@@ -1,19 +1,19 @@
-import {GET_STUDENT, STUDENT_ERROR} from '../types'
+import {GET_TIMESTAMPS, TIMESTAMPS_ERROR} from '../types'
 import axios from 'axios';
 import request from '../request.js'
 
-export const getStudent = (studentId,classId) => async dispatch => {
+export const getTimestamps = () => async dispatch => {
 
-  const url = `class/${classId}/student/${studentId}/`;
+  const url = `class/218/student/Brijesh/book/BC001/activity`;
   const response = request(url).then(resp => {
     console.log(resp.data)
     dispatch( {
-            type: GET_STUDENT,
+            type: GET_TIMESTAMPS,
             payload: resp.data
         })
   }).catch(exception => {
     dispatch( {
-            type: STUDENT_ERROR,
+            type: TIMESTAMPS_ERROR,
             payload: exception,
         })
   });

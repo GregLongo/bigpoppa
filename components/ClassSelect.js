@@ -1,24 +1,24 @@
 
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {getPopups} from '../store/actions/popupsAction'
+import {getClasslist} from '../store/actions/classlistAction'
 
-const Popups = () => {
+const ClassSelect = () => {
     const dispatch = useDispatch()
-    const popupsList = useSelector(state => state.popupsList)
-    const {loading, error, popupsVal} = popupsList
+    const classList = useSelector(state => state.classList)
+    const {loading, error, classlistVal} = classList
     useEffect(() => {
-        dispatch(getPopups())
+        dispatch(getClasslist())
       }, [dispatch])
     return (
         <>
           {loading ? "Loading..." : error ? error.message :
           <div>
-            <div>{popupsVal}</div>
+            <div>{classlistVal}</div>
           </div>
           }
         </>
     )
 }
 
-export default Popups
+export default ClassSelect

@@ -18,7 +18,7 @@ const Classroom = (props) => {
         var temp = [];
         if(classroomVal.length > 0) {
           Object.keys(classroomVal).map((v)=>{
-              temp.push(<Student key={v} studentId={classroomVal[v]} />)
+              temp.push(<Student key={v} studentId={classroomVal[v]} classId={props.classId}/>)
         })
         setArray(temp)
       }
