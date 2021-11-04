@@ -1,20 +1,20 @@
-import {GET_CLASSROOM, CLASSROOM_ERROR} from '../types'
+import {GET_CLASSLIST, CLASSLIST_ERROR} from '../types'
 
 const initialState = {
-  classroomVal: [] ,
+  classlistVal: {} ,
   loading: true
 }
 
 
 export default function(state = initialState, action){
   switch(action.type){
-    case GET_CLASSROOM:
+    case GET_CLASSLIST:
       return{
         ...state,
-        classroomVal:action.payload,
+        classlistVal:action.payload,
         loading:false
       }
-    case CLASSROOM_ERROR:
+    case CLASSLIST_ERROR:
       return{
         loading:false,
         // error:action.payload

@@ -8,7 +8,7 @@ const Student = (props) => {
     const myList = useSelector(state => state.myList)
     const {loading, error, studentVal} = myList
     useEffect(() => {
-        dispatch(getStudent(props.studentId))
+        dispatch(getStudent(props.studentId, props.classId))
       }, [dispatch])
     return (
         <>
