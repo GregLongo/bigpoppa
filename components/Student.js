@@ -1,39 +1,44 @@
-import React, {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {getStudent} from '../store/actions/studentAction'
-import BulletChart from "../components/BulletChart.js"
+import React, { Component } from 'react';
+import { getStudent } from '../store/actions/studentAction';
+import PropTypes from 'prop-types';
+export class Student extends Component {
+  componentDidMount() {
+    this.props.onGetStudent();
+  }
 
-const Student = (props) => {
-    const dispatch = useDispatch()
-    const myList = useSelector(state => state.myList)
-    const {loading, error, studentVal} = myList
+  shouldComponentUpdate(newProps, newState){
+    return newProps.studentVal != this.props.studentVal;
+  }
 
-    let component;
-
-    useEffect(() => {
-        dispatch(getStudent(props.studentId, props.classId))
-      }, [dispatch])
-
-
-      // component = studentVal == null ? `error` : <BulletChart val={studentVal.speed} max={10} title={'Avg Speed'} color={'#77C294'}/>
-
-      if(studentVal != null){
-        // console.log(myList)
-        return <BulletChart val={studentVal.speed} max={10} title={'Avg Speed'} color={'#77C294'}/>
-      }else{
-        return ``
-      }
-    // return (
-    //     <>
-    //       {loading ? "Loading..." : error ? error.message :
-    //       <div>
-    //         <div>{props.studentId}</div>
-    //         <div>{studentVal.speed}</div>
-    //         {component}
-    //       </div>
-    //       }
-    //     </>
-    // )
+  render() {
+    return loading ? "Loading..." : error ? error.message :
+      <div>
+        <div>{props.studentId}</div>
+        <div>{studentVal.speed}</div>
+        {component}
+      </div>
+  }
 }
 
-export default Student
+Student.propTypes = {
+  isLoading: PropTypes.bool,
+  error: PropTypes.object,
+  studentVal: PropTypes.object,
+  onGetStudent: PropTypes.func
+};
+
+Student.defaultProps = {
+}
+
+
+const mapStateToProps = (state) => ({
+  isLoading: state.myList.isLoading,
+  error: state.myList.error,
+  studentVal: state.myList.studentVal,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onGetStudent: () => dispatch(getStudent())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(GUI);
