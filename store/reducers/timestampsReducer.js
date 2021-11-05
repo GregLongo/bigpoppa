@@ -1,7 +1,7 @@
 import {GET_TIMESTAMPS, TIMESTAMPS_ERROR} from '../types'
 
 const initialState = {
-  timestampsVal: [] ,
+  timestampsVal: {} ,
   loading: true
 }
 
