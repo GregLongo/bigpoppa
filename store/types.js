@@ -1,8 +1,8 @@
 export const GET_STUDENT = 'GET_STUDENT'
 export const STUDENT_ERROR = 'STUDENT_ERROR'
 
-export const GET_CLASSROOM = 'GET_STUDENT'
-export const CLASSROOM_ERROR = 'STUDENT_ERROR'
+export const GET_CLASSROOM = 'GET_CLASSROOM'
+export const CLASSROOM_ERROR = 'CLASSROOM_ERROR'
 
 export const GET_POPUPS = 'GET_POPUPS'
 export const POPUPS_ERROR = 'POPUPS_ERROR'

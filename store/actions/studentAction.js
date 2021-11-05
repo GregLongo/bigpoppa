@@ -4,9 +4,9 @@ import request from '../request.js'
 
 export const getStudent = (studentId,classId) => async dispatch => {
 
-  const url = `class/${classId}/student/${studentId}/`;
+  const url = `class/218/student/Brijesh/`;
   const response = request(url).then(resp => {
-    console.log(resp.data)
+    // console.log(resp.data)
     dispatch( {
             type: GET_STUDENT,
             payload: resp.data

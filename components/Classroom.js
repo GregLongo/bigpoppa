@@ -13,7 +13,7 @@ const Classroom = (props) => {
     useEffect(() => {
         dispatch(getClassroom(props.classId))
       }, [dispatch])
-      // classroomVal.length > 0 ? console.log(classroomVal) : null
+       // classroomVal.length > 0 ? console.log(classroomVal) : null
       useEffect(() => {
         var temp = [];
         if(classroomVal.length > 0) {
@@ -23,7 +23,7 @@ const Classroom = (props) => {
         setArray(temp)
       }
       },[classroomVal])
-      console.log(myArray)
+      // console.log(myArray)
     return (
         <>
         {
