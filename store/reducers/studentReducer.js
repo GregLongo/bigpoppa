@@ -1,7 +1,7 @@
 import {GET_STUDENT, STUDENT_ERROR} from '../types'
 
 const initialState = {
-  studentVal: [] ,
+  studentVal: {} ,
   loading: true
 }
 
