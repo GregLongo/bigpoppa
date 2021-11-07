@@ -3,7 +3,7 @@ import axios from 'axios';
 import request from '../request.js'
 
 export const getClassroom = (thisClass) => async dispatch => {
-  const url = `class/${thisClass}`;
+  const url = `class/${thisClass}/student`;
   const response = request(url).then(resp => {
     dispatch( {
             type: GET_CLASSROOM,

@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
     <ClassSelect />
-    <Classroom classId={'218'}/>
+     {/* <Classroom classId={'DAVIS-0795'}/> */}
     </div>
   )
 }

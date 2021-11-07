@@ -1,31 +1,3 @@
-// import React, {useEffect} from 'react'
-// import {useDispatch, useSelector} from 'react-redux'
-// import {getStudent} from '../store/actions/studentAction'
-// import BulletChart from "../components/BulletChart.js"
-//
-// const Student = (props) => {
-//     const dispatch = useDispatch()
-//     const myList = useSelector(state => state.myList)
-//     const {loading, error, studentVal} = myList
-//     useEffect(() => {
-//         dispatch(getStudent(props.studentId, props.classId))
-//       }, [dispatch])
-//     return (
-//         <>
-//         {console.log('ddd')}
-//           {loading ? "Loading..." : error ? error.message :
-//           <div>
-//             <div>{props.studentId}</div>
-//             <div>{studentVal.speed}</div>
-//             <BulletChart val={studentVal.speed} max={10} title={'Avg Speed'} color={'#77C294'}/>
-//           </div>
-//           }
-//         </>
-//     )
-// }
-//
-// export default Student
-
 import React, { Component } from 'react';
 import { getStudent } from '../store/actions/studentAction';
 import PropTypes from 'prop-types';
@@ -34,7 +6,8 @@ import {connect} from 'react-redux'
 
 export class Student extends Component {
   componentDidMount() {
-    this.props.onGetStudent();
+    console.log(this.props.student)
+    this.props.onGetStudent(this.props.classroom, this.props.student);
   }
 
   shouldComponentUpdate(newProps, newState){
@@ -42,14 +15,16 @@ export class Student extends Component {
   }
 
   render() {
-    return this.props.loading ? "Loading..." : this.props.error ? this.props.error.message :
+    console.log(this.props.studentVal)
+
+    return (
       <div>
-        <div>{this.props.studentId}</div>
-        <div>{this.props.studentVal.speed}</div>
-        {this.props.studentVal.speed > 0 ?
+        <div>{this.props.student}</div>
+        <div>speed:{!this.props.studentVal  ? `` : this.props.studentVal.speed}</div>
+        {!this.props.studentVal ? `` : this.props.studentVal.speed > 0 ?
           <BulletChart val={parseFloat(this.props.studentVal.speed)} max={10} title={'Avg Speed'} color={'#77C294'}/>
           : null}
-      </div>
+      </div>)
   }
 }
 
@@ -71,7 +46,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGetStudent: () => dispatch(getStudent())
+  onGetStudent: (classrooom, student) => dispatch(getStudent(classrooom, student))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Student);

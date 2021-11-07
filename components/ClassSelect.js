@@ -2,6 +2,7 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {getClasslist} from '../store/actions/classlistAction'
+import Dropdown from "../components/Dropdown.js"
 
 const ClassSelect = () => {
     const dispatch = useDispatch()
@@ -14,7 +15,8 @@ const ClassSelect = () => {
         <>
           {loading ? "Loading..." : error ? error.message :
           <div>
-            <div>{classlistVal}</div>
+            <div>Choose Class </div>
+            <Dropdown paths={classlistVal} />
           </div>
           }
         </>

@@ -1,88 +1,161 @@
-//
-// import React, {useEffect} from 'react'
-// import {useDispatch, useSelector} from 'react-redux'
-// import {getTimestamps} from '../store/actions/timestampsAction'
-//
-// const DayTimeline = () => {
-//     const dispatch = useDispatch()
-//     const timestampsList = useSelector(state => state.timestampsList)
-//     const {loading, error, timestampsVal} = timestampsList
-//     const timestamps = [];
-//
-//     useEffect(() => {
-//         dispatch(getTimestamps())
-//       }, [dispatch])
-//
-//         Object.keys(timestampsVal).map(v=>{
-//           timestamps.push(timestampsVal[v].timestamp)
-//         })
-//     return (
-//         <>
-//           {loading ? "Loading..." : error ? error.message :
-//           <div>
-//             <div>{timestamps.map(t=>{return <div>{t}</div>})}</div>
-//           </div>
-//           }
-//         </>
-//     )
-// }
-
-import React, { Component } from 'react';
-import {getTimestamps} from '../store/actions/timestampsAction'
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux'
+import React, { Component, useState } from 'react';
+import Highcharts from 'highcharts'
+import HighchartsReact from 'highcharts-react-official'
 const timestamps = [];
 
-export class DayTimeline extends Component {
-  componentDidMount() {
-    this.props.onGetTimestamps();
-  }
+export default function DayTimeline(props){
 
-  shouldComponentUpdate(newProps, newState){
-    return newProps.timestampsVal != this.props.timestampsVal;
-
-  }
-  componentDidUpdate(){
-    if(this.props.timestampsVal){
-      // console.log(this.props.timestampsVal.children)
-    (this.props.timestampsVal.children).map(v=>{
-      timestamps.push(v.timestamp)
-    })}
-    console.log(timestamps)
-  }
-
-  render() {
-
-    // console.log(this.props.timestampsVal.children)
-
-    return this.props.loading ? "Loading..." : this.props.error ? this.props.error.message :
-      <div>
-        <div>
-
-        </div>
-      </div>
-  }
-}
-
-DayTimeline.propTypes = {
-  isLoading: PropTypes.bool,
-  error: PropTypes.object,
-  timestampsVal: PropTypes.object,
-  onGetTimestamps: PropTypes.func
-};
-
-DayTimeline.defaultProps = {
-}
+console.log(props.popups)
 
 
-const mapStateToProps = (state) => ({
-  isLoading: state.timestampsList.isLoading,
-  error: state.timestampsList.error,
-  timestampsVal: state.timestampsList.timestampsVal,
-});
+  const events = props.events;
 
-const mapDispatchToProps = (dispatch) => ({
-  onGetTimestamps: () => dispatch(getTimestamps())
+//Just Date
+const dates = [];
+const timestamps = [];
+const latest = new Date(dates[dates.length - 1]);
+const lastdate = latest.getFullYear()+"/"+(latest.getMonth()+1)+"/"+latest.getDate();
+
+const [selectDate, setDate] = useState(lastdate)
+
+
+ if(props.events != undefined && props.popups != undefined){
+
+Object.keys(events).map((key,id) =>{
+  var date = new Date(events[key].timestamp);
+  var dateTrunc = Date.parse(date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate());
+  if(!dates.includes(dateTrunc)){dates.push(dateTrunc)};
 })
+console.log(dates)
 
-export default connect(mapStateToProps, mapDispatchToProps)(DayTimeline);
+//all timestamps
+
+  Object.keys(events).map((key,id) =>{
+    if(events[key].action=='PopupShown'){
+      var stamp = new Date(events[key].timestamp);
+      var stampTrunc = stamp.getFullYear()+"/"+(stamp.getMonth()+1)+"/"+stamp.getDate();
+      console.log(!props.popups[events[key].popupId] ? `` : props.popups[events[key].popupId]['popup type'])
+      let interactive =!props.popups[events[key].popupId] ? ``
+      : props.popups[events[key].popupId]['popup type'] == 'interactive' ? true : false;
+      if(stampTrunc == selectDate ) {timestamps.push({x:stamp,y:0, interactive:interactive, lp:events[key].popupId})}
+    }
+  })
+
+}
+
+
+  // if(props.events != undefined && props.popups != undefined){
+  //   (props.events).map(v=>{
+  //     if(v.action=='PopupShown'){
+  //       console.log(props.popups[v.popupId]['popup type'])
+  //       let interactive = props.popups[v.popupId]['popup type'] == 'interactive' ? true : false;
+  //       timestamps.push({x:v.timestamp, y:0, id:v.popupId, interactive:interactive})
+  //     }
+  //   })
+  // }
+
+
+  const options = {
+    title: {
+      text: ''
+    },
+    xAxis: {
+      type: 'datetime',
+      lineWidth: 3,
+      opposite: true,
+    },
+    yAxis:{
+      visible: false,
+    },
+    legend:{
+      enabled: false
+    },
+    credits:{
+      enabled:false
+    },
+    chart: {
+        spacingBottom: 140,
+        spacingTop: 40,
+        spacingLeft: 10,
+        spacingRight: 10,
+        height: 220,
+      },
+      tooltip:{
+          enabled: false
+      },
+    series:[{
+      dataLabels: {
+       offset:300,
+        enabled: true,
+        useHTML: true,
+        allowOverlap: false,
+        formatter() {
+          // console.log(this.point.blorb)
+          var thisClass = '';
+
+            if (this.point.interactive) {
+              return '<div class="pop"><img src="/img/interactive.svg"><span class="cat">'+ this.point.lp +'</span></div>'
+            } else {
+              return '<div class="pop"><img src="/img/bulb.svg"><span class="cat">'+ this.point.lp +'</span></div>'
+            }
+          }
+      },      lineWidth: '4px',
+      lineWidthPlus: '4px',
+      color: 'black',
+      allowPointSelect: true,
+      states: {
+          hover:{
+            enabled: false
+          },
+          inactive: {
+              enabled: false
+          },
+      },
+      point: {
+          events: {
+              click: function() {
+                  this.series.chart.update({
+                      tooltip: {
+                          enabled: false
+                      }
+                  });
+              },
+              select: function(events){
+                console.log(this.lp)
+                events.preventDefault()
+                const poppers = this.lp
+                props.parentCallback(poppers)
+              }
+          }
+      },
+      data:timestamps
+    }]
+  }
+
+
+return (
+  <div>
+    {dates.map((thisDate,index) =>{
+    var myDate = new Date(thisDate)
+
+    console.log(timestamps)
+    return <button key={index} onClick={() => {
+
+      setDate(myDate.getFullYear()+"/"+(myDate.getMonth()+1)+"/"+myDate.getDate())
+
+        const someevent = Object.keys(events)[Object.keys(events).length-1];
+         // lastevent = events[someevent].popupId;
+    }}>{
+        myDate.getFullYear()+"/"+(myDate.getMonth()+1)+"/"+myDate.getDate()
+      }
+    </button>
+     })}
+     <div>
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={options}
+      />
+    </div>
+  </div>
+)
+  }

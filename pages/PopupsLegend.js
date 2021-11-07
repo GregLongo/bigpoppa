@@ -1,5 +1,6 @@
-import Popups from '../components/Popups.js'
+import PopupsProvider from '../components/PopupsProvider.js'
+import PopupsTable from '../components/PopupsTable.js'
 
 export default function PopupsLegend(){
-  return <Popups />
+  return <PopupsProvider><PopupsTable /></PopupsProvider>
 }
