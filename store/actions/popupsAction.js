@@ -4,9 +4,9 @@ import request from '../request.js'
 
 export const getPopups = () => async dispatch => {
 
-  const url = `class/`;
+  const url = `book/BC001`;
   const response = request(url).then(resp => {
-    // console.log(resp.data)
+    console.log(resp.data)
     dispatch( {
             type: GET_POPUPS,
             payload: resp.data
