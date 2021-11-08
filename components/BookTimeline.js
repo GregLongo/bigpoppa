@@ -118,13 +118,13 @@ if(props.popups){
       allowPointSelect: true,
       cursor: 'pointer',
       point: {
-          events: {
-              select: function(events){
-                events.preventDefault()
-                console.log(this)
-                parentCallback(this.options.key)
-              }
-          }
+          // events: {
+          //     select: function(events){
+          //       events.preventDefault()
+          //       console.log(this)
+          //       parentCallback(this.options.key)
+          //     }
+          // }
       },
     },
     {
@@ -135,7 +135,7 @@ if(props.popups){
               select: function(events){
                 events.preventDefault()
                 console.log(this)
-                parentCallback(this.options.key)
+                props.parentCallback(this.options.key)
               }
           }
       },

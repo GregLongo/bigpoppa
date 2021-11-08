@@ -17,7 +17,7 @@ export class TimelineProvider extends Component {
   render() {
     return (
       <div>
-        <div>{React.cloneElement(this.props.children, {popups:this.props.popups, events:this.props.timestampsVal.children})}</div>
+        <div>{React.cloneElement(this.props.children, {events:this.props.timestampsVal.children})}</div>
       </div>)
     }
   }
