@@ -53,14 +53,14 @@ export default function SortableTable({ columns, data }) {
             (row, i) => {
               prepareRow(row);
               return (
-                <Link href={{
+                <Link key={i} href={{
                   pathname:"/ThisStudent",
                   query: {student:[row.original.key]}
                 }}>
                     <tr {...row.getRowProps()}>
-                      {row.cells.map(cell => {
+                      {row.cells.map((cell,index) => {
                         return (
-                          <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                          <td key={index} {...cell.getCellProps()}>{cell.render('Cell')}</td>
                         )
                       })}
                     </tr>
