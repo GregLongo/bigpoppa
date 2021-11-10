@@ -74,9 +74,9 @@ export default function ThisStudent(props){
     const myList = useSelector(state => state.myList)
     const {loading2, error2, studentVal} = myList
 
-    // const dispatch3 = useDispatch()
-    // const studentBookList = useSelector(state => state.studentBookList)
-    // const {loading3, error3, studentBookVal} = studentBookList
+    const dispatch3 = useDispatch()
+    const studentBookList = useSelector(state => state.studentBookList)
+    const {loading3, error3, studentBookVal} = studentBookList
 
     useEffect(() => {
         dispatch1(getPopups())
@@ -86,10 +86,10 @@ export default function ThisStudent(props){
           dispatch2(getStudent(props.classroom, props.student))
         }, [dispatch2])
 
-        // useEffect(() => {
-        //     dispatch3(getStudentBook(props.classroom, props.student, 'BC001'))
-        //     console.log(studentBookVal)
-        //   }, [dispatch3])
+        useEffect(() => {
+            dispatch3(getStudentBook(props.classroom, props.student, 'BC001'))
+            console.log(studentBookVal)
+          }, [dispatch3])
 
 
   return (
@@ -103,10 +103,10 @@ export default function ThisStudent(props){
           </div>
           <Marquis>
             <Name>{props.student}</Name>
-            {/* { studentVal.lastEvent ?
-               <Reading>Now Reading: {studentVal.nowReading} - {popupsVal[studentVal.lastEvent.popupId]['popup title']}</Reading>
-               : null } */}
-            <Scores popups={22} />
+            { studentVal.lastEvent ?
+               <Reading>Now Reading: {studentVal.nowReading}</Reading>
+               : null }
+            <Scores popups={studentBookVal.popupCount} />
           </Marquis>
         </Info>
         <BookTimeline parentCallback={parentCallback}  popups={popupsVal}

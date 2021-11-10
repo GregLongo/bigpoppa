@@ -16,10 +16,11 @@ export default function Scores(props){
     <ScoresContainer>
       <img src="img/bulb.svg" />
       <span>{props.popups} </span>
-      <img src="img/interactive.svg" />
+      <span>Popups Played </span>
+      {/* <img src="img/interactive.svg" />
       <span>{props.interactive} </span>
       <span>⛷	</span>
-      <span>{props.something}</span>
+      <span>{props.something}</span> */}
     </ScoresContainer>
   )
 }

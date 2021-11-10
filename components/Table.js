@@ -13,12 +13,12 @@ export default function Table({ columns, data, parentCallback, defaultColumn }) 
     width: 91%;
     height: 80%;
     background: white;
-    margin: 3rem;
+    margin: 1rem 3rem;
     border-radius: 10px
   `
 
   const Th = styled.th`
-    height: 64px
+    height: 32px
   `
 
     const Tr = styled.tr`

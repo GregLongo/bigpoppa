@@ -31,7 +31,7 @@ export class Student extends Component {
       align-items: center;
       border-radius: 10px;
       &:hover{
-        outline: 2px solid  #ccc ;
+        outline: 1px solid  #ccc ;
       }
     `
     const Avatar = styled.img`

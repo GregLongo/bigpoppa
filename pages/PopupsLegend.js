@@ -8,6 +8,13 @@ import { css, jsx } from '@emotion/react'
 
 export default function PopupsLegend(){
 
+    const Legend = styled.div`
+    display: grid;
+    grid-template-columns: 100% 100%;
+    @media(min-width:880px){
+      grid-template-columns: 60% 40%;
+    }
+    `
 
      const Heading = styled.div`
        padding-top: 2rem;
@@ -49,28 +56,26 @@ export default function PopupsLegend(){
     }, [dispatch])
 
     Object.keys(popupsVal).map((key,id)=>{
+      console.log(!popupsVal[key].primary ? null : popupsVal[key].primary[0])
       papusas.push({
         lp:key,
         title:popupsVal[key]['popup title'],
-        category:'test',
+        category: !popupsVal[key].primary ? null : popupsVal[key].primary[0],
         page:popupsVal[key].page,
         interactive:popupsVal[key]['popup type'],
       })
     })
 
-
+console.log(popupsVal)
 return(
   <>
   <Heading>All Popups</Heading>
-  <div css={css`
-    display: grid;
-    grid-template-columns: 60% 40%;
-  `}>
+  <Legend>
     {papusas.length > 1  ?  <PopupsTable papusas={papusas}  grandParentCallback={callback} />  : ``}
     <RightContainer>
     {!!popupsVal[lp] ? <PopupInspector popup={lp} popups={popupsVal}/> : ``}
     </RightContainer>
-  </div>
+  </Legend>
 </>
 )
 
