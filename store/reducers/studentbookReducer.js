@@ -9,11 +9,11 @@ const initialState = {
 export default function(state = initialState, action){
   switch(action.type){
     case GET_STUDENT_BOOK:
-    console.log(action.payload)
+    // console.log(action.payload)
 
       return{
         ...state,
-        classroomVal:action.payload,
+        studentBookVal:action.payload,
         loading:false
       }
     case STUDENT_BOOK_ERROR:

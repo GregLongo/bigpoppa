@@ -8,7 +8,7 @@ import Scores from "../components/Scores.js"
 import BulletChart from "../components/BulletChart.js"
 
 export default function Student(props){
-
+  console.log(props.popupsCount)
   const Student = styled.div`
     display: grid;
     grid-template-columns: 30% 70%;
@@ -35,7 +35,7 @@ export default function Student(props){
 
 
 
-  console.log(props.student)
+  // console.log(props.student)
 
 // const students = studentVal;
 
@@ -45,7 +45,7 @@ return (
   <Avatar src={'img/animal_avatars/avatar-11.png'} />
   <div>
     <NameScore><span>{props.student}</span>
-    <Scores popups={22} interactive={11} something={3} /></NameScore>
+    <Scores popups={props.popupCount} interactive={11} something={3} /></NameScore>
     { props.speed > 0 ?
       <BulletChart val={parseFloat(props.speed)} max={2000} title={'Avg Speed'} color={'#77C294'}/>
       : null}

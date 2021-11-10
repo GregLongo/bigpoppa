@@ -4,13 +4,23 @@ import styled from "@emotion/styled"
 
 export default function PopupInspector(props){
 
+  const Inspector = styled.div`
+    padding: 2rem
+  `
+
   const Category = styled.div`
     background: #B4D260;
     width: fit-content;
-    margin-bottom: 2rem;
+    margin-top: .5rem;
+    margin-bottom: 1rem;
     padding: .5rem 1rem;
     border-radius: 16px;
     color: white
+  `
+  const Title = styled.div`
+    margin-bottom: 2rem;
+    font-size: 1.5em;
+    font-style: bold;
   `
   const Text = styled.div`
     font-size: 1.2em;
@@ -20,10 +30,10 @@ export default function PopupInspector(props){
   // console.log(props.popups[props.popup])
 
     return (
-      <div key={props.popup}>
-      <Text>
+      <Inspector key={props.popup}>
+      <Title>
          {props.popups[props.popup]["popup title"]}
-      </Text>
+      </Title>
       {props.popups[props.popup].primary.map((category, index) =>{
         return <Category key={index}>{category}</Category>
       })}
@@ -33,6 +43,6 @@ export default function PopupInspector(props){
       <Text>
          {props.popups[props.popup]["popup summary"]}
       </Text>
-      </div>
+      </Inspector>
     )
 }

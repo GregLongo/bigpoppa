@@ -4,7 +4,7 @@ import request from '../request.js'
 
 export const getStudentBook = (classroom, student, book ) => async dispatch => {
 
-  const url = `class/${classroom}/student/${student}/book/${book}/`;
+  const url = `class/${classroom}/student/${student}/book/BC001/`;
   const response = request(url).then(resp => {
     // console.log(resp.data)
     dispatch( {

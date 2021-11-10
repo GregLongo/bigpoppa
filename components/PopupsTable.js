@@ -12,13 +12,13 @@ function DefaultColumnFilter() {
 const Category = styled.button`
   background: #B4D260;
   width: fit-content;
-  margin-bottom: 2rem;
-  padding: .5rem 1rem;
+  margin-bottom: 1rem;
+  padding: .3rem .5rem;
   border-radius: 16px;
   border: none;
   color: white;
   cursor: pointer;
-  margin: 1rem;
+  margin: .4rem;
   &:hover{
     background: #76d260
   }
@@ -32,13 +32,19 @@ function SelectColumnFilter({
 }) {
   // Calculate the options for filtering
   // using the preFilteredRows
-  const options = React.useMemo(() => {
-    const options = new Set();
-    preFilteredRows.forEach((row) => {
-      options.add(row.values[id]);
-    });
-    return [...options.values()];
-  }, [id, preFilteredRows]);
+
+  // const options = React.useMemo(() => {
+  //   const options = new Set();
+  //   preFilteredRows.forEach((row) => {
+  //     options.add(row.values[id]);
+  //   });
+  //   return [...options.values()];
+  // }, [id, preFilteredRows]);
+
+  //using predetermined filters instead
+console.log()
+const options = [ "characters", "setting", "plot", "conflict / problem solution",	"text evidence / inference",	"compare / contrast",	"sequence / summary",	"theme",	"challenge",	"vocabulary",	"author / illustrator",	"structure - part / whole",	"point of view", "impact of illustrationas",	"connection with source materials" ]
+
 
   // Render a multi-select box
   return (
@@ -92,7 +98,7 @@ export default function PopupsTable(props) {
       Header: 'Category',
       accessor: 'category',
       Filter: SelectColumnFilter,
-      filter: "includes"
+      filter: "includesValue"
     },
     {
       Header: 'Page',
