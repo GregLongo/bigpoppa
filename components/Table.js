@@ -9,6 +9,41 @@ import styled from "@emotion/styled"
 // Our table component
 export default function Table({ columns, data, parentCallback, defaultColumn }) {
 
+  const Table = styled.table`
+    width: 91%;
+    height: 80%;
+    background: white;
+    margin: 3rem;
+    border-radius: 10px
+  `
+
+  const Th = styled.th`
+    height: 64px
+  `
+
+    const Tr = styled.tr`
+      cursor: pointer;
+      &:nth-of-type(2n-1){
+        background: #F4FBFF
+      }
+      &:hover{
+        background: #d0eeff
+      }
+    `
+
+  const Cell = styled.td`
+    /* text-align: center; */
+    border: none;
+    padding: .5rem
+  `
+
+  const Filters = styled.div`
+    display: flex;
+    align-items: center;
+    margin: 2rem 0rem 0rem 3rem;
+  `
+
+
   const [lp, setLP] = useState(0);
   const [activeRow, setActiveRow] =useState(false)
 
@@ -37,16 +72,16 @@ export default function Table({ columns, data, parentCallback, defaultColumn }) 
   const firstPageRows = rows.slice(0, 15);
   return (
     <>
-    <div><span>Filter By:</span>{headerGroups[0].headers[1].render("Filter")}</div>
-      <table {...getTableProps()}>
+    <Filters><span>Filter By:</span>{headerGroups[0].headers[1].render("Filter")}</Filters>
+      <Table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()} >
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>
+                <Th {...column.getHeaderProps()}>
                   {column.render("Header")}
                   {console.log(headerGroups[0].headers[1].Header)}
-                </th>
+                </Th>
               ))}
             </tr>
           ))}
@@ -63,10 +98,10 @@ export default function Table({ columns, data, parentCallback, defaultColumn }) 
           {firstPageRows.map((row, i) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}
+              <Tr {...row.getRowProps()}
                 className={i == activeRow ? 'active' : null}
                 onClick={()=>{
-                console.log(i);
+                // console.log(i);
                 setLP(row.values.lp);
                 setActiveRow(i)
                 parentCallback(lp);
@@ -74,14 +109,14 @@ export default function Table({ columns, data, parentCallback, defaultColumn }) 
 
                 {row.cells.map((cell) => {
                   return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    <Cell {...cell.getCellProps()}>{cell.render("Cell")}</Cell>
                   );
                 })}
-              </tr>
+              </Tr>
             );
           })}
         </tbody>
-      </table>
+      </Table>
       <div>
       </div>
     </>

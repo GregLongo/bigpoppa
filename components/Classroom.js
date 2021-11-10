@@ -5,6 +5,8 @@ import styles from '../styles/Home.module.css'
 import { useRouter } from "next/router"
 import Link from 'next/link'
 import {getClassroom} from '../store/actions/classroomAction'
+import styled from "@emotion/styled"
+import { css } from '@emotion/react';
 
 import StudentGrid from "/components/StudentGrid.js"
 import StudentList from "/components/StudentList.js"
@@ -19,6 +21,43 @@ import {
 
 export default function Classroom({classId}) {
 
+  const Heading = styled.div`
+    padding-top: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+  `
+  const ViewButton = styled.button`
+    cursor: pointer;
+    margin-left: 1rem;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+  `
+
+  const listButton = ({isGrid}) => css`
+    opacity: .3;
+    &:hover{
+      opacity: .4
+    }
+    ${isGrid === false && `
+      opacity: 1 !important
+    `}
+  `
+
+  const gridButton = ({isGrid}) => css`
+  opacity: .3;
+    &:hover{
+      opacity: .4
+    }
+    ${isGrid === true && `
+      opacity: 1 !important
+    `}
+  `
+
+
 
   const dispatch = useDispatch()
   const classRoster = useSelector(state => state.classRoster)
@@ -31,28 +70,28 @@ export default function Classroom({classId}) {
 
   const students=classroomVal;
 
-    console.log(classId)
+    // console.log(classId)
 
 
   return (
     <>
     {loading ? "Loading..." : error ? error.message :
     <div>
-    <div>
+    <Heading>
       <span>Students</span>
       <span>
-      <button onClick={()=>{
+      <ViewButton css={listButton({isGrid})} onClick={()=>{
         setGrid(false)
       }}>
         <FontAwesomeIcon icon={faList} />
-      </button>
-      <button  onClick={()=>{
+      </ViewButton>
+      <ViewButton css={gridButton({isGrid})} onClick={()=>{
         setGrid(true)
       }}>
         <FontAwesomeIcon icon={faTh} />
-      </button>
+      </ViewButton>
       </span>
-    </div>
+    </Heading>
         {
            isGrid ?
           <StudentGrid students={students} classroom={classId}/>

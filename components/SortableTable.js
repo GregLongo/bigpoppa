@@ -1,9 +1,39 @@
 import React from 'react'
 import { useTable, useSortBy } from 'react-table'
 import Link from 'next/link'
+import styled from '@emotion/styled'
 
 
 export default function SortableTable({ columns, data }) {
+  const Table = styled.table`
+  width: 91%;
+  height: 80%;
+  background: white;
+  margin: 3rem;
+`
+
+const Th = styled.th`
+  height: 80px
+`
+
+  const Tr = styled.tr`
+    height: 64px;
+    cursor: pointer;
+    &:nth-of-type(2n-1){
+      background: #F4FBFF
+    }
+    &:hover{
+      background: #d0eeff
+    }
+  `
+
+const Cell = styled.td`
+  text-align: center;
+  border: none;
+`
+
+
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -26,14 +56,14 @@ export default function SortableTable({ columns, data }) {
 
   return (
     <>
-      <table {...getTableProps()}>
+      <Table {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
                 // Add the sorting props to control sorting. For this example
                 // we can add them into the header props
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                <Th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
                   {/* Add a sort direction indicator */}
                   <span>
@@ -43,7 +73,7 @@ export default function SortableTable({ columns, data }) {
                         : '▼'
                       : ''}
                   </span>
-                </th>
+                </Th>
               ))}
             </tr>
           ))}
@@ -57,18 +87,18 @@ export default function SortableTable({ columns, data }) {
                   pathname:"/ThisStudent",
                   query: {student:[row.original.key]}
                 }}>
-                    <tr {...row.getRowProps()}>
+                    <Tr {...row.getRowProps()}>
                       {row.cells.map((cell,index) => {
                         return (
-                          <td key={index} {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                          <Cell key={index} {...cell.getCellProps()}>{cell.render('Cell')}</Cell>
                         )
                       })}
-                    </tr>
+                    </Tr>
                   </Link>
               )}
           )}
         </tbody>
-      </table>
+      </Table>
       <br />
     </>
   )

@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 export class TimelineProvider extends Component {
 
   componentDidMount() {
-    this.props.onGetTimestamps();
+    this.props.onGetTimestamps(this.props.classroom, this.props.student);
   }
 
   shouldComponentUpdate(newProps, newState){
@@ -41,7 +41,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGetTimestamps: () => dispatch(getTimestamps())
+  onGetTimestamps: (classrooom, student) => dispatch(getTimestamps(classrooom, student))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimelineProvider);

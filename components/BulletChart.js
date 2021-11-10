@@ -26,7 +26,7 @@ const Bullet = styled.div`
         inverted: true,
         type: "bullet",
         styledMode: false,
-        height: props.sm ? 48 : 100,
+        height: props.sm ? 48 : 90,
         width: props.sm ? 220 : null,
         backgroundColor: 'transparent',
       },

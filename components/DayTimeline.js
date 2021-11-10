@@ -19,7 +19,7 @@ export default class DayTimeline extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if(this.props.events != prevProps.events){
-      console.log("componentDidUpdate", this.props.popups);
+      // console.log("componentDidUpdate", this.props.popups);
     const events = this.props.events;
     if (this.props.events != undefined && this.props.popups != undefined) {
       Object.keys(events).map((key, id) => {
@@ -35,10 +35,14 @@ export default class DayTimeline extends React.Component {
         if (events[key].action == 'PopupShown') {
           var stamp = new Date(events[key].timestamp);
           var stampTrunc = stamp.getFullYear() + "/" + (stamp.getMonth() + 1) + "/" + stamp.getDate();
-          console.log(!this.props.popups[events[key].popupId] ? `` : this.props.popups[events[key].popupId]['popup type'])
+          // console.log(!this.props.popups[events[key].popupId] ? `` : this.props.popups[events[key].popupId]['popup type'])
+
+          let category = !this.props.popups[events[key].popupId] ? ``
+            : this.props.popups[events[key].popupId].primary[0];
+
           let interactive = !this.props.popups[events[key].popupId] ? ``
             : this.props.popups[events[key].popupId]['popup type'] == 'interactive' ? true : false;
-          if (stampTrunc == this.state.selectDate) { this.timestamps.push({ x: stamp, y: 0, interactive: interactive, lp: events[key].popupId }) }
+          if (stampTrunc == this.state.selectDate) { this.timestamps.push({ x: stamp, y: 0, interactive:interactive, cat:category, lp: events[key].popupId }) }
         }
       });
     }
@@ -94,9 +98,9 @@ export default class DayTimeline extends React.Component {
             var thisClass = '';
 
             if (this.point.interactive) {
-              return '<div class="pop"><img src="/img/interactive.svg"><span class="cat">' + this.point.lp + '</span></div>'
+              return '<div class="pop"><img src="/img/interactive.svg"><span class="cat">' + this.point.cat + '</span></div>'
             } else {
-              return '<div class="pop"><img src="/img/bulb.svg"><span class="cat">' + this.point.lp + '</span></div>'
+              return '<div class="pop"><img src="/img/interactive.svg"><span class="cat">' + this.point.cat + '</span></div>'
             }
           }
         }, lineWidth: '4px',

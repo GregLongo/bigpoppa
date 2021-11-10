@@ -2,10 +2,49 @@ import React, { Component, useState } from 'react';
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 const timestamps = [];
+import styled from "@emotion/styled"
+import { css } from '@emotion/react';
 
 export default function DayTimeline(props){
 
-console.log(props.popups)
+  const DateButton = styled.button`
+    background: transparent;
+    border: none;
+    border-top: 3px solid lightblue;
+    padding-top: .5rem;
+    margin-right: .5rem;
+    cursor: pointer;
+    &:hover{
+      border-top: 3px solid teal;
+    }
+  `
+  const DateMarquis = styled.div`
+    padding: 2rem .5rem 0rem;
+    font-size: 24px
+  `
+
+  const ChartContainer = styled.div`
+   .cat{
+    background: #B4D260;
+    padding: .2rem .4rem;
+    border-radius: 16px;
+    color: white
+  }
+  .pop{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer
+  }
+  img{
+    width: 20px;
+    height: 20px;
+    margin: .5rem
+  }
+`
+
+
+// console.log(props.popups)
 
 
   const events = props.events;
@@ -26,7 +65,7 @@ Object.keys(events).map((key,id) =>{
   var dateTrunc = Date.parse(date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate());
   if(!dates.includes(dateTrunc)){dates.push(dateTrunc)};
 })
-console.log(dates)
+// console.log(dates)
 
 //all timestamps
 
@@ -34,10 +73,15 @@ console.log(dates)
     if(events[key].action=='PopupShown'){
       var stamp = new Date(events[key].timestamp);
       var stampTrunc = stamp.getFullYear()+"/"+(stamp.getMonth()+1)+"/"+stamp.getDate();
-      console.log(!props.popups[events[key].popupId] ? `` : props.popups[events[key].popupId]['popup type'])
-      let interactive =!props.popups[events[key].popupId] ? ``
-      : props.popups[events[key].popupId]['popup type'] == 'interactive' ? true : false;
-      if(stampTrunc == selectDate ) {timestamps.push({x:stamp,y:0, interactive:interactive, lp:events[key].popupId})}
+
+      // console.log(!props.popups[events[key].popupId] ? `` : props.popups[events[key].popupId]['popup type'])
+
+      let category = !props.popups[events[key].popupId] ? ``
+        : props.popups[events[key].popupId].primary;
+
+      let interactive = !props.popups[events[key].popupId] ? ``
+        : props.popups[events[key].popupId]['popup type'] == 'interactive' ? true : false;
+      if (stampTrunc == selectDate) { timestamps.push({ x: stamp, y: 0, interactive:interactive, cat:category, lp: events[key].popupId }) }
     }
   })
 
@@ -88,15 +132,15 @@ console.log(dates)
        offset:300,
         enabled: true,
         useHTML: true,
-        allowOverlap: false,
+        allowOverlap: true,
         formatter() {
           // console.log(this.point.blorb)
           var thisClass = '';
 
             if (this.point.interactive) {
-              return '<div class="pop"><img src="/img/interactive.svg"><span class="cat">'+ this.point.lp +'</span></div>'
+              return '<div class="pop"><img src="/img/interactive.svg"><span class="cat">'+ this.point.cat +'</span></div>'
             } else {
-              return '<div class="pop"><img src="/img/bulb.svg"><span class="cat">'+ this.point.lp +'</span></div>'
+              return '<div class="pop"><img src="/img/bulb.svg"><span class="cat">'+ this.point.cat +'</span></div>'
             }
           }
       },      lineWidth: '4px',
@@ -121,7 +165,7 @@ console.log(dates)
                   });
               },
               select: function(events){
-                console.log(this.lp)
+                // console.log(this.lp)
                 events.preventDefault()
                 const poppers = this.lp
                 props.parentCallback(poppers)
@@ -138,8 +182,8 @@ return (
     {dates.map((thisDate,index) =>{
     var myDate = new Date(thisDate)
 
-    console.log(timestamps)
-    return <button key={index} onClick={() => {
+    // console.log(timestamps)
+    return <DateButton key={index} onClick={() => {
 
       setDate(myDate.getFullYear()+"/"+(myDate.getMonth()+1)+"/"+myDate.getDate())
 
@@ -148,13 +192,16 @@ return (
     }}>{
         myDate.getFullYear()+"/"+(myDate.getMonth()+1)+"/"+myDate.getDate()
       }
-    </button>
+    </DateButton>
      })}
      <div>
+     <DateMarquis>{selectDate}</DateMarquis>
+     <ChartContainer>
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
       />
+      </ChartContainer>
     </div>
   </div>
 )
