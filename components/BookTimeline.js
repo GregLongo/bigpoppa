@@ -5,15 +5,20 @@ import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import 'highcharts/modules/timeline'
 import styles from '../styles/Home.module.css'
-
+import styled from "@emotion/styled"
+import { css } from '@emotion/react';
 
 export default function BookTimeline(props){
-
-  console.log(props)
+ const Chapters = styled.div`
+  img{
+    width: 12px;
+  }
+ `
+  // console.log(props.lastEvent.lastEvent.popupId)
 
   const [thisPopup, selectPopup] = useState()
 
-  const lastpopup = 'LP018';
+  const lastpopup = props.last;
 
   // const currentBook = props.popups[lastpopup].bookid;
 
@@ -29,7 +34,7 @@ export default function BookTimeline(props){
 
 const bookmarks=[];
 const progress=[];
-console.log(props)
+// console.log(props)
 if(props.popups){
   Object.keys(props.popups).map((key, id)=>{
       var page = props.popups[key].page;
@@ -41,7 +46,7 @@ if(props.popups){
   })
 
   Object.keys(bookmarks).map((key, id)=>{
-    console.log(props.popups[lastpopup].page)
+    // console.log(props.popups[lastpopup].page)
     if(bookmarks[key].x <= props.popups[lastpopup].page){
       progress.push(bookmarks[key])
     }
@@ -94,12 +99,12 @@ if(props.popups){
           },
       },
       dataLabels: {
-        y: 45,
+        y: 35,
         enabled: true,
         useHTML: true,
-        allowOverlap: false,
+        allowOverlap: true,
         formatter() {
-          console.log(this.point.blorb)
+          // console.log(this.point.blorb)
           var thisClass = '';
 
           if(this.point.x !=0 && this.point.x !=currentPages){
@@ -134,7 +139,7 @@ if(props.popups){
           events: {
               select: function(events){
                 events.preventDefault()
-                console.log(this)
+                // console.log(this)
                 props.parentCallback(this.options.key)
               }
           }
@@ -156,12 +161,12 @@ if(props.popups){
   }
 
   return(
-  <div>
+  <Chapters>
     <HighchartsReact
       highcharts={Highcharts}
       options={options}
     />
-  </div>
+  </Chapters>
 
 )
 }

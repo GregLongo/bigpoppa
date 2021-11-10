@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { useTable, useSortBy } from 'react-table'
 import SortableTable from "/components/SortableTable.js"
@@ -30,23 +30,24 @@ export default function StudentList(props) {
     },
   ];
 
-console.log(studentVal)
+// console.log(studentVal)
 
-  const pupils = [];
+  const [pupils, setPupils] = useState([]);
   useEffect(() => {
-      Object.keys(props.students).map((key,id)=>{
-        console.log(props.students[key])
-        dispatch(getStudent(props.classroom, props.students[key]))
-        pupils.push({
-          key:key,
-          name:props.students[key],
-          avatar:'img/bulb.png',
-          speed:studentVal.speed,
-        })
+      (props.students).map((key,id)=>{
+        // console.log(key)
+        dispatch(getStudent(props.classroom, key))
       })
-
     }, [dispatch])
 
+  useEffect(()=>{
+    pupils.push({
+      key: studentVal.studentId,
+      name: studentVal.studentId,
+      avatar:'img/bulb.png',
+      speed: !!studentVal ? studentVal.speed : null,
+    })
+  },[studentVal])
 
 
   console.log(pupils)

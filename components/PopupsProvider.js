@@ -9,7 +9,7 @@ export class PopupsProvider extends Component {
   }
 
   shouldComponentUpdate(newProps, newState){
-    console.log(this.props.popup)
+    // console.log(this.props.popup)
 
     return newProps.popupsVal != this.props.popupsVal;
   }

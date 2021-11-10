@@ -2,11 +2,28 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useTable, useFilters, useAsyncDebounce } from "react-table";
 import { useSelector } from 'react-redux'
 import Table from "/components/Table.js"
+import styled from "@emotion/styled"
 
 
 function DefaultColumnFilter() {
   return null;
 }
+
+const Category = styled.button`
+  background: #B4D260;
+  width: fit-content;
+  margin-bottom: 2rem;
+  padding: .5rem 1rem;
+  border-radius: 16px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin: 1rem;
+  &:hover{
+    background: #76d260
+  }
+`
+
 
 // This is a custom filter UI for selecting
 // a unique option from a list
@@ -26,13 +43,13 @@ function SelectColumnFilter({
   // Render a multi-select box
   return (
     <div>
-    <button onClick={(e)=>{
+    <Category onClick={(e)=>{
       setFilter('')
-    }}>all</button>
+    }}>all</Category>
     {options.map((option,i)=>(
-      <button key={i} onClick={(e)=>{
+      <Category key={i} onClick={(e)=>{
         setFilter(option)
-      }}>{option}</button>
+      }}>{option}</Category>
     ))}
     </div>
   );
