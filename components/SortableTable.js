@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styled from '@emotion/styled'
 
 
-export default function SortableTable({ columns, data }) {
+export default function SortableTable({ columns, data, classroom }) {
   const Table = styled.table`
   width: 91%;
   height: 80%;
@@ -85,7 +85,10 @@ const Cell = styled.td`
               return (
                 <Link key={i} href={{
                   pathname:"/ThisStudent",
-                  query: {student:[row.original.key]}
+                  query: {
+                    student:[row.original.key],
+                    classroom:classroom
+                  }
                 }}>
                     <Tr {...row.getRowProps()}>
                       {row.cells.map((cell,index) => {

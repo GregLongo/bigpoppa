@@ -19,7 +19,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 
-export default function Classroom({classId}) {
+export default function Classroom({students, classId}) {
+
+
+  // console.log(students)
 
   const Heading = styled.div`
     padding-top: 2rem;
@@ -57,25 +60,12 @@ export default function Classroom({classId}) {
     `}
   `
 
-
-
-  const dispatch = useDispatch()
-  const classRoster = useSelector(state => state.classRoster)
-  const {loading, error, classroomVal} = classRoster
-  useEffect(() => {
-      dispatch(getClassroom(classId))
-    }, [dispatch])
-
-  const [isGrid, setGrid] = useState(true);
-
-  const students=classroomVal;
-
     // console.log(classId)
+    const [isGrid, setGrid] = useState(true);
 
 
   return (
     <>
-    {loading ? "Loading..." : error ? error.message :
     <div>
     <Heading>
       <span>Students</span>
@@ -97,7 +87,7 @@ export default function Classroom({classId}) {
           <StudentGrid students={students} classroom={classId}/>
           : <StudentList students={students} classroom={classId}/>
         }
-    </div>}
+    </div>
   </>
   )
 }
