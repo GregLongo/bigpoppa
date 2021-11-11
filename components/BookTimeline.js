@@ -19,11 +19,25 @@ export default function BookTimeline(props){
   const [thisPopup, selectPopup] = useState()
 
   const lastpopup = props.last;
-
+  const [currentPages, setPages] = useState(200);
   // const currentBook = props.popups[lastpopup].bookid;
 
   // const currentPages = booksList[currentBook].pages;
-  const currentPages = 200;
+
+useEffect(()=>{
+  switch(props.reading){
+    case 'BC001':
+        setPages (154)
+    case 'AFARM':
+        setPages (121)
+    case 'Romeo':
+        setPages (195)
+    case 'Hamlet':
+        setPages (201)
+    default:
+        setPages (200)
+  };
+})
 
   // console.log("Now Reading: "+props.popups[lastpopup].booktitle)
   // console.log("Chapter: "+props.popups[lastpopup].title)

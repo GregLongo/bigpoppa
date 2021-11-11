@@ -20,81 +20,18 @@ export default function StudentGrid({students, classroom}){
         grid-template-columns: 50% 50%;
       }
     `
-
-    const dispatch = useDispatch()
-    const myList = useSelector(state => state.myList)
-    const {loading, error, studentVal} = myList
-    const [returnMe, setReturn] = useState([]);
-    const [popCounts, setCount] = useState([]);
-
-    const dispatch2 = useDispatch()
-    const studentBookList = useSelector(state => state.studentBookList)
-    const {loading2, error2, studentBookVal} = studentBookList
-
-    useEffect(() => {
-      students.map(key => {
-        dispatch(getStudent(classroom, key))
-        dispatch2(getStudentBook(classroom, key))
-        })
-      }, [dispatch])
-
-      useEffect(() => {
-        students.map(key => {
-          })
-        }, [dispatch2])
-
-      useEffect(()=>{
-        returnMe.push(studentVal)
-      },[studentVal])
-
-      useEffect(()=>{
-        popCounts.push(studentBookVal.popupCount)
-      },[studentBookVal])
-
-
-      //
-
-      // console.log(returnMe)
-
-      //
-      // useEffect(() => {
-      //   students.map(key => {
-      //     })
-      //   }, [dispatch])
-
-        // console.log(studentBookVal)
-
-
-    // console.log(students)
-
-    // const returnMe = students.map((key,id) =>(
-    //   <div key={id}>
-    //   <Link href={{
-    //     pathname:"/ThisStudent",
-    //     query: {student:[key],classroom:classroom}
-    //   }}>
-    //   <a>
-    //       {/* <Student student={key} classroom={classroom}/> */}
-    //        </a>
-    //        </Link>
-    //     </div>
-    //   )
-    // )
-
+    
   return(
       <StudentGrid>
-        {/* {returnMe ? returnMe.studentId : 'meow'} */}
-        {/* <Student student={studentVal} classroom={"Super"}/> */}
-        {/* {returnMe} */}
        {
-         returnMe.map((key,id) => {
+         students.map((key,id) => {
            return (
              <Link key={id} href={{
                  pathname:"/ThisStudent",
-                 query: {student:[key.studentId],classroom:classroom}
+                 query: {student:[key.key],classroom:classroom}
                }}>
                <a >
-              <Student popupCount={popCounts[id]} student={key.studentId} speed={key.speed}/>
+              <Student popupCount={key.popupCount} student={key.name} speed={key.speed}/>
             </a>
           </Link>
            )

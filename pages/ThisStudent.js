@@ -17,6 +17,7 @@ import BulletChart from "../components/BulletChart.js"
 
 export default function ThisStudent(props){
 
+  console.log(props)
 
     const Container = styled.div`
       display: grid;
@@ -88,8 +89,11 @@ export default function ThisStudent(props){
 
         useEffect(() => {
             dispatch3(getStudentBook(props.classroom, props.student, 'BC001'))
-            console.log(studentBookVal)
+            // console.log(studentBookVal)
           }, [dispatch3])
+
+          console.log(studentVal)
+
 
 
   return (
@@ -109,7 +113,7 @@ export default function ThisStudent(props){
             <Scores popups={studentBookVal.popupCount} />
           </Marquis>
         </Info>
-        <BookTimeline parentCallback={parentCallback}  popups={popupsVal}
+        <BookTimeline parentCallback={parentCallback}  reading={studentVal.nowReading} popups={popupsVal}
            last={studentVal ? studentVal.lastEvent ? studentVal.lastEvent.popupId : `LP001` : `LP001`}/>
         <TimelineProvider classroom={props.classroom} student={props.student}>
           <DayTimeline_functional parentCallback={parentCallback} popups={popupsVal}/>
