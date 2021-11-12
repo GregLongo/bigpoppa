@@ -5,6 +5,7 @@ import popupsReducer from './popupsReducer'
 import classlistReducer from './classlistReducer'
 import timestampsReducer from './timestampsReducer'
 import studentbookReducer from './studentbookReducer'
+import booklistReducer from './booklistReducer'
 
 export default combineReducers({
   myList: studentReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   classRoster: classroomReducer,
   popupsList: popupsReducer,
   classList: classlistReducer,
-  timestampsList: timestampsReducer
+  timestampsList: timestampsReducer,
+  bookList: booklistReducer
 })
