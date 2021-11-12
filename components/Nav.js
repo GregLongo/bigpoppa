@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 faUserGraduate,
@@ -9,6 +9,7 @@ import Link from "next/link";
 import { withRouter, useRouter } from "next/router";
 import NavButton from "./NavButton.js"
 import styled from "@emotion/styled"
+import Burger from "./Burger.js"
 
 
 const navButtons = [
@@ -25,7 +26,12 @@ const navButtons = [
 ];
 
 
+
+
+
 export default function Nav(props){
+
+  const [open, setOpen] = useState(false)
 
   const NavBar = styled.div`
     height: 100vh;
@@ -36,7 +42,11 @@ export default function Nav(props){
     align-items: center;
     display: flex;
     flex-direction: column;
-    padding: 2rem
+    padding: 2rem;
+    transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
+    @media(min-width:768px){
+      transform: translateX(0)
+    }
   `
   const Logo = styled.div`
   cursor:pointer
@@ -47,8 +57,9 @@ export default function Nav(props){
   // console.log(blorquery.classroom)
 
   return(
-
-  <NavBar>
+    <>
+    <Burger open={open} setOpen={setOpen} />
+  <NavBar open={open}>
     <Link href={'/'}>
       <Logo>Living Popups Dashboard App</Logo>
     </Link>
@@ -61,5 +72,6 @@ export default function Nav(props){
         classroom={blorquery.classroom}
       />
     ))}
-  </NavBar>)
+  </NavBar>
+  </>)
 }
