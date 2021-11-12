@@ -12,7 +12,7 @@ import Scores from "../components/Scores.js"
 import Teacher from "../components/Teacher.js"
 import { getStudent } from '../store/actions/studentAction';
 import { getStudentBook } from '../store/actions/studentbookAction';
-
+import avatars from '../assets/avatars.js'
 import BulletChart from "../components/BulletChart.js"
 
 export default function ThisStudent(props){
@@ -80,7 +80,7 @@ export default function ThisStudent(props){
     const {loading3, error3, studentBookVal} = studentBookList
 
     useEffect(() => {
-        dispatch1(getPopups())
+        dispatch1(getPopups(studentVal.nowReading))
       }, [dispatch1])
 
       useEffect(() => {
@@ -94,6 +94,25 @@ export default function ThisStudent(props){
 
           console.log(studentVal)
 
+          const [currentPages, setPages] = useState(200);
+
+
+          useEffect(()=>{
+            switch(studentVal.nowReading){
+              case 'BC001':
+                  setPages (154)
+              case 'AFARM':
+                  setPages (121)
+              case 'Romeo':
+                  setPages (195)
+              case 'Hamlet':
+                  setPages (201)
+              default:
+                  setPages (200)
+            };
+            console.log(currentPages)
+          },[studentVal])
+
 
 
   return (
@@ -103,7 +122,7 @@ export default function ThisStudent(props){
       <LeftContainer>
         <Info>
           <div>
-            <img src="img/animal_avatars/avatar-11.png" />
+            <img src={avatars[studentVal.avatarIndex]} />
           </div>
           <Marquis>
             <Name>{props.student}</Name>
@@ -113,7 +132,7 @@ export default function ThisStudent(props){
             <Scores popups={studentBookVal.popupCount} />
           </Marquis>
         </Info>
-        <BookTimeline parentCallback={parentCallback}  reading={studentVal.nowReading} popups={popupsVal}
+        <BookTimeline parentCallback={parentCallback}  pages={currentPages} popups={popupsVal}
            last={studentVal ? studentVal.lastEvent ? studentVal.lastEvent.popupId : `LP001` : `LP001`}/>
         <TimelineProvider classroom={props.classroom} student={props.student}>
           <DayTimeline_functional parentCallback={parentCallback} popups={popupsVal}/>

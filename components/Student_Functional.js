@@ -42,7 +42,7 @@ export default function Student(props){
 return (
 
   <Student>
-  <Avatar src={'img/animal_avatars/avatar-11.png'} />
+  <Avatar src={props.avatar} />
   <div>
     <NameScore><span>{props.student}</span>
     <Scores popups={props.popupCount} interactive={11} something={3} /></NameScore>

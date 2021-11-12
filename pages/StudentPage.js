@@ -5,7 +5,7 @@ import Teacher from "../components/Teacher.js"
 import { getStudent } from '../store/actions/studentAction';
 import {getStudentBook} from '../store/actions/studentbookAction.js'
 import {getClassroom} from '../store/actions/classroomAction'
-
+import avatars from '../assets/avatars.js'
 
 
 export default function StudentPage({classroom}) {
@@ -43,7 +43,7 @@ export default function StudentPage({classroom}) {
     pupils.push({
       key: studentVal.studentId,
       name: studentVal.studentId,
-      avatar:'img/bulb.png',
+      avatar:avatars[studentVal.avatarIndex],
       speed: studentVal.speed,
       popupCount: studentBookVal.popupCount
     })

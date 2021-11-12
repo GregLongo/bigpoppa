@@ -20,7 +20,7 @@ export default function StudentGrid({students, classroom}){
         grid-template-columns: 50% 50%;
       }
     `
-    
+
   return(
       <StudentGrid>
        {
@@ -31,7 +31,7 @@ export default function StudentGrid({students, classroom}){
                  query: {student:[key.key],classroom:classroom}
                }}>
                <a >
-              <Student popupCount={key.popupCount} student={key.name} speed={key.speed}/>
+              <Student avatar={key.avatar} popupCount={key.popupCount} student={key.name} speed={key.speed}/>
             </a>
           </Link>
            )
