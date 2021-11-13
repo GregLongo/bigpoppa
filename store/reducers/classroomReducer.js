@@ -1,26 +1,26 @@
-import {GET_CLASSROOM, CLASSROOM_ERROR} from '../types'
+import { GET_CLASSROOM, CLASSROOM_ERROR } from "../types"
 
 const initialState = {
-  classroomVal: [] ,
-  loading: true
+	classroomVal: [],
+	loading: true,
 }
 
+export default function (state = initialState, action) {
+	switch (action.type) {
+		case GET_CLASSROOM:
+			// console.log(action.payload)
 
-export default function(state = initialState, action){
-  switch(action.type){
-    case GET_CLASSROOM:
-    // console.log(action.payload)
-
-      return{
-        ...state,
-        classroomVal:action.payload,
-        loading:false
-      }
-    case CLASSROOM_ERROR:
-      return{
-        loading:false,
-        // error:action.payload
-      }
-    default: return state
-  }
+			return {
+				...state,
+				classroomVal: action.payload,
+				loading: false,
+			}
+		case CLASSROOM_ERROR:
+			return {
+				loading: false,
+				// error:action.payload
+			}
+		default:
+			return state
+	}
 }
