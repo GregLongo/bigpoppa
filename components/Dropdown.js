@@ -45,7 +45,6 @@ const Container = styled.div`
           <option key={p[0]} value={p[1]}>{p[1]}</option>
         ))}
       </Drop>
-
       <Link href={{
         pathname:"/StudentPage",
         query:{classroom:path}
@@ -56,6 +55,4 @@ const Container = styled.div`
       </Link>
     </Container>
   )
-
-
 }
