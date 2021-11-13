@@ -25,7 +25,6 @@ export default function PopupsLegend(){
        border-bottom: 2px solid #CECECE
      `
      const RightContainer = styled.div`
-       background: white;
        padding: 1rem 2rem;
        margin: 3rem;
        border-radius: 10px;
@@ -98,18 +97,19 @@ return(
   <>
   <Heading>All Popups</Heading>
 
-  <Drop value={book} onChange={(e)=>{
-    setBook(e.target.value);
-  }}><option>Select Book </option>
-    {Object.entries(booklistVal).map((b)=>(
-      <option key={b[0]} value={b[1]}>{b[1]}</option>
-    ))}
-  </Drop>
+
 
 
   <Legend>
     {papusas.length > 1  ?  <PopupsTable papusas={papusas}  grandParentCallback={callback} />  : ``}
     <RightContainer>
+    <Drop value={book} onChange={(e)=>{
+      setBook(e.target.value);
+    }}><option>Select Book </option>
+      {Object.entries(booklistVal).map((b)=>(
+        <option key={b[0]} value={b[1]}>{b[1]}</option>
+      ))}
+    </Drop>
     {!!popupsVal[lp] ? <PopupInspector popup={lp} popups={popupsVal}/> : ``}
     </RightContainer>
   </Legend>

@@ -44,8 +44,11 @@ export default function Nav(props){
     flex-direction: column;
     padding: 2rem;
     transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
+    z-index: 10;
+    position: ${({ open }) => open ? 'relative' : 'absolute'};
     @media(min-width:768px){
-      transform: translateX(0)
+      transform: translateX(0);
+      position: relative;
     }
   `
   const Logo = styled.div`

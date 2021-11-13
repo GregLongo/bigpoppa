@@ -8,12 +8,13 @@ import Scores from "../components/Scores.js"
 import BulletChart from "../components/BulletChart.js"
 
 export default function Student(props){
-  console.log(props.popupsCount)
+  // console.log(props.popupsCount)
   const Student = styled.div`
     display: grid;
     grid-template-columns: 30% 70%;
     height: 140px;
-    width: 380px;
+    width: 90%;
+
     /* margin: 24px; */
     padding: .5rem 1rem;
     background-color: #fff;
@@ -22,10 +23,16 @@ export default function Student(props){
     &:hover{
       outline: 2px solid  #ccc ;
     }
+    @media(min-width:768px){
+      width: 380px;
+    }
   `
   const Avatar = styled.img`
-    width: 50%;
-    max-height: 50%
+    height: 50%;
+    width: auto;
+    justify-content: center;
+    display: flex
+    max-width: 50%
   `
   const NameScore = styled.div`
     display: flex;
