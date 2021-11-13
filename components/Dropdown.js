@@ -34,7 +34,6 @@ const Container = styled.div`
   text-align: center
 `
 
-
   const [path, setPath] = useState()
 
   return(

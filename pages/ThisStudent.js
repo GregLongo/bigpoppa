@@ -53,9 +53,12 @@ export default function ThisStudent(props){
 
     const Info = styled.div`
       display: grid;
-      grid-template-columns: 25% 75%;
+      grid-template-columns: 100%;
       align-items: center;
       padding: 2rem;
+      @media(min-width:768px){
+        grid-template-columns: 25% 75%;
+      }
     `
 
 

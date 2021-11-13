@@ -10,11 +10,12 @@ const ClassSelect = () => {
   const Splash = styled.div`
   margin-left: auto;
   margin-right: auto;
-  margin-top: 25%;
-  margin-bottom: auto;
   width: fit-content;
-  height: fit-content;
-  text-align: center
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
 const Title= styled.div`
   font-size: 36px
