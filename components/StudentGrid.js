@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import Student from "./Student_Functional.js"
 import styled from "@emotion/styled"
+import Link from "next/link"
+import React from "react"
+import { useDispatch } from "react-redux"
+import { selectStudent } from "../store/actions/thisStudentAction.js"
+import NoData from "./NoData.js"
+import Student from "./Student_Functional.js"
 
-import { getStudent } from "../store/actions/studentAction.js"
-import { getStudentBook } from "../store/actions/studentbookAction.js"
 
 export default function StudentGrid({ students, classroom }) {
 	const StudentGrid = styled.ul`
@@ -18,28 +17,35 @@ export default function StudentGrid({ students, classroom }) {
 		}
 	`
 
+	const dispatch = useDispatch();
+
 	return (
 		<StudentGrid>
-			{students.map((key, id) => {
+			{students.map((student, id) => {
 				return (
 					<Link
 						key={id}
 						href={{
 							pathname: "/ThisStudent",
-							query: { student: [key.key], classroom: classroom },
+							query: { student: [student.key], classroom: classroom },
 						}}
 					>
-						<a>
+						<a onClick={() => {
+							dispatch(selectStudent(student))
+						}}>
 							<Student
-								avatar={key.avatar}
-								popupCount={key.popupCount}
-								student={key.name}
-								speed={key.speed}
+								avatar={student.avatar}
+								popupCount={student.popupCount}
+								student={student.name}
+								speed={student.speed}
 							/>
 						</a>
 					</Link>
 				)
 			})}
+			{
+				(!students || students.length <= 0) && <NoData label={"No student records found!"}></NoData>
+			}
 		</StudentGrid>
 	)
 }

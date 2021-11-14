@@ -1,11 +1,10 @@
-import React, { useState, useCallback, useEffect } from "react"
-import PopupsTable from "../components/PopupsTable.js"
-import { useDispatch, useSelector } from "react-redux"
-import { getPopups } from "../store/actions/popupsAction"
-import { getBookList } from "../store/actions/booklistAction"
-import PopupInspector from "../components/PopupInspector.js"
 import styled from "@emotion/styled"
-import { css, jsx } from "@emotion/react"
+import React, { useCallback, useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import PopupInspector from "../components/PopupInspector.js"
+import PopupsTable from "../components/PopupsTable.js"
+import { getBookList } from "../store/actions/booklistAction"
+import { getPopups } from "../store/actions/popupsAction"
 
 export default function PopupsLegend() {
 

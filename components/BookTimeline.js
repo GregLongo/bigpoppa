@@ -24,7 +24,7 @@ export default function BookTimeline(props) {
 	const bookmarks = []
 	const progress = []
 
-	if (props.popups) {
+	if (props.popups && lastpopup) {
 		Object.keys(props.popups).map((key, id) => {
 			var page = props.popups[key].page
 			bookmarks.push({ key: key, x: page, y: 0 })

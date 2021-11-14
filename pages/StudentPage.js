@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import avatars from "../assets/avatars.js"
 import Classroom from "../components/Classroom.js"
 import Teacher from "../components/Teacher.js"
+import { getClassroom } from "../store/actions/classroomAction"
 import { getStudent } from "../store/actions/studentAction"
 import { getStudentBook } from "../store/actions/studentbookAction.js"
-import { getClassroom } from "../store/actions/classroomAction"
-import avatars from "../assets/avatars.js"
 
 export default function StudentPage({ classroom }) {
-  
+
 	const dispatch = useDispatch()
 	const classRoster = useSelector((state) => state.classRoster)
 	const { loading, error, classroomVal } = classRoster
@@ -17,32 +17,43 @@ export default function StudentPage({ classroom }) {
 		dispatch(getClassroom(classroom))
 	}, [dispatch])
 
-	const students = classroomVal
+	// This code can be used to replace the following code of it.
+	// const classStudents = useSelector((state) => state.classStudents)
+	// const { loading, error, students } = classStudents
 
-	const dispatch2 = useDispatch()
+	// useEffect(() => {
+	// 	dispatch(getClassroomStudents(classroom))
+	// }, [dispatch]);
+
+	const students = classroomVal
+	
 	const myList = useSelector((state) => state.myList)
 	const { loading2, error2, studentVal } = myList
 
-	const dispatch3 = useDispatch()
 	const studentBookList = useSelector((state) => state.studentBookList)
 	const { loading3, error3, studentBookVal } = studentBookList
 
 	const [pupils, setPupils] = useState([])
 	useEffect(() => {
 		students.map((key, id) => {
-			dispatch2(getStudent(classroom, key))
-			dispatch3(getStudentBook(classroom, key))
+			dispatch(getStudent(classroom, key))
+			dispatch(getStudentBook(classroom, key))
 		})
 	}, [classroomVal])
 
 	useEffect(() => {
-		pupils.push({
-			key: studentVal.studentId,
-			name: studentVal.studentId,
-			avatar: avatars[studentVal.avatarIndex],
-			speed: studentVal.speed,
-			popupCount: studentBookVal.popupCount,
-		})
+		// For studentVal = {}, !!studentVal will be true.
+		if (!!studentVal && studentVal.hasOwnProperty("studentId")) {
+			setPupils([...pupils,
+			{
+				key: studentVal.studentId,
+				name: studentVal.studentId,
+				avatar: avatars[studentVal.avatarIndex],
+				speed: studentVal.speed,
+				popupCount: studentBookVal ? studentBookVal.popupCount : 0,
+				nowReading: studentVal.nowReading
+			}]);
+		}
 	}, [studentVal])
 
 	return (

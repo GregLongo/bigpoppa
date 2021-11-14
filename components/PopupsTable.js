@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react"
-import { useTable, useFilters, useAsyncDebounce } from "react-table"
-import { useSelector } from "react-redux"
-import Table from "/components/Table.js"
 import styled from "@emotion/styled"
+import React, { useCallback } from "react"
+import Table from "/components/Table.js"
 
 function DefaultColumnFilter() {
 	return null
@@ -71,7 +69,7 @@ function SelectColumnFilter({
 	// }, [id, preFilteredRows]);
 
 	//using predetermined filters instead
-	console.log()
+	console.log("filterValue", filterValue)
 	const options = [
 		"characters",
 		"setting",
@@ -93,6 +91,7 @@ function SelectColumnFilter({
 		<div>
 			<Category
 				onClick={(e) => {
+					e.preventDefault();
 					setFilter("")
 				}}
 			>
@@ -103,6 +102,7 @@ function SelectColumnFilter({
 					text={option}
 					key={i}
 					onClick={(e) => {
+						e.preventDefault();
 						setFilter(option)
 					}}
 				>

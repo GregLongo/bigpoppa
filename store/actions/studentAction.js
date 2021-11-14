@@ -1,8 +1,8 @@
-import { GET_STUDENT, STUDENT_ERROR } from "../types"
-import axios from "axios"
-import request from "../request.js"
+import request from "../request.js";
+import { GET_STUDENT, STUDENT_ERROR } from "../types";
 
 export const getStudent = (classroom, student) => async (dispatch) => {
+	if (typeof classroom == 'undefined' || typeof student == 'undefined') return;
 	const url = `class/${classroom}/student/${student}`
 	const response = request(url)
 		.then((resp) => {
