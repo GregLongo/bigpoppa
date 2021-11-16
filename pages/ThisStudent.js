@@ -99,7 +99,7 @@ export default function ThisStudent(props) {
 			console.log(currentPages)
 		}
 	}, [studentVal])
-	
+
 	return studentVal && (
 		<>
 			<Teacher teacher={props.classroom} />
@@ -107,7 +107,7 @@ export default function ThisStudent(props) {
 				<LeftContainer>
 					<Info>
 						<div>
-							<img src={avatars[studentVal.avatarIndex]} />
+							<img src={studentVal.avatar} />
 						</div>
 						<Marquis>
 							<Name>{props.student}</Name>

@@ -6,7 +6,7 @@ import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 
 export default function DayTimeline(props) {
-  
+
 	const DateButton = styled.button`
 		background: transparent;
 		border: none;
@@ -28,6 +28,9 @@ export default function DayTimeline(props) {
 			padding: 0.2rem 0.4rem;
 			border-radius: 16px;
 			color: white;
+      /* text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100px; */
 		}
 		.pop {
 			display: flex;
@@ -79,7 +82,42 @@ export default function DayTimeline(props) {
 
 				let category = !props.popups[events[key].popupId]
 					? ``
-					: props.popups[events[key].popupId].primary
+					: props.popups[events[key].popupId].primary[0]
+
+        let isMore = !props.popups[events[key].popupId] || !props.popups[events[key].popupId].primary[1] ? `` : '...'
+
+        let color = !props.popups[events[key].popupId] || !props.popups[events[key].popupId].primary[1] ? ``
+                  : props.popups[events[key].popupId].primary[1] == "theme"
+                  ? "#F48C71"
+                  : props.popups[events[key].popupId].primary[1] == "plot"
+                  ? "#77C294"
+                  : props.popups[events[key].popupId].primary[1] == "characters"
+                  ? "#A4DCF7"
+                  : props.popups[events[key].popupId].primary[1] == "setting"
+                  ? "#FFCB41"
+                  : props.popups[events[key].popupId].primary[1] == "conflict / problem solution"
+                  ? "#F48C71"
+                  : props.popups[events[key].popupId].primary[1] == "text evidence / inference"
+                  ? "#FFCB41"
+                  : props.popups[events[key].popupId].primary[1] == "compare / contrast"
+                  ? "#77C294"
+                  : props.popups[events[key].popupId].primary[1] == "sequence / summary"
+                  ? "#F48C71"
+                  : props.popups[events[key].popupId].primary[1] == "challenge"
+                  ? "#77C294"
+                  : props.popups[events[key].popupId].primary[1] == "vocabulary"
+                  ? "#A4DCF7"
+                  : props.popups[events[key].popupId].primary[1] == "author / illustrator"
+                  ? "#FFCB41"
+                  : props.popups[events[key].popupId].primary[1] == "structure - part / whole"
+                  ? "#F48C71"
+                  : props.popups[events[key].popupId].primary[1] == "point of view"
+                  ? "#FFCB41"
+                  : props.popups[events[key].popupId].primary[1] == "impact of illustrationas"
+                  ? "#FFCB41"
+                  : props.popups[events[key].popupId].primary[1] == "connection with source materials"
+                  ? "#F48C71"
+                  : "#F48C71";
 
 				let interactive = !props.popups[events[key].popupId]
 					? ``
@@ -92,7 +130,9 @@ export default function DayTimeline(props) {
 						y: 0,
 						interactive: interactive,
 						cat: category,
+            isMore: isMore,
 						lp: events[key].popupId,
+            color: color
 					})
 				}
 			}
@@ -139,13 +179,15 @@ export default function DayTimeline(props) {
 						if (this.point.interactive) {
 							return (
 								'<div class="pop"><img src="/img/interactive.svg"><span class="cat">' +
-								this.point.cat +
+								this.point.cat + this.isMore +
 								"</span></div>"
 							)
 						} else {
 							return (
-								'<div class="pop"><img src="/img/bulb.svg"><span class="cat">' +
-								this.point.cat +
+								'<div class="pop"><img src="/img/bulb.svg"><span style="background-color:'+
+                  this.point.color
+                +'" class="cat">' +
+								this.point.cat + this.point.isMore +
 								"</span></div>"
 							)
 						}

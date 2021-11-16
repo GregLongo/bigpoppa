@@ -9,7 +9,7 @@ import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 
 export default function BookTimeline(props) {
-  
+
 	const Chapters = styled.div`
 		img {
 			width: 12px;
@@ -73,10 +73,11 @@ export default function BookTimeline(props) {
 				animation: false,
 				data: bookmarks,
 				type: "line",
-				lineWidth: "10px",
+				lineWidth: "4px",
 				color: "lightgrey",
 				marker: {
 					enabled: true,
+          symbol: 'diamond',
 				},
 				states: {
 					hover: {
@@ -146,8 +147,11 @@ export default function BookTimeline(props) {
 				},
 				data: progress,
 				type: "line",
-				lineWidth: "10px",
+				lineWidth: "4px",
 				color: "#77C294",
+        marker: {
+            symbol: 'diamond'
+        },
 			},
 		],
 	}

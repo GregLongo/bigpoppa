@@ -27,7 +27,7 @@ export default function Student(props) {
 		width: auto;
 		justify-content: center;
 		display: flex;
-		max-width: 50%;
+		max-height: 50%;
 	`
 
 	const NameScore = styled.div`
