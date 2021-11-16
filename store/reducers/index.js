@@ -6,7 +6,7 @@ import classStudentsReducer, { classStudentsInitalState } from "./classStudentsR
 import popupsReducer, { popupsInitialState } from "./popupsReducer"
 import studentbookReducer, { studentbookInitialState } from "./studentbookReducer"
 import studentReducer, { studentInitialState } from "./studentReducer"
-import ThisStudentReducer, { thisStudentInitialState } from "./ThisStudentReducer"
+import thisStudentReducer, { thisStudentInitialState } from "./thisStudentReducer"
 import timestampsReducer, { timestampsInitalState } from "./timestampsReducer"
 
 export const initialState = {
@@ -30,5 +30,5 @@ export default combineReducers({
 	classList: classlistReducer,
 	timestampsList: timestampsReducer,
 	bookList: booklistReducer,
-	thisStudent: ThisStudentReducer
+	thisStudent: thisStudentReducer
 })
