@@ -1,18 +1,17 @@
-import React, { useState, useCallback, useEffect } from "react"
-import DayTimeline_functional from "../components/DayTimeline_functional"
-import TimelineProvider from "../components/TimelineProvider"
-import PopupInspector from "../components/PopupInspector.js"
-import BookTimeline from "../components/BookTimeline.js"
-import { useDispatch, useSelector } from "react-redux"
-import { getPopups } from "../store/actions/popupsAction"
 import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+import React, { useCallback, useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import avatars from "../assets/avatars.js"
+import BookTimeline from "../components/BookTimeline.js"
+import BulletChart from "../components/BulletChart.js"
+import DayTimeline_functional from "../components/DayTimeline_functional"
+import PopupInspector from "../components/PopupInspector.js"
 import Scores from "../components/Scores.js"
 import Teacher from "../components/Teacher.js"
+import TimelineProvider from "../components/TimelineProvider"
+import { getPopups } from "../store/actions/popupsAction"
 import { getStudent } from "../store/actions/studentAction"
 import { getStudentBook } from "../store/actions/studentbookAction"
-import avatars from "../assets/avatars.js"
-import BulletChart from "../components/BulletChart.js"
 
 export default function ThisStudent(props) {
 
@@ -64,64 +63,64 @@ export default function ThisStudent(props) {
 		selectPopup(poppers)
 	}, [])
 
-	const dispatch1 = useDispatch()
+	const dispatch = useDispatch()
 	const popupsList = useSelector((state) => state.popupsList)
 	const { loading1, error1, popupsVal } = popupsList
 
-	const dispatch2 = useDispatch()
+	// added back original query as it contains last popup info, nowReading etc
 	const myList = useSelector((state) => state.myList)
 	const { loading2, error2, studentVal } = myList
 
-	const dispatch3 = useDispatch()
 	const studentBookList = useSelector((state) => state.studentBookList)
 	const { loading3, error3, studentBookVal } = studentBookList
 
-	useEffect(() => {
-		dispatch1(getPopups(studentVal.nowReading))
-	}, [dispatch1])
+	// multiple sources of truth for avatars etc, this is wonky. why are we doing this?
+	const thisStudent = useSelector((state) => state.thisStudent)
+	const { loading4, error4, student: thisStudentVal } = thisStudent
 
 	useEffect(() => {
-		dispatch2(getStudent(props.classroom, props.student))
-	}, [dispatch2])
-
-	useEffect(() => {
-		dispatch3(getStudentBook(props.classroom, props.student, "BC001"))
-		// console.log(studentBookVal)
-	}, [dispatch3])
+		if (studentVal) {
+			dispatch(getPopups(studentVal.nowReading))
+			dispatch(getStudentBook(props.classroom, studentVal.studentId, studentVal.nowReading))
+			console.log(studentVal)
+		}
+	}, [dispatch, studentVal])
 
 	const [currentPages, setPages] = useState(200)
 
 	useEffect(() => {
-		switch (studentVal.nowReading) {
-			case "BC001":
-				setPages(154)
-			case "AFARM":
-				setPages(121)
-			case "Romeo":
-				setPages(195)
-			case "Hamlet":
-				setPages(201)
-			default:
-				setPages(200)
+		if (studentVal) {
+			switch (studentVal.nowReading) {
+				case "BC001":
+					setPages(154)
+				case "AFARM":
+					setPages(121)
+				case "Romeo":
+					setPages(195)
+				case "Hamlet":
+					setPages(201)
+				default:
+					setPages(200)
+			}
+			console.log(currentPages)
 		}
-		console.log(currentPages)
 	}, [studentVal])
 
-	return (
+	return studentVal && (
 		<>
 			<Teacher teacher={props.classroom} />
 			<Container>
 				<LeftContainer>
 					<Info>
 						<div>
-							<img src={avatars[studentVal.avatarIndex]} />
+							<img src={thisStudentVal && thisStudentVal.avatar} />
 						</div>
 						<Marquis>
 							<Name>{props.student}</Name>
 							{studentVal.lastEvent ? (
 								<Reading>Now Reading: {studentVal.nowReading}</Reading>
 							) : null}
-							<Scores popups={studentBookVal.popupCount} />
+							{studentBookVal && <Scores popups={studentBookVal.popupCount} />}
 						</Marquis>
 					</Info>
 					<BookTimeline

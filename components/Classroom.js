@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react"
-import PropTypes from "prop-types"
-import { useDispatch, useSelector } from "react-redux"
-import styles from "../styles/Home.module.css"
-import { useRouter } from "next/router"
-import Link from "next/link"
-import { getClassroom } from "../store/actions/classroomAction"
-import styled from "@emotion/styled"
+/** @jsxImportSource @emotion/react */
+
 import { css } from "@emotion/react"
-import StudentGrid from "/components/StudentGrid.js"
-import StudentList from "/components/StudentList.js"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import styled from "@emotion/styled"
 import { faList, faTh } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React, { useState } from "react"
+import StudentGrid from "./StudentGrid.js"
+import StudentList from "./StudentList.js"
 
 export default function Classroom({ students, classId }) {
+	const ClassroomComponent = styled.div`
+	`;
+
 	const Heading = styled.div`
 		padding-top: 2rem;
 		padding-left: 3rem;
@@ -50,36 +49,33 @@ export default function Classroom({ students, classId }) {
 	`
 	const [isGrid, setGrid] = useState(true)
 
-	return (
-		<>
-			<div>
-				<Heading>
-					<span>Students</span>
-					<span>
-						<ViewButton
-							css={listButton({ isGrid })}
-							onClick={() => {
-								setGrid(false)
-							}}
-						>
-							<FontAwesomeIcon icon={faList} />
-						</ViewButton>
-						<ViewButton
-							css={gridButton({ isGrid })}
-							onClick={() => {
-								setGrid(true)
-							}}
-						>
-							<FontAwesomeIcon icon={faTh} />
-						</ViewButton>
-					</span>
-				</Heading>
-				{isGrid ? (
-					<StudentGrid students={students} classroom={classId} />
-				) : (
-					<StudentList students={students} classroom={classId} />
-				)}
-			</div>
-		</>
-	)
+	return (<ClassroomComponent>
+		<Heading>
+			<span>Students</span>
+			<span>
+				<ViewButton
+					css={listButton({ isGrid })}
+					onClick={() => {
+						setGrid(false)
+					}}
+				>
+					<FontAwesomeIcon icon={faList} />
+				</ViewButton>
+				<ViewButton
+					css={gridButton({ isGrid })}
+					onClick={() => {
+						setGrid(true)
+					}}
+				>
+					<FontAwesomeIcon icon={faTh} />
+				</ViewButton>
+			</span>
+		</Heading>
+		{isGrid ? (
+			<StudentGrid students={students} classroom={classId} />
+		) : (
+			<StudentList students={students} classroom={classId} />
+		)}
+	</ClassroomComponent>
+	);
 }

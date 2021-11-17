@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import styled from "@emotion/styled"
 
-export default function Dropdown(props){
+export default function Dropdown(props) {
 
   const Drop = styled.select`
     width: 300px;
@@ -28,26 +28,27 @@ export default function Dropdown(props){
 
     }
   `
-const Container = styled.div`
+  const Container = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center
 `
 
-  const [path, setPath] = useState()
+  const [path, setPath] = useState('')
 
-  return(
+  return (
     <Container>
-      <Drop value={path} onChange={(e)=>{
+      <Drop value={path} onChange={(e) => {
         setPath(e.target.value);
-      }}><option>Select Class </option>
-        {Object.entries(props.paths).map((p)=>(
+      }}>
+        <option value={''}>Select Class </option>
+        {Object.entries(props.paths).map((p) => (
           <option key={p[0]} value={p[1]}>{p[1]}</option>
         ))}
       </Drop>
       <Link href={{
-        pathname:"/StudentPage",
-        query:{classroom:path}
+        pathname: "/StudentPage",
+        query: { classroom: path }
       }}>
         <Go>
           Go

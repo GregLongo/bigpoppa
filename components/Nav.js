@@ -1,24 +1,11 @@
-import React, { useState } from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUserGraduate, faCommentAlt } from "@fortawesome/free-solid-svg-icons"
-import Link from "next/link"
-import { withRouter, useRouter } from "next/router"
-import NavButton from "./NavButton.js"
 import styled from "@emotion/styled"
+import { faCommentAlt, faUserGraduate } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import React, { useState } from "react"
 import Burger from "./Burger.js"
-
-const navButtons = [
-	{
-		label: "Students",
-		path: "/StudentPage",
-		icon: <FontAwesomeIcon icon={faUserGraduate} />,
-	},
-	{
-		label: "Popups",
-		path: "/PopupsLegend",
-		icon: <FontAwesomeIcon icon={faCommentAlt} />,
-	},
-]
+import NavButton from "./NavButton.js"
 
 export default function Nav(props) {
 	const [open, setOpen] = useState(false)
@@ -46,7 +33,26 @@ export default function Nav(props) {
 	`
 
 	const route = useRouter()
-	const routequery = route.query
+	const { classroom } = route.query;
+
+	const navButtons = [
+		{
+			label: "Students",
+			path: "/StudentPage",
+			icon: <FontAwesomeIcon icon={faUserGraduate} />,
+			props: {
+				classroom: !!classroom ? classroom : ''
+			}
+		},
+		{
+			label: "Popups",
+			path: "/PopupsLegend",
+			icon: <FontAwesomeIcon icon={faCommentAlt} />,
+			props: {
+				classroom: !!classroom ? classroom : ''
+			}
+		},
+	]
 
 	return (
 		<>
@@ -55,14 +61,13 @@ export default function Nav(props) {
 				<Link href={"/"}>
 					<Logo>Living Popups Dashboard App</Logo>
 				</Link>
-				{navButtons.map((button) => (
-					<NavButton
-						key={button.path}
-						path={button.path}
-						label={button.label}
-						icon={button.icon}
-						classroom={routequery.classroom}
-					/>
+				{navButtons.map((button) => (<NavButton
+					key={button.path}
+					path={button.path}
+					label={button.label}
+					icon={button.icon}
+					{...button.props}
+				/>
 				))}
 			</NavBar>
 		</>

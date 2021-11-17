@@ -1,19 +1,20 @@
-import { GET_CLASSLIST, CLASSLIST_ERROR } from "../types"
+import { GET_CLASSROOM_STUDENTS, CLASSROOM_STUDENTS_ERROR } from "../types"
 
 const initialState = {
-	classlistVal: {},
+	students: [],
 	loading: true,
 }
 
 export default function (state = initialState, action) {
 	switch (action.type) {
-		case GET_CLASSLIST:
+		case GET_CLASSROOM_STUDENTS:
+			// console.log(action.payload)
 			return {
 				...state,
-				classlistVal: action.payload,
+				students: action.payload,
 				loading: false,
 			}
-		case CLASSLIST_ERROR:
+		case CLASSROOM_STUDENTS_ERROR:
 			return {
 				loading: false,
 				// error:action.payload
@@ -23,6 +24,7 @@ export default function (state = initialState, action) {
 	}
 }
 
+
 export {
-	initialState as classlistInitalState
+	initialState as classStudentsInitalState
 }

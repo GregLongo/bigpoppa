@@ -1,6 +1,5 @@
-import { GET_CLASSLIST, CLASSLIST_ERROR } from "../types"
-import axios from "axios"
 import request from "../request.js"
+import { CLASSLIST_ERROR, GET_CLASSLIST } from "../types"
 
 export const getClasslist = () => async (dispatch) => {
 	const url = `class/`

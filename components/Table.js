@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react"
-import { useTable, useFilters, useAsyncDebounce } from "react-table"
-import { useSelector } from "react-redux"
 import styled from "@emotion/styled"
+import React, { useState } from "react"
+import { useFilters, useTable } from "react-table"
 
 export default function Table({
 	columns,
@@ -44,7 +43,6 @@ export default function Table({
 		margin: 2rem 0rem 0rem 3rem;
 	`
 
-	const [lp, setLP] = useState(0)
 	const [activeRow, setActiveRow] = useState(false)
 
 	const {
@@ -75,12 +73,11 @@ export default function Table({
 			</Filters>
 			<Table {...getTableProps()}>
 				<thead>
-					{headerGroups.map((headerGroup) => (
-						<tr {...headerGroup.getHeaderGroupProps()}>
+					{headerGroups.map((headerGroup, index) => (
+						<tr key={index} {...headerGroup.getHeaderGroupProps()}>
 							{headerGroup.headers.map((column) => (
 								<Th {...column.getHeaderProps()}>
 									{column.render("Header")}
-									{console.log(headerGroups[0].headers[1].Header)}
 								</Th>
 							))}
 						</tr>
@@ -99,12 +96,13 @@ export default function Table({
 						prepareRow(row)
 						return (
 							<Tr
+								key={i}
 								{...row.getRowProps()}
 								className={i == activeRow ? "active" : null}
-								onClick={() => {
-									setLP(row.values.lp)
+								onClick={(e) => {
+									e.preventDefault();
 									setActiveRow(i)
-									parentCallback(lp)
+									parentCallback(row.values.lp)
 								}}
 							>
 								{row.cells.map((cell) => {

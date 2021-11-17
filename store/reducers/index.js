@@ -1,18 +1,34 @@
 import { combineReducers } from "redux"
-import studentReducer from "./studentReducer"
-import classroomReducer from "./classroomReducer"
-import popupsReducer from "./popupsReducer"
-import classlistReducer from "./classlistReducer"
-import timestampsReducer from "./timestampsReducer"
-import studentbookReducer from "./studentbookReducer"
-import booklistReducer from "./booklistReducer"
+import booklistReducer, { booklistInitialState } from "./booklistReducer"
+import classlistReducer, { classlistInitalState } from "./classlistReducer"
+import classroomReducer, { classroomInitialState } from "./classroomReducer"
+import classStudentsReducer, { classStudentsInitalState } from "./classStudentsReducer"
+import popupsReducer, { popupsInitialState } from "./popupsReducer"
+import studentbookReducer, { studentbookInitialState } from "./studentbookReducer"
+import studentReducer, { studentInitialState } from "./studentReducer"
+import thisStudentReducer, { thisStudentInitialState } from "./thisStudentReducer"
+import timestampsReducer, { timestampsInitalState } from "./timestampsReducer"
+
+export const initialState = {
+	myList: studentInitialState,
+	studentBookList: studentbookInitialState,
+	classStudents: classStudentsInitalState,
+	classRoster: classroomInitialState,
+	popupsList: popupsInitialState,
+	classList: classlistInitalState,
+	bookList: booklistInitialState,
+	thisStudent: thisStudentInitialState,
+	timestampsList: timestampsInitalState
+}
 
 export default combineReducers({
 	myList: studentReducer,
 	studentBookList: studentbookReducer,
+	classStudents: classStudentsReducer,
 	classRoster: classroomReducer,
 	popupsList: popupsReducer,
 	classList: classlistReducer,
 	timestampsList: timestampsReducer,
 	bookList: booklistReducer,
+	thisStudent: thisStudentReducer
 })

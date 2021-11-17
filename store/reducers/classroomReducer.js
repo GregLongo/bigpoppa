@@ -9,7 +9,6 @@ export default function (state = initialState, action) {
 	switch (action.type) {
 		case GET_CLASSROOM:
 			// console.log(action.payload)
-
 			return {
 				...state,
 				classroomVal: action.payload,
@@ -23,4 +22,8 @@ export default function (state = initialState, action) {
 		default:
 			return state
 	}
+}
+
+export {
+	initialState as classroomInitialState
 }

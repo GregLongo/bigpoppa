@@ -5,21 +5,24 @@ const ScoresContainer = styled.div`
 	display: flex;
 	align-items: center;
 	width: 160px;
-	justify-content: flex-end;
+	justify-content: flex-start;
 	img {
-		width: 20px;
-		padding-right: 0.5rem;
+		width: 16px;
 	}
+`
+
+const Pops = styled.span`
+	margin-right: 1rem;
+	margin-left: 1rem;
+	font-size: 16px;
 `
 
 export default function Scores(props) {
 	return (
 		<ScoresContainer>
-			<span>
 				<img src="img/bulb.svg" />
-				<span>{props.popups} </span>
-			</span>
-			<span>Popups </span>
+				<Pops>{props.popups}</Pops>
+			<span>Popups</span>
 			{/* <img src="img/interactive.svg" />
       <span>{props.interactive} </span>
       <span>⛷	</span>

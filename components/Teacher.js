@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "@emotion/styled"
 
-export default function Teacher(props) {
+export default function Teacher({ teacher }) {
 	const Teacher = styled.div`
 		padding-top: 2rem;
 		padding-bottom: 2rem;
@@ -9,9 +9,8 @@ export default function Teacher(props) {
 		font-size: 36px;
 		border-bottom: 2px solid #cecece;
 	`
-	return (
-		<div>
-			<Teacher>{props.teacher}</Teacher>
-		</div>
-	)
+	if (!teacher) {
+		teacher = 'Class not selected!'
+	}
+	return <Teacher>{teacher}</Teacher>;
 }

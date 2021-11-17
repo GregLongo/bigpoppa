@@ -1,8 +1,11 @@
+/** @jsxImportSource @emotion/react */
+
 import React from "react"
 import styled from "@emotion/styled"
+import { css } from "@emotion/react"
 
 export default function PopupInspector(props) {
-  
+
 	const Inspector = styled.div`
 		padding: 2rem;
 		background: white;
@@ -57,8 +60,9 @@ export default function PopupInspector(props) {
 	const Text = styled.div`
 		font-size: 1.2em;
 		font-style: italic;
+    margin-bottom: 1.5rem
 	`
-
+  console.log(props.popups[props.popup])
 	return (
 		<Inspector key={props.popup}>
 			<Title>{props.popups[props.popup]["popup title"]}</Title>
@@ -71,6 +75,16 @@ export default function PopupInspector(props) {
 			})}
 			<Text>Page : {props.popups[props.popup].page}</Text>
 			<Text>{props.popups[props.popup]["popup summary"]}</Text>
+      {
+          props.popups[props.popup]["popup type"] == "interactive" ?
+          <div>
+            <Text>{props.popups[props.popup]["interactive prompt"]}</Text>
+            <Text>A. {props.popups[props.popup]["response A"]}</Text>
+            <Text>B. {props.popups[props.popup]["response B"]}</Text>
+            <Text><span css={{color:'green'}}>C. {props.popups[props.popup]["response C"]}</span></Text>
+            <Text> {props.popups[props.popup]["response D"] != '' ? D. props.popups[props.popup]["response D"] : ``}</Text>
+          </div>
+          : ``}
 		</Inspector>
 	)
 }

@@ -9,7 +9,7 @@ import styled from "@emotion/styled"
 import { css } from "@emotion/react"
 
 export default function BookTimeline(props) {
-  
+
 	const Chapters = styled.div`
 		img {
 			width: 12px;
@@ -18,16 +18,21 @@ export default function BookTimeline(props) {
 	const [thisPopup, selectPopup] = useState()
 
 	const lastpopup = props.last
-
+	console.log(lastpopup)
 	const currentPages = props.pages
 
 	const bookmarks = []
 	const progress = []
 
-	if (props.popups) {
+	if (props.popups && lastpopup) {
 		Object.keys(props.popups).map((key, id) => {
-			var page = props.popups[key].page
-			bookmarks.push({ key: key, x: page, y: 0 })
+			var page = props.popups[key] ? props.popups[key].page : 1
+			let interactive = !props.popups[key]
+				? ``
+				: props.popups[key]["popup type"] == "interactive"
+				? true
+				: false
+			bookmarks.push({ key: key, x: page, y: 0, interactive: interactive })
 			bookmarks.push({ x: 0, y: 0 })
 			bookmarks.unshift({ x: currentPages, y: 0 })
 		})
@@ -73,10 +78,11 @@ export default function BookTimeline(props) {
 				animation: false,
 				data: bookmarks,
 				type: "line",
-				lineWidth: "10px",
+				lineWidth: "4px",
 				color: "lightgrey",
 				marker: {
 					enabled: true,
+          symbol: 'diamond',
 				},
 				states: {
 					hover: {
@@ -116,13 +122,13 @@ export default function BookTimeline(props) {
 				allowPointSelect: true,
 				cursor: "pointer",
 				point: {
-					// events: {
-					//     select: function(events){
-					//       events.preventDefault()
-					//       console.log(this)
-					//       parentCallback(this.options.key)
-					//     }
-					// }
+					events: {
+					    select: function(events){
+					      events.preventDefault()
+					      console.log(this)
+					      props.parentCallback(this.options.key)
+					    }
+					}
 				},
 			},
 			{
@@ -146,14 +152,18 @@ export default function BookTimeline(props) {
 				},
 				data: progress,
 				type: "line",
-				lineWidth: "10px",
+				lineWidth: "4px",
 				color: "#77C294",
+        marker: {
+            symbol: 'diamond'
+        },
 			},
 		],
 	}
 
 	return (
 		<Chapters>
+		<div> {props.last}</div>
 			<HighchartsReact highcharts={Highcharts} options={options} />
 		</Chapters>
 	)

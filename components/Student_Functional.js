@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react"
-import PropTypes from "prop-types"
-import { useDispatch, useSelector } from "react-redux"
-import { getStudent } from "../store/actions/studentAction.js"
 import styled from "@emotion/styled"
-import { css } from "@emotion/react"
-import Scores from "../components/Scores.js"
+import React from "react"
 import BulletChart from "../components/BulletChart.js"
+import Scores from "../components/Scores.js"
 
 export default function Student(props) {
 
@@ -31,7 +27,7 @@ export default function Student(props) {
 		width: auto;
 		justify-content: center;
 		display: flex;
-		max-width: 50%;
+		max-height: 50%;
 	`
 
 	const NameScore = styled.div`

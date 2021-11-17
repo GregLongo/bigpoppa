@@ -1,15 +1,13 @@
 import { GET_STUDENT_BOOK, STUDENT_BOOK_ERROR } from "../types"
 
 const initialState = {
-	studentBookVal: {},
+	studentBookVal: null,
 	loading: true,
 }
 
 export default function (state = initialState, action) {
 	switch (action.type) {
 		case GET_STUDENT_BOOK:
-			// console.log(action.payload)
-
 			return {
 				...state,
 				studentBookVal: action.payload,
@@ -23,4 +21,8 @@ export default function (state = initialState, action) {
 		default:
 			return state
 	}
+}
+
+export {
+	initialState as studentbookInitialState
 }

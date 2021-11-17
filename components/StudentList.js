@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useTable, useSortBy } from "react-table"
+import React from "react"
 import SortableTable from "/components/SortableTable.js"
-import { getStudent } from "../store/actions/studentAction"
 
 export default function StudentList({ students, classroom }) {
   

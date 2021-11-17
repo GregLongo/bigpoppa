@@ -30,6 +30,9 @@ export default function SortableTable({ columns, data, classroom }) {
 	const Cell = styled.td`
 		text-align: center;
 		border: none;
+		img{
+			max-height: 48px
+		}
 	`
 
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
