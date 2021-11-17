@@ -3,7 +3,7 @@ import { GET_STUDENT_BOOK, STUDENT_BOOK_ERROR } from "../types"
 
 export const getStudentBook =
 	(classroom, student, book) => async (dispatch) => {
-		const url = `class/${classroom}/student/${student}/book/BC001/`
+		const url = `class/${classroom}/student/${student}/book/${book}/`
 		const response = request(url)
 			.then((resp) => {
 				dispatch({

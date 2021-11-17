@@ -67,16 +67,22 @@ export default function ThisStudent(props) {
 	const popupsList = useSelector((state) => state.popupsList)
 	const { loading1, error1, popupsVal } = popupsList
 
-	const thisStudent = useSelector((state) => state.thisStudent)
-	const { loading2, error2, student: studentVal } = thisStudent
+	// added back original query as it contains last popup info, nowReading etc
+	const myList = useSelector((state) => state.myList)
+	const { loading2, error2, studentVal } = myList
 
 	const studentBookList = useSelector((state) => state.studentBookList)
 	const { loading3, error3, studentBookVal } = studentBookList
 
+	// multiple sources of truth for avatars etc, this is wonky. why are we doing this?
+	const thisStudent = useSelector((state) => state.thisStudent)
+	const { loading4, error4, student: thisStudentVal } = thisStudent
+
 	useEffect(() => {
 		if (studentVal) {
 			dispatch(getPopups(studentVal.nowReading))
-			dispatch(getStudentBook(props.classroom, studentVal.key, "BC001"))
+			dispatch(getStudentBook(props.classroom, studentVal.studentId, studentVal.nowReading))
+			console.log(studentVal)
 		}
 	}, [dispatch, studentVal])
 
@@ -107,7 +113,7 @@ export default function ThisStudent(props) {
 				<LeftContainer>
 					<Info>
 						<div>
-							<img src={studentVal.avatar} />
+							<img src={thisStudentVal && thisStudentVal.avatar} />
 						</div>
 						<Marquis>
 							<Name>{props.student}</Name>

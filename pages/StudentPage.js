@@ -26,7 +26,7 @@ export default function StudentPage({ classroom }) {
 	// }, [dispatch]);
 
 	const students = classroomVal
-	
+
 	const myList = useSelector((state) => state.myList)
 	const { loading2, error2, studentVal } = myList
 
@@ -36,14 +36,15 @@ export default function StudentPage({ classroom }) {
 	const [pupils, setPupils] = useState([])
 	useEffect(() => {
 		students.map((key, id) => {
+			console.log(studentBookVal)
 			dispatch(getStudent(classroom, key))
-			dispatch(getStudentBook(classroom, key))
+			dispatch(getStudentBook(classroom, key, 'BC001'))
 		})
 	}, [classroomVal])
 
 	useEffect(() => {
 		// For studentVal = {}, !!studentVal will be true.
-		if (!!studentVal && studentVal.hasOwnProperty("studentId")) {
+		if (!!studentVal && studentVal.hasOwnProperty("studentId")  && pupils.length < students.length) {
 			setPupils([...pupils,
 			{
 				key: studentVal.studentId,
@@ -54,6 +55,7 @@ export default function StudentPage({ classroom }) {
 				nowReading: studentVal.nowReading
 			}]);
 		}
+		console.log(pupils)
 	}, [studentVal])
 
 	return (
