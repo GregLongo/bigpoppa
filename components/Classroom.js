@@ -19,6 +19,7 @@ export default function Classroom({ students, classId }) {
 		display: flex;
 		justify-content: space-between;
 		font-size: 24px;
+		color: white;
 	`
 	const ViewButton = styled.button`
 		cursor: pointer;
@@ -26,6 +27,7 @@ export default function Classroom({ students, classId }) {
 		background-color: transparent;
 		border: none;
 		font-size: 24px;
+		color: white;
 	`
 	const listButton = ({ isGrid }) => css`
 		opacity: 0.3;

@@ -8,6 +8,7 @@ export default function Teacher({ teacher }) {
 		padding-left: 3rem;
 		font-size: 36px;
 		border-bottom: 2px solid #cecece;
+		color: white
 	`
 	if (!teacher) {
 		teacher = 'Class not selected!'

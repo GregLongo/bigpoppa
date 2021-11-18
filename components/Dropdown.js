@@ -13,7 +13,7 @@ export default function Dropdown(props) {
     margin-left: auto
   `
   const Go = styled.button`
-    background: #77C294;
+    background: #0F314D;
     width:160px;
     text-align: center;
     border:none;
@@ -24,7 +24,8 @@ export default function Dropdown(props) {
     margin-left: auto;
     cursor:pointer;
     &:hover{
-      background: #2d956f
+      background: #48A88F;
+      color: white
 
     }
   `

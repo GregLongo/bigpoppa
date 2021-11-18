@@ -9,6 +9,8 @@ import { getPopups } from "../store/actions/popupsAction"
 export default function PopupsLegend() {
 
 	const Legend = styled.div`
+		height: 100%;
+		background-color: #E38F62;
 		display: grid;
 		grid-template-columns: 100% 100%;
 		@media (min-width: 880px) {
@@ -16,11 +18,13 @@ export default function PopupsLegend() {
 		}
 	`
 	const Heading = styled.div`
+		background-color: #E38F62;
 		padding-top: 2rem;
 		padding-bottom: 2rem;
 		padding-left: 3rem;
 		font-size: 36px;
 		border-bottom: 2px solid #cecece;
+		color: white
 	`
 	const RightContainer = styled.div`
 		padding: 1rem 2rem;

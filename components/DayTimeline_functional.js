@@ -24,7 +24,7 @@ export default function DayTimeline(props) {
 	`
 	const ChartContainer = styled.div`
 		.cat {
-			background: #b4d260;
+			background: #0F314D;
 			padding: 0.2rem 0.4rem;
 			border-radius: 16px;
 			color: white;
@@ -88,36 +88,36 @@ export default function DayTimeline(props) {
 
         let color = !props.popups[events[key].popupId] || !props.popups[events[key].popupId].primary[0] ? ``
                   : props.popups[events[key].popupId].primary[0] == "theme"
-                  ? "#F48C71"
+                  ? "#E37F4A"
                   : props.popups[events[key].popupId].primary[0] == "plot"
-                  ? "#77C294"
+                  ? "#B93454"
                   : props.popups[events[key].popupId].primary[0] == "characters"
-                  ? "#A4DCF7"
+                  ? "#FECE80"
                   : props.popups[events[key].popupId].primary[0] == "setting"
-                  ? "#FFCB41"
+                  ? "#32658C"
                   : props.popups[events[key].popupId].primary[0] == "conflict / problem solution"
-                  ? "#F48C71"
+                  ? "#9F3801"
                   : props.popups[events[key].popupId].primary[0] == "text evidence / inference"
-                  ? "#FFCB41"
+                  ? "#7E001E"
                   : props.popups[events[key].popupId].primary[0] == "compare / contrast"
                   ? "#77C294"
                   : props.popups[events[key].popupId].primary[0] == "sequence / summary"
-                  ? "#F48C71"
+                  ? "#0F314D"
                   : props.popups[events[key].popupId].primary[0] == "challenge"
-                  ? "#77C294"
+                  ? "#7897AF"
                   : props.popups[events[key].popupId].primary[0] == "vocabulary"
-                  ? "#A4DCF7"
+                  ? "#02A87D"
                   : props.popups[events[key].popupId].primary[0] == "author / illustrator"
-                  ? "#FFCB41"
+                  ? "#73C6B0"
                   : props.popups[events[key].popupId].primary[0] == "structure - part / whole"
-                  ? "#F48C71"
+                  ? "#B7D3E8"
                   : props.popups[events[key].popupId].primary[0] == "point of view"
-                  ? "#FFCB41"
+                  ? "#E995A9"
                   : props.popups[events[key].popupId].primary[0] == "impact of illustrationas"
-                  ? "#FFCB41"
+                  ? "#CB9D85"
                   : props.popups[events[key].popupId].primary[0] == "connection with source materials"
-                  ? "#F48C71"
-                  : "#F48C71";
+                  ? "#0F314D"
+                  : "#0F314D";
 
 				let interactive = !props.popups[events[key].popupId]
 					? ``

@@ -3,9 +3,9 @@ import styled from "@emotion/styled"
 import { Global, css } from "@emotion/react"
 
 const Layout = (props) => {
-  
+
 	const Backdrop = styled.div`
-		background: #f7f7f7;
+		background: #589ACC;
 		height: 100vh;
 		width: 100%;
 		overflow-x: hidden;
@@ -22,11 +22,10 @@ const Layout = (props) => {
 			<Global
 				styles={css`
 					@font-face {
-						@import url("https://fonts.googleapis.com/css2?family=Cabin&display=swap");
+						@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 					}
 					body {
-						font-family: "Cabin", sans-serif;
-					}
+            font-family: 'PT Sans', sans-serif;					}
 				`}
 			/>
 			<Nav />
