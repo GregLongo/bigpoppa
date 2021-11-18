@@ -2,7 +2,7 @@ import React from "react"
 import SortableTable from "/components/SortableTable.js"
 
 export default function StudentList({ students, classroom }) {
-  
+
 	const headers = [
 		{
 			accessor: "avatar",

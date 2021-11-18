@@ -6,10 +6,15 @@ import styled from "@emotion/styled"
 export default function SortableTable({ columns, data, classroom }) {
 
 	const Table = styled.table`
-		width: 91%;
 		height: 80%;
 		background: white;
-		margin: 3rem;
+		margin-top: 2rem;
+		margin-left: 1rem;
+		margin-right: 1rem;
+		@media(min-width:768px){
+			margin: 3rem;
+			width: 91%
+		}
 	`
 
 	const Th = styled.th`

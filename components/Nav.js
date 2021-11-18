@@ -13,7 +13,7 @@ export default function Nav(props) {
 	const NavBar = styled.div`
 		height: 100vh;
 		width: 140px;
-		background: #77c294;
+		background: #272274;
 		color: white;
 		align-items: center;
 		display: flex;
@@ -21,10 +21,26 @@ export default function Nav(props) {
 		padding: 2rem;
 		transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
 		z-index: 10;
-		position: ${({ open }) => (open ? "relative" : "absolute")};
+		position:fixed;
+		transition: all 1s ease
+		position: ${({ open }) => (open ? "fixed" : "absolute")};
 		@media (min-width: 768px) {
 			transform: translateX(0);
 			position: relative;
+		}
+	`
+
+	const MobileHeader = styled.div`
+		background-color: #272274;
+		height: 64px;
+		width: 100%;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		padding: 2rem;
+		@media (min-width: 768px) {
+			display: none;
 		}
 	`
 
@@ -56,7 +72,9 @@ export default function Nav(props) {
 
 	return (
 		<>
-			<Burger open={open} setOpen={setOpen} />
+			<MobileHeader>
+				<Burger open={open} setOpen={setOpen} />
+			</MobileHeader>
 			<NavBar open={open}>
 				<Link href={"/"}>
 					<Logo>Living Popups Dashboard App</Logo>
