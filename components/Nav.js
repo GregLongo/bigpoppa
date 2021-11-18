@@ -1,6 +1,4 @@
 import styled from "@emotion/styled"
-import { faCommentAlt, faUserGraduate } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import React, { useState } from "react"
@@ -13,8 +11,8 @@ export default function Nav(props) {
 	const NavBar = styled.div`
 		height: 100vh;
 		width: 140px;
-		background: #272274;
-		color: white;
+		background: #F4F4F4;
+		color: #0F314D;
 		align-items: center;
 		display: flex;
 		flex-direction: column;
@@ -55,7 +53,7 @@ export default function Nav(props) {
 		{
 			label: "Students",
 			path: "/StudentPage",
-			icon: <FontAwesomeIcon icon={faUserGraduate} />,
+			icon: 'img/students.png',
 			props: {
 				classroom: !!classroom ? classroom : ''
 			}
@@ -63,7 +61,7 @@ export default function Nav(props) {
 		{
 			label: "Popups",
 			path: "/PopupsLegend",
-			icon: <FontAwesomeIcon icon={faCommentAlt} />,
+			icon: 'img/popups.png',
 			props: {
 				classroom: !!classroom ? classroom : ''
 			}
@@ -77,7 +75,7 @@ export default function Nav(props) {
 			</MobileHeader>
 			<NavBar open={open}>
 				<Link href={"/"}>
-					<Logo>Living Popups Dashboard App</Logo>
+					<Logo><img src='img/lp_logo.png' /></Logo>
 				</Link>
 				{navButtons.map((button) => (<NavButton
 					key={button.path}

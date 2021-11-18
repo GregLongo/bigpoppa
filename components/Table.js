@@ -13,8 +13,8 @@ export default function Table({
 		width: 91%;
 		height: 80%;
 		background: white;
-		margin: 1rem 3rem;
-		border-radius: 10px;
+		margin: 0rem 3rem;
+		border-radius: 0 0 5px 5px;
 	`
 
 	const Th = styled.th`
@@ -38,9 +38,14 @@ export default function Table({
 	`
 
 	const Filters = styled.div`
-		display: flex;
 		align-items: center;
-		margin: 2rem 0rem 0rem 3rem;
+		margin: 2rem .8rem 0rem 3rem;
+		background-color: white;
+		padding: 2rem;
+		border-radius: 5px 5px 0 0 ;
+		span{
+			margin-bottom: 1rem
+		}
 	`
 
 	const [activeRow, setActiveRow] = useState(false)
@@ -68,7 +73,7 @@ export default function Table({
 	return (
 		<>
 			<Filters>
-				<span>Filter By:</span>
+				<span>Click to display by category:</span>
 				{headerGroups[0].headers[1].render("Filter")}
 			</Filters>
 			<Table {...getTableProps()}>

@@ -13,12 +13,12 @@ export default function Student(props) {
 		padding: 0.5rem 1rem;
 		background-color: #fff;
 		align-items: center;
-		border-radius: 10px;
+		border-radius: 5px;
 		&:hover {
 			outline: 2px solid #ccc;
 		}
 		@media (min-width: 768px) {
-			width: 380px;
+			width: 400px;
 		}
 	`
 

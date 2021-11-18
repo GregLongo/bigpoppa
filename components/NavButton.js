@@ -35,7 +35,7 @@ const NavButton = (props) => {
 				className={`NavButton ${props.router.pathname === props.path ? "active" : ""
 					}`}
 			>
-				<NavIcon>{props.icon}</NavIcon>
+				<NavIcon><img src={props.icon} /></NavIcon>
 				<span className="Label">{props.label}</span>
 			</StyledNavButton>
 		</Link>
