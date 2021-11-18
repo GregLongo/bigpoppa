@@ -19,10 +19,11 @@ export default function ThisStudent(props) {
 		display: grid;
 		grid-template-columns: 100%;
 		grid-gap: 3rem;
-		margin: 4rem;
 		max-width: 100vw;
+		margin: 2rem;
 		@media (min-width: 900px) {
 			grid-template-columns: 55% 40%;
+			margin: 4rem;
 		}
 	`
 	const LeftContainer = styled.div`

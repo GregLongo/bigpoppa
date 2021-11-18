@@ -3,8 +3,8 @@ import styled from "@emotion/styled"
 import { bool, func } from "prop-types"
 
 export const StyledBurger = styled.button`
-	position: absolute;
-	top: 5%;
+	/* position: absolute;
+	top: 5%; */
 	right: 2rem;
 	display: flex;
 	flex-direction: column;
@@ -22,7 +22,7 @@ export const StyledBurger = styled.button`
 	div {
 		width: 2rem;
 		height: 0.25rem;
-		background: black;
+		background: white;
 		border-radius: 10px;
 		transition: all 0.3s linear;
 		position: relative;

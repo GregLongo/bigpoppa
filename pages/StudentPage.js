@@ -56,7 +56,7 @@ export default function StudentPage({ classroom }) {
 			}]);
 		}
 		console.log(pupils)
-	}, [studentVal])
+	}, [studentVal.studentId])
 
 	return (
 		<div>
