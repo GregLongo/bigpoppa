@@ -10,8 +10,6 @@ import Scores from "../components/Scores.js"
 import Teacher from "../components/Teacher.js"
 import TimelineProvider from "../components/TimelineProvider"
 import { getPopups } from "../store/actions/popupsAction"
-import { getStudent } from "../store/actions/studentAction"
-import { getStudentBook } from "../store/actions/studentbookAction"
 
 export default function ThisStudent(props) {
 
@@ -68,22 +66,16 @@ export default function ThisStudent(props) {
 	const popupsList = useSelector((state) => state.popupsList)
 	const { loading1, error1, popupsVal } = popupsList
 
-	// added back original query as it contains last popup info, nowReading etc
-	const myList = useSelector((state) => state.myList)
-	const { loading2, error2, studentVal } = myList
-
-	const studentBookList = useSelector((state) => state.studentBookList)
-	const { loading3, error3, studentBookVal } = studentBookList
-
 	// multiple sources of truth for avatars etc, this is wonky. why are we doing this?
 	const thisStudent = useSelector((state) => state.thisStudent)
-	const { loading4, error4, student: thisStudentVal } = thisStudent
+	const { loading4, error4, student: studentVal } = thisStudent;
+	if (!studentVal) {
+		console.log("refetch this student:", props);
+	}
 
 	useEffect(() => {
 		if (studentVal) {
 			dispatch(getPopups(studentVal.nowReading))
-			dispatch(getStudentBook(props.classroom, studentVal.studentId, studentVal.nowReading))
-			console.log(studentVal)
 		}
 	}, [dispatch, studentVal])
 
@@ -114,14 +106,14 @@ export default function ThisStudent(props) {
 				<LeftContainer>
 					<Info>
 						<div>
-							<img src={thisStudentVal && thisStudentVal.avatar} />
+							<img src={avatars[studentVal.avatarIndex]} />
 						</div>
 						<Marquis>
 							<Name>{props.student}</Name>
 							{studentVal.lastEvent ? (
 								<Reading>Now Reading: {studentVal.nowReading}</Reading>
 							) : null}
-							{studentBookVal && <Scores popups={studentBookVal.popupCount} />}
+							<Scores popups={studentVal.popupCount} />
 						</Marquis>
 					</Info>
 					<BookTimeline
@@ -136,7 +128,7 @@ export default function ThisStudent(props) {
 								: `LP001`
 						}
 					/>
-					<TimelineProvider classroom={props.classroom} student={props.student}>
+					<TimelineProvider classroom={props.classroom} student={studentVal.studentId}>
 						<DayTimeline_functional
 							parentCallback={parentCallback}
 							popups={popupsVal}
