@@ -2,6 +2,7 @@ import styled from "@emotion/styled"
 import Link from "next/link"
 import React from "react"
 import { useDispatch } from "react-redux"
+import avatars from "../assets/avatars.js"
 import { selectStudent } from "../store/actions/thisStudentAction.js"
 import NoData from "./NoData.js"
 import Student from "./Student_Functional.js"
@@ -27,16 +28,16 @@ export default function StudentGrid({ students, classroom }) {
 						key={id}
 						href={{
 							pathname: "/ThisStudent",
-							query: { student: [student.key], classroom: classroom },
+							query: { student: [student.studentId], classroom: classroom },
 						}}
 					>
 						<a onClick={() => {
 							dispatch(selectStudent(student))
 						}}>
 							<Student
-								avatar={student.avatar}
+								avatar={avatars[student.avatarIndex]}
 								popupCount={student.popupCount}
-								student={student.name}
+								student={student.studentId}
 								speed={student.speed}
 							/>
 						</a>
