@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react"
-import { useRouter } from "next/router"
-import Link from "next/link"
+import styled from "@emotion/styled"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import "highcharts/modules/timeline"
+import React, { useState } from "react"
 import styles from "../styles/Home.module.css"
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
 
 export default function BookTimeline(props) {
 
@@ -15,7 +12,6 @@ export default function BookTimeline(props) {
 			width: 12px;
 		}
 	`
-	const [thisPopup, selectPopup] = useState()
 
 	const lastpopup = props.last
 	console.log(lastpopup)
@@ -30,8 +26,8 @@ export default function BookTimeline(props) {
 			let interactive = !props.popups[key]
 				? ``
 				: props.popups[key]["popup type"] == "interactive"
-				? true
-				: false
+					? true
+					: false
 			bookmarks.push({ key: key, x: page, y: 0, interactive: interactive })
 			bookmarks.push({ x: 0, y: 0 })
 			bookmarks.unshift({ x: currentPages, y: 0 })
@@ -82,7 +78,7 @@ export default function BookTimeline(props) {
 				color: "lightgrey",
 				marker: {
 					enabled: true,
-          symbol: 'diamond',
+					symbol: 'diamond',
 				},
 				states: {
 					hover: {
@@ -99,7 +95,8 @@ export default function BookTimeline(props) {
 					allowOverlap: true,
 					formatter() {
 						var thisClass = ""
-						if (this.point.x != 0 && this.point.x != currentPages) {
+						if (this.point.x != 0 && this.point.x != currentPages &&
+							props.popups && props.popups.hasOwnProperty(lastpopup)) {
 							if (this.point.x > props.popups[lastpopup].page) {
 								thisClass = styles.desaturate
 							}
@@ -123,11 +120,11 @@ export default function BookTimeline(props) {
 				cursor: "pointer",
 				point: {
 					events: {
-					    select: function(events){
-					      events.preventDefault()
-					      console.log(this)
-					      props.parentCallback(this.options.key)
-					    }
+						select: function (e) {
+							e.preventDefault()
+							console.log(this)
+							props.parentCallback(this.options.key)
+						}
 					}
 				},
 			},
@@ -136,8 +133,8 @@ export default function BookTimeline(props) {
 				allowPointSelect: true,
 				point: {
 					events: {
-						select: function (events) {
-							events.preventDefault()
+						select: function (e) {
+							e.preventDefault()
 							props.parentCallback(this.options.key)
 						},
 					},
@@ -154,16 +151,16 @@ export default function BookTimeline(props) {
 				type: "line",
 				lineWidth: "4px",
 				color: "#77C294",
-        marker: {
-            symbol: 'diamond'
-        },
+				marker: {
+					symbol: 'diamond'
+				},
 			},
 		],
 	}
 
 	return (
 		<Chapters>
-		<div> {props.last}</div>
+			<div> {props.last}</div>
 			<HighchartsReact highcharts={Highcharts} options={options} />
 		</Chapters>
 	)
