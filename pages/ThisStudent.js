@@ -2,9 +2,7 @@ import styled from "@emotion/styled"
 import React, { useCallback, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import avatars from "../assets/avatars.js"
-import BookTimeline from "../components/BookTimeline.js"
 import BulletChart from "../components/BulletChart.js"
-import DayTimeline_functional from "../components/DayTimeline_functional"
 import PopupInspector from "../components/PopupInspector.js"
 import Scores from "../components/Scores.js"
 import Teacher from "../components/Teacher.js"
@@ -58,7 +56,8 @@ export default function ThisStudent(props) {
 
 	const [thisPopup, selectPopup] = useState("LP001")
 
-	const parentCallback = useCallback((poppers) => {
+	const parentCallback = useCallback((poppers, answer) => {
+		console.log("answer", poppers,answer);
 		selectPopup(poppers)
 	}, [])
 
@@ -99,6 +98,8 @@ export default function ThisStudent(props) {
 		}
 	}, [studentVal])
 
+	console.log("popupCount", studentVal)
+
 	return studentVal && (
 		<>
 			<Teacher teacher={props.classroom} />
@@ -116,37 +117,23 @@ export default function ThisStudent(props) {
 							<Scores popups={studentVal.popupCount} />
 						</Marquis>
 					</Info>
-					<BookTimeline
+					<TimelineProvider
+						classroom={props.classroom}
+						student={studentVal}
 						parentCallback={parentCallback}
-						pages={currentPages}
-						popups={popupsVal}
-						last={
-							studentVal
-								? studentVal.lastEvent
-									? studentVal.lastEvent.popupId
-									: `LP001`
-								: `LP001`
-						}
-					/>
-					<TimelineProvider classroom={props.classroom} student={studentVal.studentId}>
-						<DayTimeline_functional
-							parentCallback={parentCallback}
-							popups={popupsVal}
-						/>
+						popupsVal={popupsVal}
+						currentPages={currentPages}
+					>
 					</TimelineProvider>
 				</LeftContainer>
 				<RightContainer>
 					<div>
-						{!studentVal ? (
-							``
-						) : studentVal.speed > 0 ? (
-							<BulletChart
-								val={parseFloat(studentVal.speed)}
-								max={2000}
-								title={"Avg Speed"}
-								color={"#77C294"}
-							/>
-						) : null}
+						{studentVal.speed > 0 && <BulletChart
+							val={parseFloat(studentVal.speed)}
+							max={2000}
+							title={"Avg Speed"}
+							color={"#77C294"}
+						/>}
 					</div>
 					{!!popupsVal[thisPopup] ? (
 						<PopupInspector popup={thisPopup} popups={popupsVal} />

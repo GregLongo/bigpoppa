@@ -1,16 +1,17 @@
 import React from "react"
+import avatars from "../assets/avatars"
 import SortableTable from "/components/SortableTable.js"
 
 export default function StudentList({ students, classroom }) {
 
 	const headers = [
 		{
-			accessor: "avatar",
-			Cell: ({ cell: { value } }) => <img src={value} />,
+			accessor: "avatarIndex",
+			Cell: ({ cell: { value } }) => <img src={avatars[value]} />,
 		},
 		{
 			Header: "name",
-			accessor: "name",
+			accessor: "studentId",
 		},
 		{
 			Header: "popupCount",

@@ -2,6 +2,8 @@ import React from "react"
 import { useTable, useSortBy } from "react-table"
 import Link from "next/link"
 import styled from "@emotion/styled"
+import { useDispatch } from "react-redux"
+import { selectStudent } from "../store/actions/thisStudentAction"
 
 export default function SortableTable({ columns, data, classroom }) {
 
@@ -49,7 +51,9 @@ export default function SortableTable({ columns, data, classroom }) {
 			useSortBy
 		)
 
-	const firstPageRows = rows.slice(0, 20)
+	const firstPageRows = rows.slice(0, 20);
+
+	const dispatch = useDispatch();
 
 	return (
 		<>
@@ -77,12 +81,14 @@ export default function SortableTable({ columns, data, classroom }) {
 								href={{
 									pathname: "/ThisStudent",
 									query: {
-										student: [row.original.key],
+										student: [row.original.studentId],
 										classroom: classroom,
 									},
 								}}
 							>
-								<Tr {...row.getRowProps()}>
+								<Tr {...row.getRowProps()} onClick={() => {
+									dispatch(selectStudent(row.original))
+								}}>
 									{row.cells.map((cell, index) => {
 										return (
 											<Cell key={index} {...cell.getCellProps()}>

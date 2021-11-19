@@ -1,27 +1,45 @@
-import React, { Component } from "react"
-import { getTimestamps } from "../store/actions/timestampsAction"
 import PropTypes from "prop-types"
+import React, { Component } from "react"
 import { connect } from "react-redux"
+import BookTimeline from "../components/BookTimeline.js"
+import DayTimeline_functional from "../components/DayTimeline_functional"
+import { getTimestamps } from "../store/actions/timestampsAction"
 
 export class TimelineProvider extends Component {
+	constructor() {
+		super();
+	}
 
 	componentDidMount() {
-		this.props.onGetTimestamps(this.props.classroom, this.props.student)
+		if (this.props.student.hasOwnProperty('nowReading'))
+			this.props.onGetTimestamps(this.props.classroom, this.props.student.studentId, this.props.student.nowReading)
 	}
 
 	shouldComponentUpdate(newProps, newState) {
-		return newProps.timestampsVal != this.props.timestampsVal
+		return !!newProps.timestampsVal || newProps.timestampsVal != this.props.timestampsVal
 	}
 
 	render() {
 		return (
-			<div>
-				<div>
-					{React.cloneElement(this.props.children, {
-						events: this.props.timestampsVal.children,
-					})}
-				</div>
-			</div>
+			<>
+				<BookTimeline
+					parentCallback={this.props.parentCallback}
+					pages={this.props.currentPages}
+					popups={this.props.popupsVal}
+					last={
+						this.props.student
+							? this.props.student.lastEvent
+								? this.props.student.lastEvent.popupId
+								: `LP001`
+							: `LP001`
+					}
+				/>
+				<DayTimeline_functional
+					parentCallback={this.props.parentCallback}
+					popups={this.props.popupsVal}
+					events={this.props.timestampsVal.children}
+				/>
+			</>
 		)
 	}
 }
@@ -42,8 +60,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-	onGetTimestamps: (classrooom, student) =>
-		dispatch(getTimestamps(classrooom, student)),
+	onGetTimestamps: (classrooom, student, bookId, page, size) =>
+		dispatch(getTimestamps(classrooom, student, bookId, page, size)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimelineProvider)

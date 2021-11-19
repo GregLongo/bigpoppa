@@ -1,5 +1,5 @@
-import request from "../request.js"
-import { CLASSROOM_STUDENTS_ERROR, GET_CLASSROOM_STUDENTS } from "../types"
+import request from "../request.js";
+import { CLASSROOM_STUDENTS_ERROR, GET_CLASSROOM_STUDENTS } from "../types";
 
 export const getClassroomStudents = (thisClass) => async (dispatch) => {
 	if (typeof thisClass == 'undefined' || !String(thisClass)) return;

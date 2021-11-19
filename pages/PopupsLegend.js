@@ -43,7 +43,6 @@ export default function PopupsLegend() {
 	const popupsList = useSelector((state) => state.popupsList)
 	const { loading, error, popupsVal } = popupsList
 
-	const dispatch2 = useDispatch()
 	const bookList = useSelector((state) => state.bookList)
 	const { loading2, error2, booklistVal } = bookList
 
@@ -59,13 +58,13 @@ export default function PopupsLegend() {
 
 	useEffect(() => {
 		dispatch(getBookList())
-	}, [dispatch2])
+	}, [dispatch])
 
 	const [book, setBook] = useState()
 
 	useEffect(() => {
 		dispatch(getPopups(book))
-	}, [book])
+	}, [dispatch, book])
 
 	Object.keys(popupsVal).map((key, id) => {
 		papusas.push({
