@@ -4,7 +4,6 @@ import styled from "@emotion/styled"
 const ScoresContainer = styled.div`
 	display: flex;
 	align-items: center;
-	width: 160px;
 	justify-content: flex-start;
 	img {
 		width: 16px;
@@ -12,16 +11,16 @@ const ScoresContainer = styled.div`
 `
 
 const Pops = styled.span`
-	margin-right: 1rem;
-	margin-left: 1rem;
+	margin-right: .3rem;
+	margin-left: .3rem;
 	font-size: 16px;
 `
 
 export default function Scores(props) {
 	return (
 		<ScoresContainer>
-				<img src="img/bulb.svg" />
-				<Pops>{props.popups}</Pops>
+			<img src="img/bulb.svg" />
+			<Pops>{props.popups}</Pops>
 			<span>Popups</span>
 			{/* <img src="img/interactive.svg" />
       <span>{props.interactive} </span>

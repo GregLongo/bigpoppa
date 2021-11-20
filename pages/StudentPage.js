@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Classroom from "../components/Classroom.js"
+import StudentPageHeader from "../components/StudentPageHeader.js"
 import Teacher from "../components/Teacher.js"
 import { getClassroomStudents } from '../store/actions/classStudentsAction.js'
 
@@ -17,7 +18,8 @@ export default function StudentPage({ classroom }) {
 
 	return (
 		<div>
-			<Teacher teacher={classroom} />
+			{/* <Teacher teacher={classroom} /> */}
+			<StudentPageHeader selectedClass={classroom}/>
 			<Classroom students={students} classId={classroom} />
 		</div>
 	)

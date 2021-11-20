@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react"
-import Highcharts from "highcharts"
-import bullet from "highcharts/modules/bullet.js"
-import HighchartsReact from "highcharts-react-official"
+import { ClassNames } from "@emotion/react"
 import styled from "@emotion/styled"
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
+import bullet from "highcharts/modules/bullet.js"
+import React, { useState } from "react"
 
 export default function BulletChart(props) {
 	bullet(Highcharts)
@@ -12,27 +13,37 @@ export default function BulletChart(props) {
 	const Bullet = styled.div`
 		display: flex;
 		align-items: center;
+		padding-right: 0.5rem;
+		height: 3.5rem;
+    	align-content: center;
 		span {
-			padding-top: 0.5rem;
-			font-size: 12px;
+			font-size: 16px;
 		}
 	`
 	const [options, setOptions] = useState({
 		chart: {
-			marginTop: props.sm ? 22 : null,
-			marginBottom: props.sm ? 8 : null,
+			// marginTop: props.sm ? 22 : null,
+			// marginBottom: props.sm ? 8 : null,
 			inverted: true,
 			type: "bullet",
 			styledMode: false,
-			height: props.sm ? 48 : 90,
-			width: props.sm ? 220 : null,
+			// height: props.sm ? 48 : 90,
+			// width: props.sm ? 220 : null,
 			backgroundColor: "transparent",
+			margin: 5,
+			padding: 0,
+			events: {
+				load: function (e) {
+					// prevent redrawing the chart.
+					e.preventDefault();
+				}
+			}
 		},
 		title: {
 			text: title,
 			align: "left",
 			style: {
-				fontSize: 12,
+				fontSize: 12
 			},
 		},
 		credits: {
@@ -42,35 +53,51 @@ export default function BulletChart(props) {
 			enabled: false,
 		},
 		height: 1,
-		xAxis: {
-			categories: [],
-		},
 		plotOptions: {
 			series: {
 				borderRadius: 8,
 				lineWidth: 8,
 				pointPadding: 0,
+				pointWidth: 10,
 				borderWidth: 0,
-				color: props.color,
+				color: {
+					linearGradient: {
+						x1: 0,
+						x2: 0,
+						y1: 0,
+						y2: 1
+					},
+					stops: [
+						[0, props.color],
+						[1, "#FFFFFF"]
+					]
+				},
 				marginTop: 0,
 				marginBottom: 0,
 				targetOptions: {
 					width: 0,
-				},
+				}
 			},
 		},
 		legend: {
 			enabled: false,
 		},
 		xAxis: {
-			visible: false,
+			lineWidth: 0,
+			minorGridLineWidth: 0,
+			lineColor: 'transparent',
+			labels: {
+				enabled: false
+			},
+			minorTickLength: 0,
+			tickLength: 0
 		},
 		yAxis: {
 			// height: 6,
 
 			max: props.max,
 			visible: true,
-			gridLineWidth: 1,
+			gridLineWidth: 0,
 			// plotBands: [
 			//   {
 			//     from: 0,
@@ -91,7 +118,7 @@ export default function BulletChart(props) {
 			title: "jdjjsjkjkdj",
 			labels: {
 				style: {
-					fontSize: 8,
+					display: "none"
 				},
 			},
 		},
@@ -100,19 +127,30 @@ export default function BulletChart(props) {
 				targetOptions: {
 					width: 20,
 				},
-				data: [
-					{
-						y: val,
-					},
-				],
+				data: [{
+					y: (val)
+				}]
 			},
-		],
+		]
 	})
 
 	return (
-		<Bullet>
-			<HighchartsReact highcharts={Highcharts} options={options} />
-			<span>{val}</span>
-		</Bullet>
+		<ClassNames>
+			{({ css, cx }) => (
+				<Bullet>
+					<HighchartsReact
+						highcharts={Highcharts}
+						options={options}
+						containerProps={{
+							className: css({
+								height: "100%",
+								width: "100%"
+							})
+						}}
+					/>
+					<span>{Math.round(val)}</span>
+				</Bullet>
+			)}
+		</ClassNames>
 	)
 }

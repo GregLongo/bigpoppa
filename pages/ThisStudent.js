@@ -106,7 +106,7 @@ export default function ThisStudent(props) {
 				<LeftContainer>
 					<Info>
 						<div>
-							<img src={avatars[studentVal.avatarIndex]} />
+							<img src={avatars[studentVal.avatarIndex - 1]} />
 						</div>
 						<Marquis>
 							<Name>{props.student}</Name>

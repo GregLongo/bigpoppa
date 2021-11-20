@@ -10,7 +10,6 @@ export default function Student(props) {
 		grid-template-columns: 30% 70%;
 		height: 140px;
 		width: 90%;
-		padding: 0.5rem 1rem;
 		background-color: #fff;
 		align-items: center;
 		border-radius: 5px;
@@ -20,39 +19,52 @@ export default function Student(props) {
 		@media (min-width: 768px) {
 			width: 400px;
 		}
+		padding: 0.5rem 0.5rem 0.5rem 0rem;
 	`
 
-	const Avatar = styled.img`
-		height: 50%;
-		width: auto;
+	const Avatar = styled.div`
 		justify-content: center;
 		display: flex;
-		max-height: 50%;
+	`
+
+	const StudentInfo = styled.div`
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
 	`
 
 	const NameScore = styled.div`
 		display: flex;
 		justify-content: space-between;
-		padding: 0.5rem 0.5rem 0 0.5rem;
 	`
 
 	return (
 		<Student>
-			<Avatar src={props.avatar} />
-			<div>
+			<Avatar >
+				<img src={props.avatar} />
+			</Avatar>
+			<StudentInfo>
 				<NameScore>
-					<span>{props.student}</span>
+					<span>{props.studentId}</span>
 					<Scores popups={props.popupCount} interactive={11} something={3} />
 				</NameScore>
 				{props.speed > 0 ? (
 					<BulletChart
-						val={parseFloat(props.speed)}
-						max={2000}
+						val={parseFloat(props.speed) / 60}
+						max={10}
 						title={"Avg Speed"}
-						color={"#77C294"}
+						color={"#26ab24"}
 					/>
 				) : null}
-			</div>
+				{props.score > 0 ? (
+					<BulletChart
+						val={parseFloat(props.score)}
+						max={100}
+						title={"Avg Speed"}
+						color={"#ed601a"}
+					/>
+				) : null}
+			</StudentInfo>
 		</Student>
 	)
 }

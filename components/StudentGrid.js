@@ -11,11 +11,8 @@ import Student from "./Student_Functional.js"
 export default function StudentGrid({ students, classroom }) {
 	const StudentGrid = styled.ul`
 		display: grid;
-		grid-template-columns: 100%;
 		grid-gap: 1rem;
-		@media (min-width: 880px) {
-			grid-template-columns: 50% 50%;
-		}
+		grid-template-columns: auto auto auto auto;
 	`
 
 	const dispatch = useDispatch();
@@ -35,10 +32,8 @@ export default function StudentGrid({ students, classroom }) {
 							dispatch(selectStudent(student))
 						}}>
 							<Student
-								avatar={avatars[student.avatarIndex]}
-								popupCount={student.popupCount}
-								student={student.studentId}
-								speed={student.speed}
+								avatar={avatars[student.avatarIndex - 1]}
+								{...student}
 							/>
 						</a>
 					</Link>

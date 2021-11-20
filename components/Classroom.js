@@ -10,23 +10,29 @@ import StudentList from "./StudentList.js"
 
 export default function Classroom({ students, classId }) {
 	const ClassroomComponent = styled.div`
-	`;
-
-	const Heading = styled.div`
 		padding-top: 2rem;
 		padding-left: 3rem;
 		padding-right: 3rem;
-		display: flex;
-		justify-content: space-between;
-		font-size: 24px;
+	`;
+
+	const Heading = styled.div`
+		font-size: 44px;
+		font-weight: 500;
 		color: white;
 	`
+
+	const ViewButtonContainer = styled.div`
+		display: flex;
+		justify-content: flex-end;
+	`
+
 	const ViewButton = styled.button`
 		cursor: pointer;
 		margin-left: 1rem;
 		background-color: transparent;
 		border: none;
-		font-size: 24px;
+		font-size: 30px;
+		font-weight: 300;
 		color: white;
 	`
 	const listButton = ({ isGrid }) => css`
@@ -52,9 +58,9 @@ export default function Classroom({ students, classId }) {
 	const [isGrid, setGrid] = useState(true)
 
 	return (<ClassroomComponent>
-		<Heading>
-			<span>Students</span>
-			<span>
+		<div>
+			<Heading><span>Students Overview</span></Heading>
+			<ViewButtonContainer>
 				<ViewButton
 					css={listButton({ isGrid })}
 					onClick={() => {
@@ -71,8 +77,8 @@ export default function Classroom({ students, classId }) {
 				>
 					<FontAwesomeIcon icon={faTh} />
 				</ViewButton>
-			</span>
-		</Heading>
+			</ViewButtonContainer>
+		</div>
 		{isGrid ? (
 			<StudentGrid students={students} classroom={classId} />
 		) : (
