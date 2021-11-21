@@ -6,7 +6,7 @@ import BookTimeline from "../components/BookTimeline.js"
 import BulletChart from "../components/BulletChart.js"
 import DayTimeline_functional from "../components/DayTimeline_functional"
 import PopupInspector from "../components/PopupInspector.js"
-import Scores from "../components/Scores.js"
+import Score from "../components/Score.js"
 import Teacher from "../components/Teacher.js"
 import TimelineProvider from "../components/TimelineProvider"
 import { getPopups } from "../store/actions/popupsAction"
@@ -113,7 +113,7 @@ export default function ThisStudent(props) {
 							{studentVal.lastEvent ? (
 								<Reading>Now Reading: {studentVal.nowReading}</Reading>
 							) : null}
-							<Scores popups={studentVal.popupCount} />
+							<Score src={'img/lightbulb.svg'} popups={studentVal.popupCount} />
 						</Marquis>
 					</Info>
 					<BookTimeline

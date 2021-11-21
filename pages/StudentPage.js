@@ -1,3 +1,4 @@
+import styled from "@emotion/styled"
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Classroom from "../components/Classroom.js"
@@ -6,6 +7,12 @@ import Teacher from "../components/Teacher.js"
 import { getClassroomStudents } from '../store/actions/classStudentsAction.js'
 
 export default function StudentPage({ classroom }) {
+	const HeaderSpace = styled.div`
+		height: 3rem;
+		@media (min-width: 768px) {
+			display: none;
+		}
+	`
 
 	const dispatch = useDispatch();
 
@@ -19,7 +26,8 @@ export default function StudentPage({ classroom }) {
 	return (
 		<div>
 			{/* <Teacher teacher={classroom} /> */}
-			<StudentPageHeader selectedClass={classroom}/>
+			<HeaderSpace />
+			<StudentPageHeader selectedClass={classroom} />
 			<Classroom students={students} classId={classroom} />
 		</div>
 	)

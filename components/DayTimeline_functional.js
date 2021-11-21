@@ -1,9 +1,8 @@
-import React, { Component, useState } from "react"
+import styled from "@emotion/styled"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
+import React, { useState } from "react"
 const timestamps = []
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
 
 export default function DayTimeline(props) {
 

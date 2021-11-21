@@ -18,7 +18,7 @@ export default function Nav(props) {
 		flex-direction: column;
 		padding: 2rem;
 		transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
-		z-index: 10;
+		z-index: 300;
 		position:fixed;
 		transition: all 1s ease
 		position: ${({ open }) => (open ? "fixed" : "absolute")};
@@ -30,7 +30,7 @@ export default function Nav(props) {
 
 	const MobileHeader = styled.div`
 		background-color: #272274;
-		height: 64px;
+		height: 3rem;
 		width: 100%;
 		position: absolute;
 		display: flex;
@@ -40,6 +40,7 @@ export default function Nav(props) {
 		@media (min-width: 768px) {
 			display: none;
 		}
+		z-index: 200;
 	`
 
 	const Logo = styled.div`

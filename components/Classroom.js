@@ -11,8 +11,8 @@ import StudentList from "./StudentList.js"
 export default function Classroom({ students, classId }) {
 	const ClassroomComponent = styled.div`
 		padding-top: 2rem;
-		padding-left: 3rem;
-		padding-right: 3rem;
+		padding-left: 4rem;
+		padding-right: 4rem;
 	`;
 
 	const Heading = styled.div`

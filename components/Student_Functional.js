@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import React from "react"
 import BulletChart from "../components/BulletChart.js"
-import Scores from "../components/Scores.js"
+import Score from "./Score.js"
 
 export default function Student(props) {
 
@@ -17,7 +17,7 @@ export default function Student(props) {
 			outline: 2px solid #ccc;
 		}
 		@media (min-width: 768px) {
-			width: 400px;
+			width: 380px;
 		}
 		padding: 0.5rem 0.5rem 0.5rem 0rem;
 	`
@@ -38,6 +38,11 @@ export default function Student(props) {
 		justify-content: space-between;
 	`
 
+	const ScoreList = styled.div`
+		display: flex;
+		justify-content: space-between;
+	`
+
 	return (
 		<Student>
 			<Avatar >
@@ -45,23 +50,38 @@ export default function Student(props) {
 			</Avatar>
 			<StudentInfo>
 				<NameScore>
-					<span>{props.studentId}</span>
-					<Scores popups={props.popupCount} interactive={11} something={3} />
+					<div>
+						<span>{props.studentId}</span>
+					</div>
+					<ScoreList>
+						<Score
+							src={'img/book.svg'}
+							value={1}
+						/>
+						<Score
+							src={'img/lightbulb.svg'}
+							value={props.popupCount}
+						/>
+						<Score
+							src={'img/question_mark.svg'}
+							value={3}
+						/>
+					</ScoreList>
 				</NameScore>
 				{props.speed > 0 ? (
 					<BulletChart
 						val={parseFloat(props.speed) / 60}
 						max={10}
 						title={"Avg Speed"}
-						color={"#26ab24"}
+						color={"#02A87D"}
 					/>
 				) : null}
 				{props.score > 0 ? (
 					<BulletChart
 						val={parseFloat(props.score)}
 						max={100}
-						title={"Avg Speed"}
-						color={"#ed601a"}
+						title={"Overall Comprehension"}
+						color={"#EB720B"}
 					/>
 				) : null}
 			</StudentInfo>

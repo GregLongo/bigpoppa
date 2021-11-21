@@ -9,10 +9,13 @@ import Student from "./Student_Functional.js"
 
 
 export default function StudentGrid({ students, classroom }) {
-	const StudentGrid = styled.ul`
+	const StudentGrid = styled.div`
 		display: grid;
-		grid-gap: 1rem;
-		grid-template-columns: auto auto auto auto;
+		grid-column-gap: .5rem;
+		grid-row-gap: 1rem;
+		// 380px same as provided at the Student component.
+		grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+		margin-top: 3rem;
 	`
 
 	const dispatch = useDispatch();
