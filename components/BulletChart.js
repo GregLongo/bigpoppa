@@ -25,7 +25,7 @@ export default function BulletChart(props) {
 			// marginTop: props.sm ? 22 : null,
 			// marginBottom: props.sm ? 8 : null,
 			inverted: true,
-			type: "bullet",
+			type: "bar",
 			styledMode: false,
 			// height: props.sm ? 48 : 90,
 			// width: props.sm ? 220 : null,
@@ -54,6 +54,12 @@ export default function BulletChart(props) {
 		},
 		height: 1,
 		plotOptions: {
+			bar: {
+				dataLabels: {
+					enabled: false
+				},
+				grouping: false
+			},
 			series: {
 				borderRadius: 8,
 				lineWidth: 8,
@@ -77,7 +83,7 @@ export default function BulletChart(props) {
 				targetOptions: {
 					width: 0,
 				}
-			},
+			}
 		},
 		legend: {
 			enabled: false,
@@ -123,6 +129,15 @@ export default function BulletChart(props) {
 			},
 		},
 		series: [
+			{
+				targetOptions: {
+					width: 20,
+				},
+                data: [
+					props.max
+				],
+                color: '#E6E6E6'
+            },
 			{
 				targetOptions: {
 					width: 20,
