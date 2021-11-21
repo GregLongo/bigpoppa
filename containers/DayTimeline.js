@@ -28,7 +28,8 @@ class DayTimeline extends React.Component {
 			dates: [],
 			selectDate: null,
 			timestamps: [],
-			options: null
+			options: null,
+			selectedDateIndex: 0
 		}
 		this.getReadableDate = this.getReadableDate.bind(this);
 		this.setSelectDate = this.setSelectDate.bind(this);
@@ -179,12 +180,13 @@ class DayTimeline extends React.Component {
 		}
 	}
 
-	setSelectDate(myDate) {
+	setSelectDate(myDate, selectedDateIndex) {
 		if (!myDate) {
 			return;
 		}
 		this.setState({
-			selectDate: this.getReadableDate(myDate)
+			selectDate: this.getReadableDate(myDate),
+			selectedDateIndex
 		});
 	}
 
@@ -202,6 +204,7 @@ class DayTimeline extends React.Component {
 			this.state.options && <DayTimelineComponent
 				dates={this.state.dates}
 				onSelectDate={this.setSelectDate}
+				selectedDateIndex={this.state.selectedDateIndex}
 				onGetReadableDate={this.getReadableDate}
 				options={this.state.options}
 			/>

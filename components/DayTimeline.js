@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
@@ -34,11 +35,11 @@ export default function DayTimeline(props) {
 		&:hover {
 			border-top: 3px solid teal;
 		}
+		&.active {
+			border-top: 3px solid teal;
+		}
 	`
-	const DateMarquis = styled.div`
-		padding: 2rem 0.5rem 0rem;
-		font-size: 24px;
-	`
+	
 	const ChartContainer = styled.div`
 		.cat {
 			background: #0F314D;
@@ -65,14 +66,15 @@ export default function DayTimeline(props) {
 	return (
 		<div>
 			{props.dates.map((thisDate, index) => {
-				var myDate = new Date(thisDate)
+				var myDate = new Date(thisDate);
 
 				return (
 					<DateButton
+						className={props.selectedDateIndex == index ? 'active': ''}
 						key={index}
 						onClick={(e) => {
 							e.preventDefault();
-							props.onSelectDate(myDate);
+							props.onSelectDate(myDate, index);
 						}}
 					>
 						{props.onGetReadableDate(myDate)}
