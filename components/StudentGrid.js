@@ -20,7 +20,6 @@ export default function StudentGrid({ students, classroom }) {
 
 	const dispatch = useDispatch();
 
-	console.log("student", students)
 	return (
 		<StudentGrid>
 			{students.map((student, id) => {

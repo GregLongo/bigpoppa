@@ -64,7 +64,7 @@ export default function Student(props) {
 						/>
 						<Score
 							src={'img/question_mark.svg'}
-							value={3}
+							value={11}
 						/>
 					</ScoreList>
 				</NameScore>

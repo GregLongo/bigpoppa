@@ -9,7 +9,7 @@ export const getTimestamps = (classroom, student, bookId, page = 0, size = 30) =
 		.then((resp) => {
 			dispatch({
 				type: GET_TIMESTAMPS,
-				payload: resp.data,
+				payload: resp.data
 			})
 		})
 		.catch((exception) => {

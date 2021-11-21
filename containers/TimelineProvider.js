@@ -1,13 +1,13 @@
 import PropTypes from "prop-types"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import BookTimeline from "../components/BookTimeline.js"
-import DayTimeline_functional from "../components/DayTimeline_functional"
 import { getTimestamps } from "../store/actions/timestampsAction"
+import BookTimeline from "./BookTimeline.js"
+import DayTimeline from "./DayTimeline"
 
 export class TimelineProvider extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 	}
 
 	componentDidMount() {
@@ -16,30 +16,29 @@ export class TimelineProvider extends Component {
 	}
 
 	shouldComponentUpdate(newProps, newState) {
-		return !!newProps.timestampsVal || newProps.timestampsVal != this.props.timestampsVal
+		return newProps.currentPages != this.props.currentPages ||
+			newProps.timestampsVal.page != this.props.timestampsVal.page ||
+			newProps.timestampsVal.size != this.props.timestampsVal.size;
 	}
 
 	render() {
-		return (
-			<>
+		return this.props.timestampsVal && (
+			<React.Fragment>
 				<BookTimeline
 					parentCallback={this.props.parentCallback}
 					pages={this.props.currentPages}
 					popups={this.props.popupsVal}
-					last={
-						this.props.student
-							? this.props.student.lastEvent
-								? this.props.student.lastEvent.popupId
-								: `LP001`
-							: `LP001`
+					last={this.props.student.lastEvent
+						? this.props.student.lastEvent.popupId
+						: `LP001`
 					}
 				/>
-				<DayTimeline_functional
+				<DayTimeline
 					parentCallback={this.props.parentCallback}
 					popups={this.props.popupsVal}
 					events={this.props.timestampsVal.children}
 				/>
-			</>
+			</React.Fragment>
 		)
 	}
 }

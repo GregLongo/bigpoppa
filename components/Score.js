@@ -22,6 +22,7 @@ export default function Score(props) {
 		<ScoreContainer>
 			<img src={props.src} />
 			<Pops>{props.value}</Pops>
+			{props.text && <span>{props.text}</span>}
 		</ScoreContainer>
 	)
 }

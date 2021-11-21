@@ -5,6 +5,7 @@ import styled from "@emotion/styled"
 import { faList, faTh } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useState } from "react"
+import SecondaryHeader from "./SecondaryHeader.js"
 import StudentGrid from "./StudentGrid.js"
 import StudentList from "./StudentList.js"
 
@@ -14,12 +15,6 @@ export default function Classroom({ students, classId }) {
 		padding-left: 4rem;
 		padding-right: 4rem;
 	`;
-
-	const Heading = styled.div`
-		font-size: 44px;
-		font-weight: 500;
-		color: white;
-	`
 
 	const ViewButtonContainer = styled.div`
 		display: flex;
@@ -59,7 +54,7 @@ export default function Classroom({ students, classId }) {
 
 	return (<ClassroomComponent>
 		<div>
-			<Heading><span>Students Overview</span></Heading>
+			<SecondaryHeader><span>Students Overview</span></SecondaryHeader>
 			<ViewButtonContainer>
 				<ViewButton
 					css={listButton({ isGrid })}

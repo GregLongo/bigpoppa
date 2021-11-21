@@ -81,7 +81,6 @@ export default function PopupInspector(props) {
 						<Text>{props.popups[props.popup]["interactive prompt"]}</Text>
 						{
 							['A', 'B', 'C', 'D'].map((answer) => {
-								console.log("props.popup", props.popup);
 								if (props.popups[props.popup]["response " + answer])
 									return <Text key={answer}><span css={{ color: props.popups[props.popup]["correct " + answer] ? "green" : "" }}>{answer}. {props.popups[props.popup]["response " + answer]}</span></Text>
 							})

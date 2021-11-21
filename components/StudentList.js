@@ -19,7 +19,7 @@ export default function StudentList({ students, classroom }) {
 		},
 		{
 			Header: "Questions",
-			Cell: ({ cell: { value } }) => <span>3</span>,
+			Cell: ({ cell: { value } }) => <span>11</span>,
 		},
 		{
 			Header: "AVG Speed",
