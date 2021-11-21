@@ -1,6 +1,5 @@
-import { GET_BOOKLIST, BOOKLIST_ERROR } from "../types"
-import axios from "axios"
 import request from "../request.js"
+import { BOOKLIST_ERROR, GET_BOOKLIST } from "../types"
 
 export const getBookList = () => async (dispatch) => {
 	const url = `book/`

@@ -1,8 +1,7 @@
 import styled from "@emotion/styled"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import React, { useState } from "react"
-const timestamps = []
+import React, { useEffect, useState } from "react"
 
 export default function DayTimeline(props) {
 
@@ -83,55 +82,55 @@ export default function DayTimeline(props) {
 					? ``
 					: props.popups[events[key].popupId].primary[0]
 
-        let isMore = !props.popups[events[key].popupId] || !props.popups[events[key].popupId].primary[1] ? `` : '...'
+				let isMore = !props.popups[events[key].popupId] || !props.popups[events[key].popupId].primary[1] ? `` : '...'
 
-        let color = !props.popups[events[key].popupId] || !props.popups[events[key].popupId].primary[0] ? ``
-                  : props.popups[events[key].popupId].primary[0] == "theme"
-                  ? "#E37F4A"
-                  : props.popups[events[key].popupId].primary[0] == "plot"
-                  ? "#B93454"
-                  : props.popups[events[key].popupId].primary[0] == "characters"
-                  ? "#FECE80"
-                  : props.popups[events[key].popupId].primary[0] == "setting"
-                  ? "#32658C"
-                  : props.popups[events[key].popupId].primary[0] == "conflict / problem solution"
-                  ? "#9F3801"
-                  : props.popups[events[key].popupId].primary[0] == "text evidence / inference"
-                  ? "#7E001E"
-                  : props.popups[events[key].popupId].primary[0] == "compare / contrast"
-                  ? "#77C294"
-                  : props.popups[events[key].popupId].primary[0] == "sequence / summary"
-                  ? "#0F314D"
-                  : props.popups[events[key].popupId].primary[0] == "challenge"
-                  ? "#7897AF"
-                  : props.popups[events[key].popupId].primary[0] == "vocabulary"
-                  ? "#02A87D"
-                  : props.popups[events[key].popupId].primary[0] == "author / illustrator"
-                  ? "#73C6B0"
-                  : props.popups[events[key].popupId].primary[0] == "structure - part / whole"
-                  ? "#B7D3E8"
-                  : props.popups[events[key].popupId].primary[0] == "point of view"
-                  ? "#E995A9"
-                  : props.popups[events[key].popupId].primary[0] == "impact of illustrationas"
-                  ? "#CB9D85"
-                  : props.popups[events[key].popupId].primary[0] == "connection with source materials"
-                  ? "#0F314D"
-                  : "#0F314D";
+				let color = !props.popups[events[key].popupId] || !props.popups[events[key].popupId].primary[0] ? ``
+					: props.popups[events[key].popupId].primary[0] == "theme"
+						? "#E37F4A"
+						: props.popups[events[key].popupId].primary[0] == "plot"
+							? "#B93454"
+							: props.popups[events[key].popupId].primary[0] == "characters"
+								? "#FECE80"
+								: props.popups[events[key].popupId].primary[0] == "setting"
+									? "#32658C"
+									: props.popups[events[key].popupId].primary[0] == "conflict / problem solution"
+										? "#9F3801"
+										: props.popups[events[key].popupId].primary[0] == "text evidence / inference"
+											? "#7E001E"
+											: props.popups[events[key].popupId].primary[0] == "compare / contrast"
+												? "#77C294"
+												: props.popups[events[key].popupId].primary[0] == "sequence / summary"
+													? "#0F314D"
+													: props.popups[events[key].popupId].primary[0] == "challenge"
+														? "#7897AF"
+														: props.popups[events[key].popupId].primary[0] == "vocabulary"
+															? "#02A87D"
+															: props.popups[events[key].popupId].primary[0] == "author / illustrator"
+																? "#73C6B0"
+																: props.popups[events[key].popupId].primary[0] == "structure - part / whole"
+																	? "#B7D3E8"
+																	: props.popups[events[key].popupId].primary[0] == "point of view"
+																		? "#E995A9"
+																		: props.popups[events[key].popupId].primary[0] == "impact of illustrationas"
+																			? "#CB9D85"
+																			: props.popups[events[key].popupId].primary[0] == "connection with source materials"
+																				? "#0F314D"
+																				: "#0F314D";
 
 				let interactive = !props.popups[events[key].popupId]
 					? ``
 					: props.popups[events[key].popupId]["popup type"] == "interactive"
-					? true
-					: false
+						? true
+						: false
 				if (stampTrunc == selectDate) {
 					timestamps.push({
 						x: stamp,
 						y: 0,
 						interactive: interactive,
 						cat: category,
-            isMore: isMore,
+						isMore: isMore,
 						lp: events[key].popupId,
-            color: color
+						color: color
 					})
 				}
 			}
@@ -183,9 +182,9 @@ export default function DayTimeline(props) {
 							)
 						} else {
 							return (
-								'<div class="pop"><img src="/img/bulb.svg"><span style="background-color:'+
-                  this.point.color
-                +'" class="cat">' +
+								'<div class="pop"><img src="/img/bulb.svg"><span style="background-color:' +
+								this.point.color
+								+ '" class="cat">' +
 								this.point.cat + this.point.isMore +
 								"</span></div>"
 							)
@@ -225,6 +224,26 @@ export default function DayTimeline(props) {
 		],
 	}
 
+	const setSelectDate = (myDate) => {
+		if (!myDate) {
+			return;
+		}
+		setDate(
+			myDate.getFullYear() +
+			"/" +
+			(myDate.getMonth() + 1) +
+			"/" +
+			myDate.getDate()
+		)
+	}
+
+	useEffect(() => {
+		// default select date
+		if (dates.length > 0) {
+			setSelectDate(new Date(dates[0]));
+		}
+	}, [dates])
+
 	return (
 		<div>
 			{dates.map((thisDate, index) => {
@@ -234,13 +253,7 @@ export default function DayTimeline(props) {
 					<DateButton
 						key={index}
 						onClick={() => {
-							setDate(
-								myDate.getFullYear() +
-									"/" +
-									(myDate.getMonth() + 1) +
-									"/" +
-									myDate.getDate()
-							)
+							setSelectDate(myDate)
 
 							const someevent =
 								Object.keys(events)[Object.keys(events).length - 1]

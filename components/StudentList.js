@@ -1,6 +1,6 @@
-import React from "react"
-import SortableTable from "./SortableTable.js"
+import React from "react";
 import avatars from '../assets/avatars.js';
+import SortableTable from "./SortableTable.js";
 
 export default function StudentList({ students, classroom }) {
 
@@ -24,7 +24,7 @@ export default function StudentList({ students, classroom }) {
 		{
 			Header: "AVG Speed",
 			accessor: "speed",
-			Cell: ({ cell: { value } }) => Math.round(Number(value) /60)
+			Cell: ({ cell: { value } }) => Math.round(Number(value) / 60)
 		},
 		{
 			Header: "Comprehension",

@@ -62,7 +62,7 @@ export default function PopupInspector(props) {
 		font-style: italic;
     margin-bottom: 1.5rem
 	`
-	console.log(props.popups[props.popup])
+	
 	return (
 		<Inspector key={props.popup}>
 			<Title>{props.popups[props.popup]["popup title"]}</Title>

@@ -48,7 +48,8 @@ export default function Nav(props) {
 	`
 
 	const route = useRouter()
-	const { classroom } = route.query;
+	let { classroom } = route.query;
+	classroom = !!classroom ? classroom : '';
 
 	const navButtons = [
 		{
@@ -56,7 +57,7 @@ export default function Nav(props) {
 			path: "/StudentPage",
 			icon: 'img/students.png',
 			props: {
-				classroom: !!classroom ? classroom : ''
+				classroom
 			}
 		},
 		{
@@ -64,7 +65,7 @@ export default function Nav(props) {
 			path: "/PopupsLegend",
 			icon: 'img/popups.png',
 			props: {
-				classroom: !!classroom ? classroom : ''
+				classroom
 			}
 		},
 	]
@@ -75,7 +76,10 @@ export default function Nav(props) {
 				<Burger open={open} setOpen={setOpen} />
 			</MobileHeader>
 			<NavBar open={open}>
-				<Link href={"/"}>
+				<Link href={{
+					pathname: "/",
+					query: { classroom }
+				}}>
 					<Logo><img src='img/lp_logo.png' /></Logo>
 				</Link>
 				{navButtons.map((button) => (<NavButton
