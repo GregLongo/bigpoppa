@@ -1,25 +1,36 @@
 import React from "react"
-import SortableTable from "/components/SortableTable.js"
+import SortableTable from "./SortableTable.js"
+import avatars from '../assets/avatars.js';
 
 export default function StudentList({ students, classroom }) {
 
 	const headers = [
 		{
-			accessor: "avatar",
-			Cell: ({ cell: { value } }) => <img src={value} />,
+			accessor: "avatarIndex",
+			Cell: ({ cell: { value } }) => <img src={avatars[value - 1]} />,
 		},
 		{
-			Header: "name",
-			accessor: "name",
+			Header: "Name",
+			accessor: "studentId",
 		},
 		{
-			Header: "popupCount",
+			Header: "Popups",
 			accessor: "popupCount",
 		},
 		{
-			Header: "speed",
-			accessor: "speed",
+			Header: "Questions",
+			Cell: ({ cell: { value } }) => <span>3</span>,
 		},
+		{
+			Header: "AVG Speed",
+			accessor: "speed",
+			Cell: ({ cell: { value } }) => Math.round(Number(value) /60)
+		},
+		{
+			Header: "Comprehension",
+			accessor: "score",
+			Cell: ({ cell: { value } }) => Math.ceil(Number(value))
+		}
 	]
 
 	const data = React.useMemo(() => students, [])
