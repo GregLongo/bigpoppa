@@ -15,8 +15,8 @@ export default function Nav(props) {
 		color: #0F314D;
 		align-items: center;
 		display: flex;
+		padding: 0 2rem;
 		flex-direction: column;
-		padding: 2rem;
 		transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
 		z-index: 300;
 		position:fixed;
@@ -45,6 +45,7 @@ export default function Nav(props) {
 
 	const Logo = styled.div`
 		cursor: pointer;
+		padding: 1rem;
 	`
 
 	const route = useRouter()
@@ -55,7 +56,15 @@ export default function Nav(props) {
 		{
 			label: "Students",
 			path: "/StudentPage",
-			icon: 'img/students.png',
+			icon: 'img/students.svg',
+			props: {
+				classroom
+			}
+		},
+		{
+			label: "Class",
+			path: "/ClassPage",
+			icon: 'img/class.svg',
 			props: {
 				classroom
 			}
@@ -63,11 +72,11 @@ export default function Nav(props) {
 		{
 			label: "Popups",
 			path: "/PopupsLegend",
-			icon: 'img/popups.png',
+			icon: 'img/popups.svg',
 			props: {
 				classroom
 			}
-		},
+		}
 	]
 
 	return (
