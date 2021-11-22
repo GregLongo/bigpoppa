@@ -11,6 +11,7 @@ export default function BulletChart(props) {
 	const [val, setVal] = useState(props.val)
 	const [title, setTitle] = useState(props.title)
 	const Bullet = styled.div`
+		pointer-events: none;
 		display: grid;
 		grid-template-columns: 90% 10%;
 		align-items: flex-end;

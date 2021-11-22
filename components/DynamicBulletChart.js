@@ -10,6 +10,7 @@ export default function DynamicBulletChart(props) {
 	const [title, setTitle] = useState(props.title)
 
 	const ChartContainer = styled.div`
+	pointer-events: none;
 		display: grid;
 		grid-template-columns: 100% 100%;
 		@media (min-width: 880px) {
