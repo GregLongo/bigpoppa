@@ -18,6 +18,7 @@ const ClassSelect = () => {
 	`
 	const Title = styled.div`
 		font-size: 36px;
+		font-family: 'BauhausStd-Light';
 	`
 	const Subtitle = styled.div`
 		font-size: 24px;
@@ -37,7 +38,7 @@ const ClassSelect = () => {
 				error.message
 			) : (
 				<Splash>
-					<Title>Living Popups Teacher's Edition</Title>
+					<Title>LP-Bookspace Teacher Dashboard</Title>
 					<Subtitle>Please Choose Your Class </Subtitle>
 					<Dropdown paths={classlistVal} />
 				</Splash>
