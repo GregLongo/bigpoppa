@@ -19,11 +19,17 @@ export default function ThisStudentRightPart(props) {
 	return (
 		<RightContainer>
 			<div>
-				{studentVal.speed > 0 && <BulletChart
-					val={Math.round(Number(studentVal.speed) / 60)}
-					max={10}
+				{studentVal.speed >= 0 && <BulletChart
+					val={(60 * 60) / parseFloat(studentVal.speed)}
+					max={60}
 					title={"Avg Speed (Minutes per pages)"}
 					color={"#02A87D"}
+				/>}
+				{studentVal.score >= 0 && <BulletChart
+					val={parseFloat(studentVal.score)}
+					max={100}
+					title={"Overall Comprehension"}
+					color={"#E37F4A"}
 				/>}
 			</div>
 			<StudentPopupInspector popups={popupsVal} />

@@ -111,7 +111,6 @@ class BookTimeline extends React.Component {
 				useHTML: true
 			});
 		};
-		console.log("plotBands", plotBands);
 		let options = {
 			title: {
 				text: "",
