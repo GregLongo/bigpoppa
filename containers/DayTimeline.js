@@ -65,29 +65,46 @@ class DayTimeline extends React.Component {
 
 			Object.keys(events).map((key, id) => {
 				if (events[key].action == "PopupShown") {
+					const currentPopup = this.props.popups[events[key].popupId];
+					if (!currentPopup) {
+						return;
+					}
+
 					var stamp = new Date(events[key].timestamp)
 					var stampTrunc = this.getReadableDate(stamp)
 
-					let category = !this.props.popups[events[key].popupId]
-						? ``
-						: this.props.popups[events[key].popupId].primary[0]
+					let category;
+					let isMore;
+					if (currentPopup.primary.length > 0) {
+						category = this.props.popups[events[key].popupId].primary[0];
+						if (currentPopup.primary.length > 1) {
+							isMore = true;
+						}
+					} else if (currentPopup.secondary.length > 0) {
+						category = this.props.popups[events[key].popupId].secondary[0];
+						if (currentPopup.secondary.length > 1) {
+							isMore = true;
+						}
+					} else {
+						category = currentPopup['popup title'];
+						category = new String(category).substring(0, 10);
+						isMore = true;
+					}
 
-					let isMore = !this.props.popups[events[key].popupId] || !this.props.popups[events[key].popupId].primary[1] ? `` : '...';
+					console.log("popup", currentPopup, category);
 
 					let color = CATEGORY_COLORS.hasOwnProperty(category) ? CATEGORY_COLORS[category] : "#0F314D";
 
-					let interactive = !this.props.popups[events[key].popupId]
-						? ``
-						: this.props.popups[events[key].popupId]["popup type"] == "interactive"
-							? true
-							: false
+					let interactive = currentPopup["popup type"] == "interactive"
+						? true
+						: false
 					if (stampTrunc == this.state.selectDate) {
 						timestamps.push({
 							x: stamp,
 							y: 0,
 							interactive: interactive,
 							cat: category,
-							isMore: isMore,
+							isMore,
 							lp: events[key].popupId,
 							color: color
 						})
@@ -131,11 +148,11 @@ class DayTimeline extends React.Component {
 							useHTML: true,
 							allowOverlap: true,
 							formatter() {
-								var thisClass = ""
+								console.log("this.point", this.point);
 								if (this.point.interactive) {
 									return (
 										'<div class="pop"><img src="/img/interactive.svg"><span class="cat">' +
-										this.point.cat + this.isMore +
+										this.point.cat + (this.point.isMore ? '...' : '') +
 										"</span></div>"
 									)
 								} else {
@@ -143,7 +160,7 @@ class DayTimeline extends React.Component {
 										'<div class="pop"><img src="/img/bulb.svg"><span style="background-color:' +
 										this.point.color
 										+ '" class="cat">' +
-										this.point.cat + this.point.isMore +
+										this.point.cat + (this.point.isMore ? '...' : '') +
 										"</span></div>"
 									)
 								}
