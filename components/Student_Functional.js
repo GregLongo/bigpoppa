@@ -21,6 +21,11 @@ export default function Student(props) {
 		padding: 0.5rem 0.5rem 0.5rem 0rem;
 	`
 
+	const StudentName = styled.div`
+		display: flex;
+    	align-items: center;
+	`
+
 	const Avatar = styled.div`
 		justify-content: center;
 		display: flex;
@@ -50,9 +55,9 @@ export default function Student(props) {
 			</Avatar>
 			<StudentInfo>
 				<NameScore>
-					<div>
+					<StudentName>
 						<span>{props.studentId}</span>
-					</div>
+					</StudentName>
 					<ScoreList>
 						<Score
 							src={'img/book.svg'}
@@ -70,8 +75,8 @@ export default function Student(props) {
 				</NameScore>
 				{props.speed >= 0 ? (
 					<BulletChart
-						val={parseFloat(props.speed) / 60}
-						max={10}
+						val={(60 * 60) / parseFloat(props.speed)}
+						max={60}
 						title={"Avg Speed"}
 						color={"#02A87D"}
 					/>
