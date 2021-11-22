@@ -9,11 +9,12 @@ class ThisStudent extends React.Component {
 		this.state = {
 			currentPages: 200,
 		}
+		this.componentDidMountUpdate = this.componentDidMountUpdate.bind(this);
 	}
 
 	componentDidMount() {
 		if (this.props.studentVal && this.props.studentVal.nowReading) {
-			this.props.onGetPopups(this.props.studentVal.nowReading);
+			this.componentDidMountUpdate();
 		}
 	}
 
@@ -32,25 +33,33 @@ class ThisStudent extends React.Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		if (this.props.studentVal && this.props.studentVal.nowReading != prevProps.studentVal.nowReading) {
-			let currentPages;
-			this.props.onGetPopups(this.props.studentVal.nowReading);
-			switch (this.props.studentVal.nowReading) {
-				case "BC001":
-					currentPages = 154;
-				case "AFARM":
-					currentPages = 121;
-				case "Romeo":
-					currentPages = 195;
-				case "Hamlet":
-					currentPages = 201;
-				default:
-					currentPages = 200;
-			}
-			if (this.currentPages) {
-				this.setState({
-					currentPages
-				})
-			}
+			this.componentDidMountUpdate();
+		}
+	}
+
+	componentDidMountUpdate() {
+		let currentPages;
+		this.props.onGetPopups(this.props.studentVal.nowReading);
+		switch (this.props.studentVal.nowReading) {
+			case "BC001":
+				currentPages = 155;
+				break;
+			case "AFARM":
+				currentPages = 121;
+				break;
+			case "Romeo":
+				currentPages = 195;
+				break;
+			case "Hamlet":
+				currentPages = 201;
+				break;
+			default:
+				currentPages = 200;
+		}
+		if (currentPages) {
+			this.setState({
+				currentPages
+			})
 		}
 	}
 

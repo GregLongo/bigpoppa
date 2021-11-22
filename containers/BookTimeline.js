@@ -9,11 +9,11 @@ class BookTimeline extends React.Component {
 		this.state = {
 			bookmarks: [],
 			progress: [],
-			currentPages: [],
 			options: null,
 			optionsChanged: false
 		}
 		this.setOptions = this.setOptions.bind(this);
+		this.getPageTitle = this.getPageTitle.bind(this);
 	}
 
 	componentDidMount() {
@@ -22,6 +22,7 @@ class BookTimeline extends React.Component {
 
 		const bookmarks = []
 		const progress = []
+		this.pageTitles = {};
 
 		if (this.props.popups && lastpopup) {
 			Object.keys(this.props.popups).map((key, id) => {
@@ -33,7 +34,11 @@ class BookTimeline extends React.Component {
 						: false
 				bookmarks.push({ key: key, x: page, y: 0, interactive: interactive })
 				bookmarks.push({ x: 0, y: 0 })
-				bookmarks.unshift({ x: currentPages, y: 0 })
+				bookmarks.unshift({ x: currentPages, y: 0 });
+				let pageTitle = this.props.popups[key]['popup title'];
+				if (!!pageTitle) {
+					this.pageTitles[page] = pageTitle;
+				}
 			})
 
 			Object.keys(bookmarks).map((key, id) => {
@@ -46,8 +51,7 @@ class BookTimeline extends React.Component {
 		// Set the component state
 		this.setState({
 			bookmarks,
-			progress,
-			currentPages
+			progress
 		}, () => {
 		});
 	}
@@ -55,7 +59,7 @@ class BookTimeline extends React.Component {
 	componentDidUpdate(prevProps, prevState) {
 		if ((this.state.bookmarks != prevState.bookmarks && this.state.bookmarks)
 			|| (this.state.progress != prevState.progress && this.state.progress)
-			|| (this.state.currentPages != prevState.currentPages && this.state.currentPages)) {
+			|| (this.props.pages != prevProps.pages && this.props.pages)) {
 			this.setOptions();
 		}
 
@@ -66,11 +70,48 @@ class BookTimeline extends React.Component {
 		}
 	}
 
+
+	shouldComponentUpdate(newProps, newState) {
+		return newState.optionsChanged ||
+			newProps.last != this.props.last ||
+			newState.bookmarks != this.state.bookmarks ||
+			newProps.pages != this.props.pages ||
+			newState.progress != this.state.progress;
+	}
+
 	setOptions() {
-		const { bookmarks, progress, currentPages } = this.state;
-		const { popups } = this.props;
+		const { bookmarks, progress } = this.state;
+		const { popups, pages: currentPages } = this.props;
 		const lastpopup = this.props.last;
 		const parentCallback = this.props.parentCallback;
+		const getPageTitle = this.getPageTitle;
+		let plotBands = [];
+
+		let pageNumbers = Object.keys(this.pageTitles);
+		let prevPage = 0;
+		for (let i = 0; i < pageNumbers.length - 1; i++) {
+			const pageNumber = Number(pageNumbers[i]);
+			if (prevPage == 0 || pageNumber - prevPage > 20) {
+				prevPage = pageNumber;
+			} else {
+				continue;
+			}
+			plotBands.push({
+				label: {
+					x: pageNumber,
+					y: 20,
+					text: `<span class='label-page-title'>
+						${this.pageTitles[pageNumber]}
+					</span>`
+				},
+				from: pageNumber,
+				to: pageNumbers[i + 1] - 1,
+				color: 'transparent',
+				verticalAlign: 'top',
+				useHTML: true
+			});
+		};
+		console.log("plotBands", plotBands);
 		let options = {
 			title: {
 				text: "",
@@ -89,12 +130,15 @@ class BookTimeline extends React.Component {
 				height: 140
 			},
 			xAxis: {
-				visible: false,
-				min: 0,
-				max: this.state.currentPages,
+				visible: true,
 				opposite: true,
-				lineWidth: 20,
-				tickLength: 20
+				plotBands: plotBands
+				// labels: {
+				// 	formatter: function () {
+				// 		console.log("this.pos", this.pos)
+				// 		return getPageTitle(this.pos);
+				// 	}
+				// }
 			},
 			yAxis: {
 				visible: false
@@ -210,12 +254,25 @@ class BookTimeline extends React.Component {
 		})
 	}
 
-	shouldComponentUpdate(newProps, newState) {
-		return newState.optionsChanged ||
-			newProps.last != this.props.last ||
-			newState.bookmarks != this.state.bookmarks ||
-			newState.currentPages != this.state.currentPages ||
-			newState.progress != this.state.progress;
+	getPageTitle(pageNumber) {
+		let pageTitle;
+		let pageNumbers = Object.keys(this.pageTitles);
+		for (let i = 1; i < pageNumbers.length; i++) {
+			let prevPageNumber = pageNumbers[i - 1];
+			let currentPageNumber = pageNumbers[i];
+			if (prevPageNumber <= pageNumber && currentPageNumber >= pageNumber) {
+				if (Math.abs(prevPageNumber - pageNumber) > Math.abs(currentPageNumber - pageNumber)) {
+					pageTitle = this.pageTitles[currentPageNumber];
+				} else {
+					pageTitle = this.pageTitles[prevPageNumber];
+				}
+			}
+		}
+		if (pageTitle)
+			return `<span class='label-page-title'>
+				${pageTitle}
+			</span>`;
+		return null;
 	}
 
 	render() {
