@@ -11,14 +11,20 @@ export default function BulletChart(props) {
 	const [val, setVal] = useState(props.val)
 	const [title, setTitle] = useState(props.title)
 	const Bullet = styled.div`
-		display: flex;
-		align-items: center;
+		display: grid;
+		grid-template-columns: 90% 10%;
+		align-items: flex-end;
 		padding-right: 0.5rem;
-		height: 3.5rem;
+		height: 2.5rem;
     	align-content: center;
 		span {
 			font-size: 16px;
+			color: #122433;
 		}
+	`
+	const Value = styled.div`
+		display: flex;
+		justify-content: flex-end;
 	`
 	const [options, setOptions] = useState({
 		chart: {
@@ -27,7 +33,7 @@ export default function BulletChart(props) {
 			inverted: true,
 			type: "bar",
 			styledMode: false,
-			// height: props.sm ? 48 : 90,
+			height: 60,
 			// width: props.sm ? 220 : null,
 			backgroundColor: "transparent",
 			margin: 5,
@@ -130,14 +136,15 @@ export default function BulletChart(props) {
 		},
 		series: [
 			{
+				animation: false,
 				targetOptions: {
 					width: 20,
 				},
-                data: [
+				data: [
 					props.max
 				],
-                color: '#E6E6E6'
-            },
+				color: '#E6E6E6'
+			},
 			{
 				targetOptions: {
 					width: 20,
@@ -163,7 +170,7 @@ export default function BulletChart(props) {
 							})
 						}}
 					/>
-					<span>{Math.round(val)}</span>
+					<Value><span>{Math.round(val)}</span></Value>
 				</Bullet>
 			)}
 		</ClassNames>

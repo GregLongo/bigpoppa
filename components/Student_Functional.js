@@ -8,10 +8,9 @@ export default function Student(props) {
 	const Student = styled.div`
 		display: grid;
 		grid-template-columns: 30% 70%;
-		height: 140px;
+		height: 130px;
 		width: 90%;
 		background-color: #fff;
-		align-items: center;
 		border-radius: 5px;
 		&:hover {
 			outline: 2px solid #ccc;
@@ -25,6 +24,7 @@ export default function Student(props) {
 	const Avatar = styled.div`
 		justify-content: center;
 		display: flex;
+		align-items: center;
 	`
 
 	const StudentInfo = styled.div`
@@ -68,7 +68,7 @@ export default function Student(props) {
 						/>
 					</ScoreList>
 				</NameScore>
-				{props.speed > 0 ? (
+				{props.speed >= 0 ? (
 					<BulletChart
 						val={parseFloat(props.speed) / 60}
 						max={10}
@@ -76,7 +76,7 @@ export default function Student(props) {
 						color={"#02A87D"}
 					/>
 				) : null}
-				{props.score > 0 ? (
+				{props.score >= 0 ? (
 					<BulletChart
 						val={parseFloat(props.score)}
 						max={100}
