@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { getStudent } from '../store/actions/studentAction';
 import PropTypes from 'prop-types';
 import BulletChart from "../components/BulletChart.js"
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import styled from "@emotion/styled"
-import Scores from "../components/Scores.js"
+import Score from "../components/Score.js"
 
 
 export class Student extends Component {
@@ -15,7 +15,7 @@ export class Student extends Component {
     this.props.onGetStudent(this.props.classroom, this.props.student);
   }
 
-  shouldComponentUpdate(newProps, newState){
+  shouldComponentUpdate(newProps, newState) {
     return newProps.studentVal != this.props.studentVal;
   }
 
@@ -49,15 +49,15 @@ export class Student extends Component {
 
     return (
       <Student>
-      <Avatar src={'img/bulb.png'} />
-      <div>
-      <NameScore><span>{this.props.studentVal.studentId}</span><Scores popups={22} interactive={11} something={3} /></NameScore>
-        {/* <div>speed:{!this.props.studentVal  ? `` : this.props.studentVal.speed}</div> */}
-        {!this.props.studentVal ? `` : this.props.studentVal.speed > 0 ?
-          <BulletChart val={parseFloat(this.props.studentVal.speed)} max={2000} title={'Avg Speed'} color={'#77C294'}/>
-          : null}
-      </div>
-    </Student>
+        <Avatar src={'img/bulb.png'} />
+        <div>
+          <NameScore><span>{this.props.studentVal.studentId}</span><Score src={'img/lightbulb.svg'} popups={22} interactive={11} something={3} /></NameScore>
+          {/* <div>speed:{!this.props.studentVal  ? `` : this.props.studentVal.speed}</div> */}
+          {!this.props.studentVal ? `` : this.props.studentVal.speed > 0 ?
+            <BulletChart val={parseFloat(this.props.studentVal.speed)} max={2000} title={'Avg Speed'} color={'#77C294'} />
+            : null}
+        </div>
+      </Student>
     )
   }
 }

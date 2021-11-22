@@ -1,6 +1,7 @@
-import { SELECT_STUDENT } from '../actions/thisStudentAction';
+import { SELECT_STUDENT, UPDATE_ACTIVE_POPUP } from '../actions/thisStudentAction';
 const initialState = {
-	student: null
+	student: null,
+	activePopup: null
 }
 
 const reducer = (state, action) => {
@@ -11,6 +12,11 @@ const reducer = (state, action) => {
 				...state,
 				student: action.student
 			};
+		case UPDATE_ACTIVE_POPUP:
+			return {
+				...state,
+				activePopup: action.activePopup
+			}
 		default:
 			return state;
 	}

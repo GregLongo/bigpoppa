@@ -62,7 +62,7 @@ export default function PopupInspector(props) {
 		font-style: italic;
     margin-bottom: 1.5rem
 	`
-	console.log("props", props)
+	
 	return (
 		<Inspector key={props.popup}>
 			<Title>{props.popups[props.popup]["popup title"]}</Title>
@@ -81,9 +81,8 @@ export default function PopupInspector(props) {
 						<Text>{props.popups[props.popup]["interactive prompt"]}</Text>
 						{
 							['A', 'B', 'C', 'D'].map((answer) => {
-								console.log("props.popup", props.popup);
 								if (props.popups[props.popup]["response " + answer])
-									return <Text><span css={{ color: props.popups[props.popup]["correct " + answer] ? "green" : "" }}>{answer}. {props.popups[props.popup]["response " + answer]}</span></Text>
+									return <Text key={answer}><span css={{ color: props.popups[props.popup]["correct " + answer] ? "green" : "" }}>{answer}. {props.popups[props.popup]["response " + answer]}</span></Text>
 							})
 						}
 					</div>

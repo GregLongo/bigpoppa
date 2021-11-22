@@ -5,28 +5,33 @@ import styled from "@emotion/styled"
 import { faList, faTh } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useState } from "react"
+import SecondaryHeader from "./SecondaryHeader.js"
 import StudentGrid from "./StudentGrid.js"
 import StudentList from "./StudentList.js"
 
 export default function Classroom({ students, classId }) {
 	const ClassroomComponent = styled.div`
+		padding-top: 2rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
+		@media(min-width:768px){
+			padding-left: 4rem;
+			padding-right: 4rem;
+		}
 	`;
 
-	const Heading = styled.div`
-		padding-top: 2rem;
-		padding-left: 3rem;
-		padding-right: 3rem;
+	const ViewButtonContainer = styled.div`
 		display: flex;
-		justify-content: space-between;
-		font-size: 24px;
-		color: white;
+		justify-content: flex-end;
 	`
+
 	const ViewButton = styled.button`
 		cursor: pointer;
 		margin-left: 1rem;
 		background-color: transparent;
 		border: none;
-		font-size: 24px;
+		font-size: 30px;
+		font-weight: 300;
 		color: white;
 	`
 	const listButton = ({ isGrid }) => css`
@@ -52,9 +57,9 @@ export default function Classroom({ students, classId }) {
 	const [isGrid, setGrid] = useState(true)
 
 	return (<ClassroomComponent>
-		<Heading>
-			<span>Students</span>
-			<span>
+		<div>
+			<SecondaryHeader><span>Students Overview</span></SecondaryHeader>
+			<ViewButtonContainer>
 				<ViewButton
 					css={listButton({ isGrid })}
 					onClick={() => {
@@ -71,8 +76,8 @@ export default function Classroom({ students, classId }) {
 				>
 					<FontAwesomeIcon icon={faTh} />
 				</ViewButton>
-			</span>
-		</Heading>
+			</ViewButtonContainer>
+		</div>
 		{isGrid ? (
 			<StudentGrid students={students} classroom={classId} />
 		) : (

@@ -134,7 +134,6 @@ function SelectColumnFilter({
 	// }, [id, preFilteredRows]);
 
 	//using predetermined filters instead
-	console.log("filterValue", filterValue)
 	const options = [
 		"characters",
 		"setting",

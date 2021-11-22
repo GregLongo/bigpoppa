@@ -4,7 +4,7 @@ import styled from "@emotion/styled"
 
 const StyledNavButton = styled.div`
 	cursor: pointer;
-	padding: 2rem;
+	padding: 1rem;
 	text-align: center;
 	opacity: 0.5;
 	&:hover {
@@ -16,6 +16,9 @@ const StyledNavButton = styled.div`
 `
 const NavIcon = styled.div`
 	font-size: 36px;
+	img {
+		width: 140px;
+	}
 `
 
 const NavButton = (props) => {
