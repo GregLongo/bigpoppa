@@ -24,7 +24,7 @@ class BookTimeline extends React.Component {
 		const progress = []
 		this.pageTitles = {};
 
-		if (this.props.popups && lastpopup) {
+		if (this.props.popups && this.props.popups.hasOwnProperty(lastpopup)) {
 			Object.keys(this.props.popups).map((key, id) => {
 				var page = this.props.popups[key] ? this.props.popups[key].page : 1
 				let interactive = !this.props.popups[key]

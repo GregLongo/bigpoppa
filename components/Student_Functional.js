@@ -1,7 +1,7 @@
-import styled from "@emotion/styled"
-import React from "react"
-import BulletChart from "../components/BulletChart.js"
-import Score from "./Score.js"
+import styled from "@emotion/styled";
+import React from "react";
+import BulletChart from "../components/BulletChart.js";
+import Score from "./Score.js";
 
 export default function Student(props) {
 
@@ -36,6 +36,7 @@ export default function Student(props) {
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
+		margin: 0 0.4rem 0 0;
 	`
 
 	const NameScore = styled.div`
@@ -45,7 +46,15 @@ export default function Student(props) {
 
 	const ScoreList = styled.div`
 		display: flex;
-		justify-content: space-between;
+		justify-content: flex-end;
+	`
+
+	const ChartContainer = styled.div`
+		margin-top: 0.5rem;
+	`
+
+	const WhiteSpace = styled.span`
+		margin: 0.2rem;
 	`
 
 	return (
@@ -63,32 +72,38 @@ export default function Student(props) {
 							src={'img/book.svg'}
 							value={1}
 						/>
+						<WhiteSpace />
 						<Score
 							src={'img/lightbulb.svg'}
 							value={props.popupCount}
 						/>
+						<WhiteSpace />
 						<Score
 							src={'img/question_mark.svg'}
 							value={11}
 						/>
 					</ScoreList>
 				</NameScore>
-				{props.speed >= 0 ? (
-					<BulletChart
-						val={(60 * 60) / parseFloat(props.speed)}
-						max={60}
-						title={"Avg Speed"}
-						color={"#02A87D"}
-					/>
-				) : null}
-				{props.score >= 0 ? (
-					<BulletChart
-						val={parseFloat(props.score)}
-						max={100}
-						title={"Overall Comprehension"}
-						color={"#EB720B"}
-					/>
-				) : null}
+				<ChartContainer>
+					{props.speed >= 0 ? (
+						<BulletChart
+							val={props.speed == 0 ? 0 : (3600) / parseFloat(props.speed)} /** This is temparary. Later server will send the data in required format */
+							max={60}
+							title={"Reading Speed"}
+							color={"#02A87D"}
+							showToolTip={true}
+							tooltipText={"pages per hour"}
+						/>
+					) : null}
+					{props.score >= 0 ? (
+						<BulletChart
+							val={parseFloat(props.score)}
+							max={100}
+							title={"Overall Comprehension"}
+							color={"#EB720B"}
+						/>
+					) : null}
+				</ChartContainer>
 			</StudentInfo>
 		</Student>
 	)

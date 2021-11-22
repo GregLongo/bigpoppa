@@ -20,9 +20,9 @@ export default function ThisStudentRightPart(props) {
 		<RightContainer>
 			<div>
 				{studentVal.speed >= 0 && <BulletChart
-					val={(60 * 60) / parseFloat(studentVal.speed)}
+					val={studentVal.speed == 0 ? 0 : (3600) / parseFloat(studentVal.speed)} /** This is temparary. Later server will send the data in required format */
 					max={60}
-					title={"Avg Speed (Minutes per pages)"}
+					title={"Reading Speed (pages per hour)"}
 					color={"#02A87D"}
 				/>}
 				{studentVal.score >= 0 && <BulletChart
