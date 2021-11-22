@@ -78,7 +78,8 @@ export default function Student(props) {
 						val={(60 * 60) / parseFloat(props.speed)}
 						max={60}
 						title={"Avg Speed"}
-						color={"#02A87D"}
+						colorLt={"#02A87D"}
+						colorDk={"#BEF4E6"}
 					/>
 				) : null}
 				{props.score >= 0 ? (
@@ -86,7 +87,8 @@ export default function Student(props) {
 						val={parseFloat(props.score)}
 						max={100}
 						title={"Overall Comprehension"}
-						color={"#EB720B"}
+						colorLt={"#EB720B"}
+						colorDk={"#F4D5BB"}
 					/>
 				) : null}
 			</StudentInfo>

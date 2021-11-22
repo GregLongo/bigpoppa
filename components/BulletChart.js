@@ -29,23 +29,13 @@ export default function BulletChart(props) {
 	`
 	const [options, setOptions] = useState({
 		chart: {
-<<<<<<< HEAD
 			marginTop: props.sm ? 22 : null,
 			marginBottom: props.sm ? 8 : 45,
-=======
-			// marginTop: props.sm ? 22 : null,
-			// marginBottom: props.sm ? 8 : null,
->>>>>>> 137bd352b68799160287edf0bfeeb4283ea0578a
 			inverted: true,
 			type: "bar",
 			styledMode: false,
-<<<<<<< HEAD
 			height: props.sm ? 48 :95,
 			width: props.sm ? 220 : null,
-=======
-			height: 60,
-			// width: props.sm ? 220 : null,
->>>>>>> 137bd352b68799160287edf0bfeeb4283ea0578a
 			backgroundColor: "transparent",
 			margin: 5,
 			padding: 0,
@@ -83,40 +73,20 @@ export default function BulletChart(props) {
 				pointPadding: 0,
 				pointWidth: 10,
 				borderWidth: 0,
-<<<<<<< HEAD
 				// color: props.color,
 				color: {
 				    linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
 				    stops: [
-				        [0, '#02A87D'],
-				        [1, '#BEF4E6']
+				        [0, props.colorLt],
+				        [1, props.colorDk]
 				    ]
-=======
-				color: {
-					linearGradient: {
-						x1: 0,
-						x2: 0,
-						y1: 0,
-						y2: 1
-					},
-					stops: [
-						[0, props.color],
-						[1, "#FFFFFF"]
-					]
->>>>>>> 137bd352b68799160287edf0bfeeb4283ea0578a
 				},
 				marginTop: 0,
 				marginBottom: 0,
 				targetOptions: {
-<<<<<<< HEAD
 					width: 10,
 				},
 			},
-=======
-					width: 0,
-				}
-			}
->>>>>>> 137bd352b68799160287edf0bfeeb4283ea0578a
 		},
 		legend: {
 			enabled: false,
@@ -136,45 +106,7 @@ export default function BulletChart(props) {
 			max: props.max,
 			visible: true,
 			gridLineWidth: 0,
-<<<<<<< HEAD
-			plotBands: [
-			  {
-			    from: 0,
-			    to: props.max,
-			    color: "#E6E6E6"
-			  },
-			  // {
-			  //   from: 150,
-			  //   to: 225,
-			  //   color: "#999"
-			  // },
-			  // {
-			  //   from: 225,
-			  //   to: 9e9,
-			  //   color: "#bbb"
-			  // }
-			],
 			title: "Bullet",
-=======
-			// plotBands: [
-			//   {
-			//     from: 0,
-			//     to: 150,
-			//     color: "#666"
-			//   },
-			//   {
-			//     from: 150,
-			//     to: 225,
-			//     color: "#999"
-			//   },
-			//   {
-			//     from: 225,
-			//     to: 9e9,
-			//     color: "#bbb"
-			//   }
-			// ],
-			title: "jdjjsjkjkdj",
->>>>>>> 137bd352b68799160287edf0bfeeb4283ea0578a
 			labels: {
 				style: {
 					display: "none"
