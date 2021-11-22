@@ -1,58 +1,95 @@
 import styled from "@emotion/styled"
 import React from "react"
 import BulletChart from "../components/BulletChart.js"
-import Scores from "../components/Scores.js"
+import Score from "./Score.js"
 
 export default function Student(props) {
 
 	const Student = styled.div`
 		display: grid;
 		grid-template-columns: 30% 70%;
-		height: 140px;
+		height: 130px;
 		width: 90%;
-		padding: 0.5rem 1rem;
 		background-color: #fff;
-		align-items: center;
 		border-radius: 5px;
 		&:hover {
 			outline: 2px solid #ccc;
 		}
 		@media (min-width: 768px) {
-			width: 400px;
+			width: 380px;
 		}
+		padding: 0.5rem 0.5rem 0.5rem 0rem;
 	`
 
-	const Avatar = styled.img`
-		height: 50%;
-		width: auto;
+	const StudentName = styled.div`
+		display: flex;
+    	align-items: center;
+	`
+
+	const Avatar = styled.div`
 		justify-content: center;
 		display: flex;
-		max-height: 50%;
+		align-items: center;
+	`
+
+	const StudentInfo = styled.div`
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
 	`
 
 	const NameScore = styled.div`
 		display: flex;
 		justify-content: space-between;
-		padding: 0.5rem 0.5rem 0 0.5rem;
+	`
+
+	const ScoreList = styled.div`
+		display: flex;
+		justify-content: space-between;
 	`
 
 	return (
 		<Student>
-			<Avatar src={props.avatar} />
-			<div>
+			<Avatar >
+				<img src={props.avatar} />
+			</Avatar>
+			<StudentInfo>
 				<NameScore>
-					<span>{props.student}</span>
-					<Scores popups={props.popupCount} interactive={11} something={3} />
+					<StudentName>
+						<span>{props.studentId}</span>
+					</StudentName>
+					<ScoreList>
+						<Score
+							src={'img/book.svg'}
+							value={1}
+						/>
+						<Score
+							src={'img/lightbulb.svg'}
+							value={props.popupCount}
+						/>
+						<Score
+							src={'img/question_mark.svg'}
+							value={11}
+						/>
+					</ScoreList>
 				</NameScore>
-				{props.speed > 0 ? (
+				{props.speed >= 0 ? (
 					<BulletChart
-						val={parseFloat(props.speed)}
-						max={2000}
+						val={(60 * 60) / parseFloat(props.speed)}
+						max={60}
 						title={"Avg Speed"}
-						color={"#77C294"}
+						color={"#02A87D"}
 					/>
 				) : null}
-			</div>
+				{props.score >= 0 ? (
+					<BulletChart
+						val={parseFloat(props.score)}
+						max={100}
+						title={"Overall Comprehension"}
+						color={"#EB720B"}
+					/>
+				) : null}
+			</StudentInfo>
 		</Student>
 	)
 }

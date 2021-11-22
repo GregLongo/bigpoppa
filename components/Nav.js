@@ -15,10 +15,10 @@ export default function Nav(props) {
 		color: #0F314D;
 		align-items: center;
 		display: flex;
+		padding: 0 2rem;
 		flex-direction: column;
-		padding: 2rem;
 		transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
-		z-index: 10;
+		z-index: 300;
 		position:fixed;
 		transition: all 1s ease
 		position: ${({ open }) => (open ? "fixed" : "absolute")};
@@ -30,7 +30,7 @@ export default function Nav(props) {
 
 	const MobileHeader = styled.div`
 		background-color: #272274;
-		height: 64px;
+		height: 3rem;
 		width: 100%;
 		position: absolute;
 		display: flex;
@@ -40,10 +40,12 @@ export default function Nav(props) {
 		@media (min-width: 768px) {
 			display: none;
 		}
+		z-index: 200;
 	`
 
 	const Logo = styled.div`
 		cursor: pointer;
+		padding: 1rem;
 	`
 
 	const route = useRouter()
@@ -54,7 +56,15 @@ export default function Nav(props) {
 		{
 			label: "Students",
 			path: "/StudentPage",
-			icon: 'img/students.png',
+			icon: 'img/students.svg',
+			props: {
+				classroom
+			}
+		},
+		{
+			label: "Class",
+			path: "/ClassPage",
+			icon: 'img/class.svg',
 			props: {
 				classroom
 			}
@@ -62,11 +72,11 @@ export default function Nav(props) {
 		{
 			label: "Popups",
 			path: "/PopupsLegend",
-			icon: 'img/popups.png',
+			icon: 'img/popups.svg',
 			props: {
 				classroom
 			}
-		},
+		}
 	]
 
 	return (

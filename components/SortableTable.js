@@ -20,11 +20,14 @@ export default function SortableTable({ columns, data, classroom }) {
 	`
 
 	const Th = styled.th`
+		text-align: ${props => props.align};
 		height: 80px;
+		font-size: 19px;
+		color: #122433;
 	`
 
 	const Tr = styled.tr`
-		height: 64px;
+		height: 4rem;
 		cursor: pointer;
 		&:nth-of-type(2n-1) {
 			background: #f4fbff;
@@ -35,10 +38,11 @@ export default function SortableTable({ columns, data, classroom }) {
 	`
 
 	const Cell = styled.td`
-		text-align: center;
+		text-align: ${props => props.align};
 		border: none;
-		img{
-			max-height: 48px
+		height: 4rem;
+		img {
+			height: 95%;
 		}
 	`
 
@@ -52,7 +56,6 @@ export default function SortableTable({ columns, data, classroom }) {
 		)
 
 	const firstPageRows = rows.slice(0, 20);
-
 	const dispatch = useDispatch();
 
 	return (
@@ -61,8 +64,8 @@ export default function SortableTable({ columns, data, classroom }) {
 				<thead>
 					{headerGroups.map((headerGroup) => (
 						<tr {...headerGroup.getHeaderGroupProps()}>
-							{headerGroup.headers.map((column) => (
-								<Th {...column.getHeaderProps(column.getSortByToggleProps())}>
+							{headerGroup.headers.map((column, index) => (
+								<Th align={index == 1 ? 'left' : 'center'} {...column.getHeaderProps(column.getSortByToggleProps())}>
 									{column.render("Header")}
 									<span>
 										{column.isSorted ? (column.isSortedDesc ? "▲" : "▼") : ""}
@@ -86,12 +89,14 @@ export default function SortableTable({ columns, data, classroom }) {
 									},
 								}}
 							>
-								<Tr {...row.getRowProps()} onClick={() => {
-									dispatch(selectStudent(row.original))
-								}}>
+								<Tr {...row.getRowProps()}
+									onClick={() => {
+										dispatch(selectStudent(row.original))
+									}}>
 									{row.cells.map((cell, index) => {
 										return (
-											<Cell key={index} {...cell.getCellProps()}>
+											<Cell key={index} {...cell.getCellProps()}
+												align={index == 1 ? 'left' : 'center'}>
 												{cell.render("Cell")}
 											</Cell>
 										)
