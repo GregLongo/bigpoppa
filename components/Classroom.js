@@ -12,8 +12,12 @@ import StudentList from "./StudentList.js"
 export default function Classroom({ students, classId }) {
 	const ClassroomComponent = styled.div`
 		padding-top: 2rem;
-		padding-left: 4rem;
-		padding-right: 4rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
+		@media(min-width:768px){
+			padding-left: 4rem;
+			padding-right: 4rem;
+		}
 	`;
 
 	const ViewButtonContainer = styled.div`

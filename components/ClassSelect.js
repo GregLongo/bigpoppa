@@ -5,7 +5,7 @@ import Dropdown from "../components/Dropdown.js"
 import styled from "@emotion/styled"
 
 const ClassSelect = () => {
-  
+
 	const Splash = styled.div`
 		margin-left: auto;
 		margin-right: auto;
@@ -37,7 +37,7 @@ const ClassSelect = () => {
 				error.message
 			) : (
 				<Splash>
-					<Title>Living Popups Teacher's Edition</Title>
+					<Title>LP-Bookspace Teacher Dashboard</Title>
 					<Subtitle>Please Choose Your Class </Subtitle>
 					<Dropdown paths={classlistVal} />
 				</Splash>

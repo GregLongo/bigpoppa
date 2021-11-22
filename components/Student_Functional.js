@@ -9,7 +9,6 @@ export default function Student(props) {
 		display: grid;
 		grid-template-columns: 30% 70%;
 		height: 130px;
-		width: 90%;
 		background-color: #fff;
 		border-radius: 5px;
 		&:hover {

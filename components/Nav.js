@@ -29,14 +29,20 @@ export default function Nav(props) {
 	`
 
 	const MobileHeader = styled.div`
-		background-color: #272274;
+		background-color: #0F314D;
+		color:white;
+		font-family: 'BauhausStd-Light';
+		font-size: 16px;
 		height: 3rem;
 		width: 100%;
 		position: absolute;
 		display: flex;
 		align-items: center;
-		justify-content: flex-end;
-		padding: 2rem;
+		justify-content: space-between;
+		padding: 2rem 1rem;
+		@media (min-width: 480px) {
+			font-size: 24px;
+		}
 		@media (min-width: 768px) {
 			display: none;
 		}
@@ -82,6 +88,7 @@ export default function Nav(props) {
 	return (
 		<>
 			<MobileHeader>
+				<span>Lp-Bookspace Teacher's Dashboard</span>
 				<Burger open={open} setOpen={setOpen} />
 			</MobileHeader>
 			<NavBar open={open}>

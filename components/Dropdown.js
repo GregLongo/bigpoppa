@@ -24,7 +24,7 @@ export default function Dropdown(props) {
     margin-left: auto;
     cursor:pointer;
     &:hover{
-      background: #48A88F;
+      background: #EB720B;
       color: white
 
     }

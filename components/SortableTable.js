@@ -11,8 +11,10 @@ export default function SortableTable({ columns, data, classroom }) {
 		height: 80%;
 		background: white;
 		margin-top: 2rem;
-		margin-left: 1rem;
+		margin-bottom: 0;
+		margin-left: -1rem;
 		margin-right: 1rem;
+		width: 100vw;
 		@media(min-width:768px){
 			margin: 3rem;
 			width: 91%
