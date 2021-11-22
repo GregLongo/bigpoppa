@@ -21,6 +21,7 @@ export default function BulletChart(props) {
 			font-size: 16px;
 			color: #122433;
 		}
+		margin-left: -0.6rem; // to compensate Highchart margin
 	`
 	const Value = styled.div`
 		display: flex;
