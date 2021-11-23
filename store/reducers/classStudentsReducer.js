@@ -9,17 +9,17 @@ const initialState = {
 export default function (state = initialState, action) {
 	switch (action.type) {
 		case SET_CLASSROOM_STUDENTS:
-			// console.log(action.payload)
 			return {
 				...state,
 				students: action.payload,
 				classRoom: action.classRoom,
-				loading: false,
+				bookName: action.bookName,
+				loading: false
 			}
 		case GET_CLASSROOM_STUDENTS:
 			return {
 				...state,
-				loading: true,
+				loading: true
 			}
 		case CLEAR_CLASSROOM_STUDENTS:
 			return initialState;

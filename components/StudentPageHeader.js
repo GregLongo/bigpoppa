@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "@emotion/styled"
 
-export default function StudentPageHeader({ selectedClass }) {
+export default function StudentPageHeader({ selectedClass, bookName, loading }) {
 	const HeaderSpace = styled.div`
 		height: 3rem;
 		@media (min-width: 768px) {
@@ -53,7 +53,7 @@ export default function StudentPageHeader({ selectedClass }) {
 			</div>
 			<HeaderRightPart>
 				<RightPartHolder className={"space-after"}><div>{selectedClass}</div><div><img src={"img/arrow_down.svg"} /></div></RightPartHolder>
-				<RightPartHolder><div>{"Romeo and Juliet"}</div><div><img src={"img/arrow_down.svg"} /></div></RightPartHolder>
+				{!loading && bookName && <RightPartHolder><div>{bookName}</div><div><img src={"img/arrow_down.svg"} /></div></RightPartHolder>}
 			</HeaderRightPart>
 		</StudentPageHeader>
 	</React.Fragment>);

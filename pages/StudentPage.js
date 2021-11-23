@@ -17,7 +17,7 @@ export default function StudentPage(props) {
 	}, [dispatch]);
 
 	const classStudents = useSelector((state) => state.classStudents)
-	let { loading, error, students } = classStudents;
+	let { loading, error, students, bookName } = classStudents;
 
 	const StudentPageComponent = styled.div`
 	`
@@ -31,7 +31,7 @@ export default function StudentPage(props) {
 	return (
 		<StudentPageComponent>
 			{/* <Teacher teacher={classroom} /> */}
-			<StudentPageHeader selectedClass={props.classroom} />
+			<StudentPageHeader selectedClass={props.classroom} loading={loading} bookName={bookName} />
 			<ClassroomComponent>
 				{
 					loading ? (
