@@ -4,7 +4,6 @@ import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import bullet from "highcharts/modules/bullet.js"
 import React, { useState } from "react"
-import ReactTooltip from "react-tooltip"
 import Tooltip from "./Tooltip"
 
 export default function BulletChart(props) {
@@ -13,7 +12,7 @@ export default function BulletChart(props) {
 	const [val, setVal] = useState(props.val)
 	const [title, setTitle] = useState(props.title)
 	const Bullet = styled.div`
-		pointer-events: none;
+		cursor: pointer;
 		display: grid;
 		grid-template-columns: 92% 8%;
 		align-items: center;
@@ -23,7 +22,7 @@ export default function BulletChart(props) {
 	`
 	const Container = styled.div`
 		display: grid;
-		grid-template-columns: 90% 10%;
+		grid-template-columns: 95% 5%;
 		align-items: center;
 	`
 	const Value = styled.div`
@@ -34,6 +33,17 @@ export default function BulletChart(props) {
 			color: #122433;
 		}
 	`
+
+	const tooltip = !!props.tooltipText ? {
+		// animation: false,
+		headerFormat: '',
+		pointFormat: props.tooltipText,
+		shared: false,
+		useHTML: false
+	} : {
+		enabled: false
+	};
+
 	const [options, setOptions] = useState({
 		chart: {
 			// marginTop: props.sm ? 22 : null,
@@ -63,9 +73,7 @@ export default function BulletChart(props) {
 		credits: {
 			enabled: false,
 		},
-		tooltip: {
-			enabled: false,
-		},
+		tooltip,
 		height: 1,
 		plotOptions: {
 			bar: {
@@ -89,13 +97,13 @@ export default function BulletChart(props) {
 					},
 					stops: [
 						[0, props.colorLt],
-				        [1, props.colorDk]
+						[1, props.colorDk]
 					]
 				},
 				marginTop: 0,
 				marginBottom: 0,
 				targetOptions: {
-					width: 10,
+					width: 0,
 				}
 			}
 		},
@@ -115,7 +123,7 @@ export default function BulletChart(props) {
 		yAxis: {
 			height: 8,
 			max: props.max,
-			visible: true,
+			visible: false,
 			gridLineWidth: 0,
 			title: "Bullet",
 			labels: {
@@ -128,20 +136,29 @@ export default function BulletChart(props) {
 			{
 				animation: false,
 				targetOptions: {
-					width: 10,
+					width: 20,
 				},
 				data: [
 					props.max
 				],
-				color: '#E6E6E6'
+				color: '#E6E6E6',
 			},
 			{
+				animation: false,
 				targetOptions: {
 					width: 20,
 				},
 				data: [{
 					y: (val)
-				}]
+				}],
+				// dataLabels: {
+				// 	enabled: !!props.tooltipText,
+				// 	useHTML: true,
+				// 	formatter: function () {
+				// 		// console.log(this) // uncomment this line to see all params available
+				// 		return `<div class='tooltip-text'>${props.tooltipText || 'nn'}</div>`
+				// 	}
+				// }
 			},
 		]
 	})
@@ -161,16 +178,16 @@ export default function BulletChart(props) {
 								})
 							}}
 						/>
-						{props.showToolTip ?
+						{/* {props.showToolTip ?
 							(
 								<Tooltip
-									id={"unit"}
+									id={props.id}
 									text={props.tooltipText}
-									radius={15}
-									fontSize={12}
+									radius={20}
+									fontSize={18}
 								/>
 							) : <span></span>
-						}
+						} */}
 					</Container>
 					<Value><span>{Math.round(val)}</span></Value>
 				</Bullet>

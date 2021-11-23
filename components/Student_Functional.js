@@ -89,10 +89,10 @@ export default function Student(props) {
 							val={props.speed == 0 ? 0 : (3600) / parseFloat(props.speed)} /** This is temparary. Later server will send the data in required format */
 							max={60}
 							title={"Reading Speed"}
-							showToolTip={true}
 							tooltipText={"pages per hour"}
 							colorLt={"#02A87D"}
 							colorDk={"#BEF4E6"}
+							id={props.studentId + "_tooltip"}
 						/>
 					) : null}
 					{props.score >= 0 ? (
