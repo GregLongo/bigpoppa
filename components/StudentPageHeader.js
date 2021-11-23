@@ -52,7 +52,7 @@ export default function StudentPageHeader({ selectedClass, bookName, loading }) 
 				<span>LP-Bookspace Teacher Dashboard</span>
 			</div>
 			<HeaderRightPart>
-				<RightPartHolder className={"space-after"}><div>{selectedClass}</div><div><img src={"img/arrow_down.svg"} /></div></RightPartHolder>
+				{selectedClass && <RightPartHolder className={"space-after"}><div>{selectedClass}</div><div><img src={"img/arrow_down.svg"} /></div></RightPartHolder>}
 				{!loading && bookName && <RightPartHolder><div>{bookName}</div><div><img src={"img/arrow_down.svg"} /></div></RightPartHolder>}
 			</HeaderRightPart>
 		</StudentPageHeader>

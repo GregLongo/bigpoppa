@@ -11,7 +11,7 @@ export default function StudentPage(props) {
 	useEffect(() => {
 		dispatch(getClassroomStudents(props.classroom))
 
-		return ()=>{
+		return () => {
 			dispatch(clearClassroomStudents(props.classroom))
 		}
 	}, [dispatch]);
@@ -32,13 +32,13 @@ export default function StudentPage(props) {
 		<StudentPageComponent>
 			{/* <Teacher teacher={classroom} /> */}
 			<StudentPageHeader selectedClass={props.classroom} loading={loading} bookName={bookName} />
-			<ClassroomComponent>
+			{props.classroom && <ClassroomComponent>
 				{
 					loading ? (
 						<NoData label={`Fetching the class ${props.classroom}`}></NoData>
 					) : <Classroom students={students} classId={props.classroom} />
 				}
-			</ClassroomComponent>
+			</ClassroomComponent>}
 		</StudentPageComponent>
 	)
 }

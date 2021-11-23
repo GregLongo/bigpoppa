@@ -80,7 +80,7 @@ export default function Student(props) {
 						<WhiteSpace />
 						<Score
 							src={'img/question_mark.svg'}
-							value={11}
+							value={props.interactivePopupCount || 0}
 						/>
 					</ScoreList>
 				</NameScore>
