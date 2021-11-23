@@ -18,6 +18,7 @@ const ClassSelect = () => {
 	`
 	const Title = styled.div`
 		font-size: 36px;
+		font-family: 'BauhausStd-Light';
 	`
 	const Subtitle = styled.div`
 		font-size: 24px;

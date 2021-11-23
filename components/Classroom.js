@@ -10,16 +10,6 @@ import StudentGrid from "./StudentGrid.js"
 import StudentList from "./StudentList.js"
 
 export default function Classroom({ students, classId }) {
-	const ClassroomComponent = styled.div`
-		padding-top: 2rem;
-		padding-left: 1rem;
-		padding-right: 1rem;
-		@media(min-width:768px){
-			padding-left: 4rem;
-			padding-right: 4rem;
-		}
-	`;
-
 	const ViewButtonContainer = styled.div`
 		display: flex;
 		justify-content: flex-end;
@@ -56,7 +46,7 @@ export default function Classroom({ students, classId }) {
 	`
 	const [isGrid, setGrid] = useState(true)
 
-	return (<ClassroomComponent>
+	return (<React.Fragment>
 		<div>
 			<SecondaryHeader><span>Students Overview</span></SecondaryHeader>
 			<ViewButtonContainer>
@@ -83,6 +73,6 @@ export default function Classroom({ students, classId }) {
 		) : (
 			<StudentList students={students} classroom={classId} />
 		)}
-	</ClassroomComponent>
+	</React.Fragment>
 	);
 }

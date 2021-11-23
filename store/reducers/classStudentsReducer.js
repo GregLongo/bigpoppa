@@ -1,19 +1,28 @@
-import { GET_CLASSROOM_STUDENTS, CLASSROOM_STUDENTS_ERROR } from "../types"
+import { GET_CLASSROOM_STUDENTS, CLASSROOM_STUDENTS_ERROR, SET_CLASSROOM_STUDENTS, CLEAR_CLASSROOM_STUDENTS } from "../types"
 
 const initialState = {
 	students: [],
+	classRoom: null,
 	loading: true,
 }
 
 export default function (state = initialState, action) {
 	switch (action.type) {
-		case GET_CLASSROOM_STUDENTS:
-			// console.log(action.payload)
+		case SET_CLASSROOM_STUDENTS:
 			return {
 				...state,
 				students: action.payload,
-				loading: false,
+				classRoom: action.classRoom,
+				bookName: action.bookName,
+				loading: false
 			}
+		case GET_CLASSROOM_STUDENTS:
+			return {
+				...state,
+				loading: true
+			}
+		case CLEAR_CLASSROOM_STUDENTS:
+			return initialState;
 		case CLASSROOM_STUDENTS_ERROR:
 			return {
 				loading: false,

@@ -46,6 +46,11 @@ export default function ThisStudentLeftPart(props) {
 		flex-wrap: wrap;
 	`
 
+	/** TODO: Another isolated component can be implemented */
+	const WhiteSpace = styled.span`
+		margin: 0.2rem;
+	`
+
 	return (<LeftContainer>
 		<Info>
 			<div>
@@ -62,11 +67,13 @@ export default function ThisStudentLeftPart(props) {
 						value={1}
 						text={"Books"}
 					/>
+					<WhiteSpace/>
 					<Score
 						src={'img/lightbulb.svg'}
 						value={studentVal.popupCount}
 						text={"Popups Played"}
 					/>
+					<WhiteSpace/>
 					<Score
 						src={'img/question_mark.svg'}
 						value={11}
